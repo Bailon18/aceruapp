@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
         case 'email':
           return `El campo ${field} debe ser un correo válido.`;
-        
+
         case 'invalidEmail':
           return `El campo ${field} ya se encuentra registrado.`;
       }
@@ -79,25 +79,27 @@ export class RegisterComponent implements OnInit {
   }
 
   isValidadEmail(event: any) {
+
     if (this.registerForm.controls['email'].valid){
+
       const email = (event.target as HTMLInputElement).value;
 
       this.authService.getValidarCorreo(email).subscribe(res => {
-        if(res != null ){
-          this.registerForm.controls['correo'].setErrors({ invalid: 'Email ya esta registrado' });
+        if(res){
+          this.registerForm.controls['email'].setErrors({ invalidEmail: '' });
         }else{
-          this.registerForm.controls['correo'].setErrors(null);
+          this.registerForm.controls['email'].setErrors(null);
         }
       });
     }
   }
 
   register() {
-    
+
     if (this.registerForm.valid) {
-      
+
       const roles = [this.registerForm.value.rol];
-      
+
       this.nuevoUsuario = {
         nombre: this.registerForm.value.nombre,
         nombreUsuario: this.registerForm.value.nick,
@@ -105,7 +107,7 @@ export class RegisterComponent implements OnInit {
         password: this.registerForm.value.contrasena,
         roles: roles
       };
-  
+
       this.authService.nuevo(this.nuevoUsuario).subscribe({
         next: (response) => {
           this.isRegistro = true;
@@ -120,8 +122,8 @@ export class RegisterComponent implements OnInit {
           this.toastr.error("Error en el servidor", "Registro")
         }
       });
-      
+
     }
   }
-  
+
 }

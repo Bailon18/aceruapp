@@ -1,6 +1,6 @@
 <div class="container-register" [formGroup]="registerForm">
   <div class="title text-secondary"> Registro </div>
-  <br>
+  <br> <br>
   <div class="div-input">
     <mat-form-field appearance="outline">
       <mat-label>Nombre</mat-label>
@@ -9,9 +9,8 @@
         {{ getFieldError('nombre') }}
       </mat-error>
     </mat-form-field>
-
   </div>
-  
+  <br>
   <div class="div-input">
     <mat-form-field appearance="outline">
       <mat-label>Nick</mat-label>
@@ -21,7 +20,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-
+  <br>
   <div class="div-input">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
@@ -31,7 +30,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-
+  <br>
   <div class="div-input">
     <mat-form-field appearance="outline">
       <mat-label>Contraseña</mat-label>
@@ -41,7 +40,7 @@
       </mat-error>
     </mat-form-field>
   </div>
-
+  <br>
   <div class="div-input">
     <mat-form-field appearance="outline">
       <mat-label>Rol</mat-label>
@@ -51,11 +50,13 @@
       </select>
     </mat-form-field>
   </div>
-  
+  <br>
   <div class="actions">
     <button mat-raised-button class="button" [disabled]="registerForm.invalid" (click)="register()">Registrar</button>
   </div>
+
   <div class="message" (click)="redirect('auth/login')">
     <a>¿Ya tienes una cuenta? Ingresa.</a>
   </div>
+  <br><br>
 </div>

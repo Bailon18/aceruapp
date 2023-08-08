@@ -1,0 +1,17 @@
+<div class="container-categories">
+  <div class="title text-secondary">Problemas</div>
+  <div class="actions "><button class="button hiddenParticipante" (click)="redirect('problems/new-category')">Nueva categoria</button>
+    <div class="search" >
+      <div class="left-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+          <input class="input-text input-search"  placeholder="Buscar" />
+      </div>
+      <div class="right-search">
+          <fa-icon [icon]="faTimes" [styles]="{ color: '#797979' }" (click)="clearSearch()"></fa-icon>
+      </div>
+  </div>
+  </div>
+  <div class="body-categories">
+    <app-grid [data]="data" (eventEmmiter)="redirect('problems/category',$event.id)"></app-grid>
+  </div>
+</div>

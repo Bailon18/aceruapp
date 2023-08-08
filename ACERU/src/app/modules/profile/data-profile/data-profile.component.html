@@ -1,0 +1,33 @@
+<div class="container-profile">
+  <hr class="separator">
+  <div class="container-data">
+    <div class="form-profile" [formGroup]="form">
+      <div class="title text-secondary"> Datos Personales</div>
+      <div class="div-input">
+        <div class="txt"> Nombre</div>
+        <input formControlName="nombre" class="input"  placeholder="Nombre">
+      </div>
+      <div class="div-input">
+        <div class="txt"> Usuario</div>
+        <input formControlName="usuario" class="input"  placeholder="E-mail">
+      </div>
+      <div class="div-input">
+        <div class="txt">Rol</div>
+        <select class="input select" formControlName="rol" name="miselect">
+          <option [value]="item" *ngFor="let item of roles">{{item}}</option>
+          </select>
+      </div>
+    </div>
+    <div class="card-profile">
+      <img src="assets/images/profile/foto-perfil.jpeg" alt="imagen no disponible">
+      <div class="data-profile">
+        <div class="level">Nivel</div>
+        <div class="name">{{this.form.controls['nombre'].value}}</div>
+        <div class="edit-profile"><button class="button">Editar perfil</button></div>
+        <div class="change-password" routerLink="change-password"><button class="button">Cambiar contraseña</button></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

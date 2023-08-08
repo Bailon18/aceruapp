@@ -1,0 +1,61 @@
+<div class="container-register" [formGroup]="registerForm">
+  <div class="title text-secondary"> Registro </div>
+  <br>
+  <div class="div-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Nombre">
+      <mat-error *ngIf="isValidField('nombre')">
+        {{ getFieldError('nombre') }}
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+  
+  <div class="div-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Nick</mat-label>
+      <input matInput formControlName="nick" placeholder="nick">
+      <mat-error *ngIf="isValidField('nick')">
+        {{ getFieldError('nick') }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="div-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="E-mail" (keyup)="isValidadEmail($event)">
+      <mat-error *ngIf="isValidField('email')">
+        {{ getFieldError('email') }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="div-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="contrasena" type="password" placeholder="Contraseña">
+      <mat-error *ngIf="isValidField('contrasena')">
+        {{ getFieldError('contrasena') }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="div-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Rol</mat-label>
+      <select matNativeControl formControlName="rol" name="miselect">
+        <option value="admin">Administrador</option>
+        <option value="user">Participante</option>
+      </select>
+    </mat-form-field>
+  </div>
+  
+  <div class="actions">
+    <button mat-raised-button class="button" [disabled]="registerForm.invalid" (click)="register()">Registrar</button>
+  </div>
+  <div class="message" (click)="redirect('auth/login')">
+    <a>¿Ya tienes una cuenta? Ingresa.</a>
+  </div>
+</div>

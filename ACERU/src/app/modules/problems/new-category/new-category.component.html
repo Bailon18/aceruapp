@@ -1,0 +1,27 @@
+<div class="container-categories">
+  <div class="left">
+<div class="form">
+<div class="title"><strong>Nueva Categoria de Problemas</strong> </div>
+<div class="subtitle">Nuevos temarios de retos!</div>
+<div class="body-form" [formGroup]="form">
+  <div class="div-input2">
+    Nombre de la categoría
+    <input class="input2" formControlName="name">
+  </div>
+  <div class="div-input2">
+    Descripción de la categoria
+    <textarea class="input2" formControlName="description"></textarea>
+  </div>
+<div class="actions">
+  <div class="div-file">
+    <p class="texto">Agregar imagen</p>
+    <input type="file" formControlName="image">
+  </div>
+  <div class="buttons"><button class="button" (click)="redirect('/problems')">Cancelar</button><button class="button" (click)="saveCategory()">Crear</button></div>
+</div>
+</div>
+</div>
+
+  </div>
+  <div class="right"><img src="assets/images/problems/icono_busqueda.png" alt="imagen no disponible"></div>
+</div>

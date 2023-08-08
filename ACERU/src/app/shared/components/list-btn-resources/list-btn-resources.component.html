@@ -1,0 +1,10 @@
+<div class="container-list">
+<div class="item-list" *ngFor="let item of data">
+  <div class="icon-body">
+<div class="icon"><img [src]="item.icon" alt="imagen no disponible"></div>
+  </div>
+  <div class="title text-tertiary"><strong>{{item.title}}</strong></div>
+  <div class="description text-tertiary">{{item.description}}</div>
+</div>
+
+</div>

@@ -1,0 +1,8 @@
+<div class="container-grid">
+  holaaaaaaa
+  <div class="card text-tertiary" *ngFor="let item of data" (click)="sendEvent(item)">
+    <div class="card-actions hiddenParticipante"><img [src]="action.value" *ngFor="let action of actions"></div>
+    <div class="card-image"> <img [src]="item.image" alt="imagen no disponible"></div>
+    <div class="card-title">{{item.name}}</div>
+  </div>
+</div>

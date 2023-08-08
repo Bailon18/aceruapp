@@ -1,0 +1,7 @@
+<div class="container-ranking">
+  <div class="container-title"><div class="title text-secondary">Ranking</div></div>
+  <hr class="separator">
+    <div class="table">
+      <app-table [data]="exercises" (eventEmmiter)="openConsol($event)"></app-table>
+    </div>
+</div>

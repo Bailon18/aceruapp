@@ -1,0 +1,36 @@
+<div class="container-new-skills">
+  <div class="form" [formGroup]="form">
+<div class="title text-secondary">Nueva competencia</div>
+<div class="subtitle">Competencias para preparar participantes en programación competitiva</div>
+<div class="div-input">
+  <div class="txt "> Nombre de la competencia</div>
+  <input formControlName="name" class="input"  >
+</div>
+<div class="div-input">
+  <div class="txt"> Descripción</div>
+  <textarea formControlName="description" class="input"  ></textarea>
+</div>
+
+  <div class="input-flex">
+    <label>Desde el</label>
+    <input type="date" class="input" formControlName="dateInit">
+    <img src="assets/images/crud/calendario.png" alt="imagen no disponible">
+    <label>a las </label>
+    <input type="time" class="input" formControlName="dateInitB">
+    <img src="assets/images/crud/cronometro.png" alt="imagen no disponible">
+  </div>
+    <div class="input-flex">
+      <label>Hasta el</label>
+      <input type="date" class="input" formControlName="dateEnd">
+      <img src="assets/images/crud/calendario.png" alt="imagen no disponible">
+      <label>a las </label>
+      <input type="time" class="input" formControlName="dateEndB">
+      <img src="assets/images/crud/cronometro.png" alt="imagen no disponible">
+    </div>
+    <div class="actions">
+      <button class="button cancel" [routerLink]="['/skills']">Cancelar</button>
+      <button class="button create" (click)="redirect('skills/new-skill/description')">Crear</button>
+    </div>
+  </div>
+
+</div>

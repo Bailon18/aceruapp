@@ -1,0 +1,24 @@
+<div class="container-list-skills">
+<div class="row-title">
+  <div class="title text-secondary">Maratones</div>
+  <button class="button hiddenParticipante" (click)="redirect('skills/new-skill')">Crear maratón</button>
+</div>
+<hr class="separator">
+<div class="row-actions ">
+  <div class="buttons "><button class="button hiddenParticipante">Vigentes</button>
+    <button class="button hiddenParticipante">Terminadas</button>
+  </div>
+  <div class="search" >
+    <div class="left-search">
+        <fa-icon [icon]="faSearch"></fa-icon>
+        <input class="input-text input-search"  placeholder="Buscar" />
+    </div>
+    <div class="right-search">
+        <fa-icon [icon]="faTimes" [styles]="{ color: '#797979' }" (click)="clearSearch()"></fa-icon>
+    </div>
+</div>
+</div>
+<div class="body-list">
+  <app-table  [data]="{headers,data}" (eventEmmiter)="redirect('skills/description/'+$event.item.id)"></app-table>
+</div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container-description-problem">
+  <div class="header">
+    <div class="name-problem text-secondary">{{data.name}}</div>
+
+  </div>
+
+  <hr class="separator">
+
+  <div class="body-description ">
+
+    <div class="left">
+      <button class="button button-description">Descripción</button>
+      <div class="card-description form">
+        <div class="section-description">
+          <strong>{{data.name}}</strong>
+        </div>
+        <div class="section-description">
+          <label>Estado: {{data.state}}</label>
+        </div>
+        <div class="section-description description">
+          <label>{{data.description}}</label>
+        </div>
+        <div class="row">
+          <div class="icon"><img src="assets/images/crud/calendario.png" alt="imagen no disponible"></div>
+          <div class="section-description">
+            <label>Fecha programada</label>
+            <label>{{data.date}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="icon"><img src="assets/images/crud/cronometro.png" alt="imagen no disponible"></div>
+          <div class="section-description">
+            <label>Duración de la competencia</label>
+            <label>{{data.duration}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="card-profile">
+        <div class="data-profile">
+          <div class="edit-profile hiddenParticipante" ><button class="button" >Publicarla</button></div>
+          <div class="edit-profile hiddenAdministrador"><button class="button" >Inscribirse</button></div>
+          <div class="change-password " ><button class="button" (click)="redirect('skills')">Cancelar</button></div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

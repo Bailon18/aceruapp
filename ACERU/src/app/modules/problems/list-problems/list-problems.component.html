@@ -1,0 +1,17 @@
+<div class="container-list-problems">
+  <div class="name-category text-secondary">Ejercicios - {{data.name}}</div>
+  <hr class="separator">
+  <div class="actions "><button class="button hiddenParticipante" [routerLink]="['/problems/category/'+idActual+'/new-problem']">Nuevo problema</button>
+    <div class="search" >
+      <div class="left-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+          <input class="input-text input-search" placeholder="Buscar" />
+      </div>
+      <div class="right-search">
+          <fa-icon [icon]="faTimes" [styles]="{ color: '#797979' }" (click)="clearSearch()"></fa-icon>
+      </div>
+  </div>
+  </div>
+  <app-table  [data]="{headers,data:data?.problems}" (eventEmmiter)="redirect('problems/category/description-problem/'+idActual+'/'+$event.item.id)"></app-table>
+</div>
+

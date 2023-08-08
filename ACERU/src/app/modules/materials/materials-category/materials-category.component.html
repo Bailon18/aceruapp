@@ -1,0 +1,9 @@
+<div class="container-categories">
+  <div class="title text-secondary">Categorias de Material</div>
+  <div class="actions "><button class="button hiddenParticipante" (click)="redirect('materials/new-category')">Nueva categoria</button>
+
+  </div>
+  <div class="body-categories">
+  <app-grid [data]="data" (eventEmmiter)="redirect('materials/category/',$event.id)"></app-grid>
+  </div>
+</div>

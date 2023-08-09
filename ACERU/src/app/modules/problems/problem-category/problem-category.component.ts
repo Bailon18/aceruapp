@@ -3,6 +3,8 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { DATA_CATEGORY_PROBLEMS } from 'src/app/shared/constants/constants-problems';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
+import { CategoriaService } from '../services/categoria.service';
+import { Categoria } from '../model/categoria';
 
 @Component({
   selector: 'app-problem-category',
@@ -13,15 +15,27 @@ export class ProblemCategoryComponent implements OnInit {
   
   faSearch = faSearch;
   faTimes = faTimes;
-  data = DATA_CATEGORY_PROBLEMS;
+  data: Categoria[] = [];
 
   constructor(
     private serviceNavigation: NavigationService,
-    private userService: UserService
+    private categoriaService: CategoriaService
   ) {}
 
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.categoriaService.getListarCategoria().subscribe( {
+      next: (data) => {
+        this.data = data
+        console.log("DATA: ", this.data)
+      },
+      error: (err) =>{
+        console.log("Error ", err.error)
+      }
+    })
+
+  }
 
   clearSearch() {}
 

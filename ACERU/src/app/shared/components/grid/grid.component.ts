@@ -16,6 +16,7 @@ import { UserService } from '../../services/user/user.service';
 export class GridComponent implements OnInit {
 
   @Input() data: any;
+
   actions = [
     { value: 'assets/images/crud/lapiz.png', event: 'edit' },
     { value: 'assets/images/crud/eliminar.png', event: 'delete' },
@@ -25,7 +26,9 @@ export class GridComponent implements OnInit {
   
   constructor(private userService: UserService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("DATO EN GRID ", this.data);
+  }
   sendEvent(event: any) {
     this.eventEmmiter.emit(event);
   }

@@ -19,7 +19,8 @@ public class Categoria implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String nombre;
-
+    private String imagenurl;
+    private String imagenid;
     @Column
     private String descripcion;
 
@@ -27,20 +28,16 @@ public class Categoria implements Serializable {
     @JsonIgnore
     private List<Problema> problemas;
 
-    @Lob
-    @Column
-    private byte[] imagen;
 
     public Categoria() {
         super();
     }
 
-    public Categoria(Long id, String nombre, String descripcion, byte[] imagen) {
-        super();
-        this.id = id;
+    public Categoria(String nombre, String imagenurl, String imagenid, String descripcion) {
         this.nombre = nombre;
+        this.imagenurl = imagenurl;
+        this.imagenid = imagenid;
         this.descripcion = descripcion;
-        this.imagen = imagen;
     }
 
     public Long getId() {
@@ -67,20 +64,28 @@ public class Categoria implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-
     public List<Problema> getProblemas() {
         return problemas;
     }
 
     public void setProblemas(List<Problema> problemas) {
         this.problemas = problemas;
+    }
+
+    public String getImagenurl() {
+        return imagenurl;
+    }
+
+    public void setImagenurl(String imagenurl) {
+        this.imagenurl = imagenurl;
+    }
+
+    public String getImagenid() {
+        return imagenid;
+    }
+
+    public void setImagenid(String imagenid) {
+        this.imagenid = imagenid;
     }
 
     private static final long serialVersionUID = 1L;

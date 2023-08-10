@@ -16,14 +16,14 @@ const routes: Routes = [
       { path: '', component: ProblemCategoryComponent },
       {
         path: 'new-category',
-        canActivate: [RoleGuardService],
+        //canActivate: [RoleGuardService],
         data: { rol: 'Administrador' },
         component: NewCategoryComponent,
       },
       { path: 'category/:id', component: ListProblemsComponent },
       {
         path: 'category/:id/new-problem',
-        canActivate: [RoleGuardService],
+        //canActivate: [RoleGuardService],
         data: { rol: 'Administrador' },
         component: NewProblemComponent,
       },

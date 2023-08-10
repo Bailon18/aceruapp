@@ -11,6 +11,7 @@ import { GridModule } from 'src/app/shared/components/grid/grid.module';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { DescriptionProblemComponent } from './description-problem/description-problem.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
     ProblemsRoutingModule,
     FontAwesomeModule,
     GridModule,

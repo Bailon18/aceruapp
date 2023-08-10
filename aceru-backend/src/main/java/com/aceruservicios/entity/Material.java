@@ -10,15 +10,13 @@ import java.util.Arrays;
 
 public class Material implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, length = 200)
     private String nombre;
-    @Lob
-    @Column
-    private byte[] imagen;
+    private String imagenurl;
+    private String imagenid;
     @Column(length = 50, columnDefinition = "VARCHAR(50) DEFAULT 'Activo'")
     private String estado;
 
@@ -27,16 +25,11 @@ public class Material implements Serializable {
     }
 
 
-    public Material(Long id, String nombre, byte[] imagen, String estado) {
-        super();
-        this.id = id;
+    public Material(String nombre, String imagenurl, String imagenid, String estado) {
         this.nombre = nombre;
-        this.imagen = imagen;
+        this.imagenurl = imagenurl;
+        this.imagenid = imagenid;
         this.estado = estado;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 
     public Long getId() {
@@ -55,14 +48,6 @@ public class Material implements Serializable {
         this.nombre = nombre;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -71,19 +56,24 @@ public class Material implements Serializable {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Material [id=");
-        builder.append(id);
-        builder.append(", nombre=");
-        builder.append(nombre);
-        builder.append(", imagen=");
-        builder.append(Arrays.toString(imagen));
-        builder.append(", estado=");
-        builder.append(estado);
-        builder.append("]");
-        return builder.toString();
+
+    public String getImagenurl() {
+        return imagenurl;
     }
+
+    public void setImagenurl(String imagenurl) {
+        this.imagenurl = imagenurl;
+    }
+
+    public String getImagenid() {
+        return imagenid;
+    }
+
+    public void setImagenid(String imagenid) {
+        this.imagenid = imagenid;
+    }
+
+    private static final long serialVersionUID = 1L;
+
 }
 

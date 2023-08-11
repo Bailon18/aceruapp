@@ -11,8 +11,10 @@ import { UserService } from 'src/app/shared/services/user/user.service';
   styleUrls: ['./list-problems.component.less']
 })
 export class ListProblemsComponent implements OnInit {
+  
  @Input() exercises:any = DATA_CATEGORY_PROBLEMS
  @Input() headers = DATA_CATEGORY_HEADERS
+ 
   data: any
   faSearch = faSearch;
   faTimes = faTimes;

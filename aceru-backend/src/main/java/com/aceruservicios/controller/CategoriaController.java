@@ -7,6 +7,7 @@ import com.aceruservicios.service.ICategoriaService;
 import com.aceruservicios.service.imple.CloudinaryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +36,7 @@ public class CategoriaController {
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
-    @PostMapping("/nuevo")
+    @PostMapping(value="/nuevo", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8" })
     public ResponseEntity<?> nuevaCategoria(@RequestPart("categoria") Categoria categoria,
                                             @RequestPart("imagen") MultipartFile multipartFile)
             throws IOException {
@@ -50,8 +51,12 @@ public class CategoriaController {
         categoria.setImagenid((String) result.get("public_id"));
         categoria.setImagenurl((String) result.get("url"));
 
-        categoriService.guardarCategoria(categoria);
-
+        // aqui validamos si el actualizado o creacion
+        if(categoria.getId() != null){
+            categoriService.actualizar(categoria);
+        }else{
+            categoriService.guardarCategoria(categoria);
+        }
         return new ResponseEntity<>(new Mensaje("imagen subida"), HttpStatus.OK);
     }
 }

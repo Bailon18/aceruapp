@@ -19,7 +19,7 @@ export class GridComponent implements OnInit {
 
   actions = [
     { value: 'assets/images/crud/lapiz.png', event: 'edit' },
-    { value: 'assets/images/crud/eliminar.png', event: 'delete' },
+    //{ value: 'assets/images/crud/eliminar.png', event: 'delete' },
   ];
 
   @Output() eventEmmiter = new EventEmitter();
@@ -30,6 +30,7 @@ export class GridComponent implements OnInit {
     console.log("DATO EN GRID ", this.data);
   }
   sendEvent(event: any) {
+    console.log("event ", event)
     this.eventEmmiter.emit(event);
   }
 }

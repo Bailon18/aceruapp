@@ -34,9 +34,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private serviceNavigation: NavigationService,
-    private service: UsuarioServices,
     private authService: AuthService,
-    private tokenService: TokenService,
     private toastr: ToastrService
   ) { }
 

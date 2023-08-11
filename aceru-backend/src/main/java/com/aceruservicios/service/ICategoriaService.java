@@ -8,8 +8,10 @@ public interface ICategoriaService {
 
     List<Categoria> listarCategoria();
 
-    Categoria guardarCategoria(Categoria categoria);
+    void guardarCategoria(Categoria categoria);
 
     Categoria buscarCategoriId(Long categoriaId);
+
+    void actualizar(Categoria categoria);
 
 }

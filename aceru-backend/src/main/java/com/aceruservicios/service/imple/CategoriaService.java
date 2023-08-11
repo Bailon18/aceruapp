@@ -25,12 +25,28 @@ public class CategoriaService implements ICategoriaService {
     }
 
     @Override
-    public Categoria guardarCategoria(Categoria categoria) {
-        return categoriarepo.save(categoria);
+    public void guardarCategoria(Categoria categoria) {
+        categoriarepo.save(categoria);
     }
 
     @Override
     public Categoria buscarCategoriId(Long categoriaId) {
         return categoriarepo.findById(categoriaId).orElse(null);
+    }
+
+    @Override
+    public void actualizar(Categoria categoria) {
+
+        Categoria categoriabase = this.buscarCategoriId(categoria.getId());
+
+        if( categoriabase != null){
+
+            categoriabase.setId(categoria.getId());
+            categoriabase.setNombre(categoria.getNombre());
+            categoriabase.setDescripcion(categoria.getDescripcion());
+            categoriabase.setImagenurl(categoria.getImagenurl());
+            categoriabase.setImagenid(categoria.getImagenid());
+            categoriarepo.save(categoriabase);
+        }
     }
 }

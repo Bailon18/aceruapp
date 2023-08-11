@@ -12,8 +12,18 @@
   </div>
   </div>
   <div class="body-categories">
-    <app-grid [data]="data" (eventEmmiter)="redirect('problems/category',$event.id)"></app-grid>
+    <app-grid [data]="data" (eventEmmiter)="redirectWithCategoryData($event)"></app-grid>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 

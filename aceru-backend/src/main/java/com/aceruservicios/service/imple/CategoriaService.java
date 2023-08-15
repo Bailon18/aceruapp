@@ -46,7 +46,19 @@ public class CategoriaService implements ICategoriaService {
             categoriabase.setDescripcion(categoria.getDescripcion());
             categoriabase.setImagenurl(categoria.getImagenurl());
             categoriabase.setImagenid(categoria.getImagenid());
+            categoriabase.setEstado(categoria.getEstado());
             categoriarepo.save(categoriabase);
         }
+    }
+
+    @Override
+    public List<Categoria> obtenerCategoriasPorEstado(String estado) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        return categoriarepo.findByEstado(estado, sort);
+    }
+
+    @Override
+    public void cambiarEstadoCategoria(Long categoriaId, String nuevoEstado) {
+        categoriarepo.cambiarEstado(categoriaId, nuevoEstado);
     }
 }

@@ -39,12 +39,14 @@ export class NewCategoryComponent implements OnInit {
     descripcion: ['', [Validators.required]],
     imagen: ['', [Validators.required]],
     imagenurl: [''],
+    estado:['Activo']
   });
 
 
   ngOnInit() { 
 
     this.datocategoria = this.dataService.getData();
+
 
     if( this.datocategoria != null){
 
@@ -55,7 +57,8 @@ export class NewCategoryComponent implements OnInit {
       this.categoriaform.controls['nombre'].setValue(this.datocategoria.nombre);
       this.categoriaform.controls['descripcion'].setValue(this.datocategoria.descripcion);
       this.categoriaform.controls['imagenurl'].setValue(this.datocategoria.imagenurl);
-
+      this.categoriaform.controls['estado'].setValue(this.datocategoria.estado);
+     
      
       const imagenPreview = document.getElementById('imagenPreview') as HTMLImageElement;
       imagenPreview.style.display = 'block';
@@ -120,7 +123,8 @@ export class NewCategoryComponent implements OnInit {
       this.nuevaCategoria = {
         nombre: this.categoriaform.value.nombre,
         descripcion: this.categoriaform.value.descripcion,
-        imagen: null
+        imagen: null,
+        estado: this.categoriaform.value.estado,
       };
 
       
@@ -135,6 +139,8 @@ export class NewCategoryComponent implements OnInit {
         new Blob([JSON.stringify(this.nuevaCategoria)], { type: 'application/json' }));
 
       formData.append('imagen', imagen);
+
+      console.log("DATA ",this.nuevaCategoria )
 
       this.categoriaService.guardarCategoria(formData).subscribe({
         next: () => {
@@ -157,6 +163,11 @@ export class NewCategoryComponent implements OnInit {
       }else{
         this.toster.error(mensaje, titulo)
       }
+    }
+
+    limpiardata(){
+      this.redirect('/problems');
+      this.dataService.clearData();
     }
 
 

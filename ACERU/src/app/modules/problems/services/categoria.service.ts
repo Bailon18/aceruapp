@@ -12,12 +12,17 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
-  getListarCategoria():Observable<Categoria[]>{
-    return this.http.get<Categoria[]>(`${baseUrl}/categoria/lista`);
+  getListarCategoria(estado: string):Observable<Categoria[]>{
+    return this.http.get<Categoria[]>(`${baseUrl}/categoria/lista/${estado}`);
   }
 
   guardarCategoria(dato: FormData): Observable<any> {
     return this.http.post(`${baseUrl}/categoria/nuevo`, dato);
+  }
+
+  cambiarEstadoCategoria(categoriaId: number, estado: string): Observable<void> {
+    const url = `${baseUrl}/categoria/cambiarEstado/${categoriaId}/${estado}`;
+    return this.http.get<void>(url);
   }
 
 }

@@ -24,20 +24,22 @@ public class Categoria implements Serializable {
     @Column
     private String descripcion;
 
+    private String estado;
+
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Problema> problemas;
-
 
     public Categoria() {
         super();
     }
 
-    public Categoria(String nombre, String imagenurl, String imagenid, String descripcion) {
+    public Categoria(String nombre, String imagenurl, String imagenid, String descripcion, String estado) {
         this.nombre = nombre;
         this.imagenurl = imagenurl;
         this.imagenid = imagenid;
         this.descripcion = descripcion;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -86,6 +88,15 @@ public class Categoria implements Serializable {
 
     public void setImagenid(String imagenid) {
         this.imagenid = imagenid;
+    }
+
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     private static final long serialVersionUID = 1L;

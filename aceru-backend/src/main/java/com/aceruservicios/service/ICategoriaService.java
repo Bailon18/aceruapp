@@ -14,4 +14,8 @@ public interface ICategoriaService {
 
     void actualizar(Categoria categoria);
 
+    List<Categoria> obtenerCategoriasPorEstado(String estado);
+
+    void cambiarEstadoCategoria(Long categoriaId, String nuevoEstado);
+
 }

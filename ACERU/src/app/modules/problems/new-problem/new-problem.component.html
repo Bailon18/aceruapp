@@ -1,47 +1,83 @@
 <div class="container-categories">
   <div class="left">
-<div class="form">
-<div class="title"><strong>Nuevo problema</strong> </div>
-<div class="subtitle">Nuevos retos para los conocimientos de los participantes</div>
-<div class="body-form" [formGroup]="form">
-  <div class="div-input2">
-    Nombre del problema
-    <input class="input2" formControlName="name">
-  </div>
-  <div class="div-input2">
-    Descripción
-    <textarea class="input2" formControlName="description"></textarea>
-  </div>
-  <div class="div-input-row ">
-    <div class="div-input2">
-      Entradas
-      <input class="input2" formControlName="input">
-    </div> <div class="div-input2">
-      Salidas
-      <input class="input2" formControlName="output">
+    <div class="form">
+      <div class="title"><strong>Nuevo problema</strong></div>
+      <div class="subtitle">Nuevos retos para los conocimientos de los participantes</div>
+      <div class="body-form" [formGroup]="problemaForm">
+        <div class="div-input2">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre del problema</mat-label>
+            <input matInput formControlName="nombre">
+            <mat-error *ngIf="isValidField('nombre')">
+              {{ getFieldError('nombre') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="div-input2">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="descripcion"></textarea>
+            <mat-error *ngIf="isValidField('descripcion')">
+              {{ getFieldError('descripcion') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="div-input-row">
+          <div class="div-input2">
+            <mat-form-field appearance="outline">
+              <mat-label>Entradas</mat-label>
+              <input matInput formControlName="ingreso">
+              <mat-error *ngIf="isValidField('ingreso')">
+                {{ getFieldError('ingreso') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="div-input2">
+            <mat-form-field appearance="outline">
+              <mat-label>Salidas</mat-label>
+              <input matInput formControlName="salida">
+              <mat-error *ngIf="isValidField('salida')">
+                {{ getFieldError('salida') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="div-input2">
+          <mat-form-field appearance="outline">
+            <mat-label>Ejemplos entradas</mat-label>
+            <textarea matInput formControlName="ejemplo_ingreso"></textarea>
+            <mat-error *ngIf="isValidField('ejemplo_ingreso')">
+              {{ getFieldError('ejemplo_ingreso') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="div-input2">
+          <mat-form-field appearance="outline">
+            <mat-label>Ejemplos salidas</mat-label>
+            <textarea matInput formControlName="ejemplo_salida"></textarea>
+            <mat-error *ngIf="isValidField('ejemplo_salida')">
+              {{ getFieldError('ejemplo_salida') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="div-input2">
+          <mat-form-field appearance="outline">
+            <mat-label>Dificultad</mat-label>
+            <mat-select formControlName="dificultad">
+              <mat-option value="Facil">Facil</mat-option>
+              <mat-option value="Intermedio">Intermedio</mat-option>
+              <mat-option value="Dificil">Dificil</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="actions">
+          <div class="buttons">
+            <button mat-raised-button color="warn" (click)="redirect('/problems/category/')">Cancelar</button>
+            <button mat-raised-button color="primary" [disabled]="problemaForm.invalid" (click)="saveProblem()">{{ titulo }}</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="div-input2">
-    Ejemplos entradas
-    <textarea class="input2" formControlName="exampleInput"></textarea>
-  </div>
-  <div class="div-input2">
-    Ejemplos salidas
-    <textarea class="input2" formControlName="exampleOutput"></textarea>
-  </div>
-  <div class="div-input2">
-    Dificultad
-    <select class="input2"formControlName="difficulty">
-      <option [value]="item" *ngFor="let item of dificultad">{{item}}</option>
-    </select>
-  </div>
-<div class="actions">
-
-  <div class="buttons"><button class="button" (click)="redirect('/problems/category/')">Cancelar</button><button class="button" (click)="saveProblem()">Crear</button></div>
-</div>
-</div>
-</div>
-
   </div>
   <div class="right"><img src="assets/images/problems/icono_busqueda.png" alt="imagen no disponible"></div>
 </div>

@@ -18,6 +18,10 @@ export class ProblemCategoryComponent implements OnInit {
   faSearch = faSearch;
   faTimes = faTimes;
   data: Categoria[] = [];
+  estadoFiltro:any;
+
+  showInactivos = false; // Variable para controlar el estado del checkbox
+
 
   constructor(
     private serviceNavigation: NavigationService,
@@ -29,14 +33,7 @@ export class ProblemCategoryComponent implements OnInit {
 
   ngOnInit() {
 
-    this.categoriaService.getListarCategoria().subscribe( {
-      next: (data) => {
-        this.data = data
-      },
-      error: (err) =>{
-        console.log("Error ", err.error)
-      }
-    })
+    this.obtenerListadoCategori("Activo");
 
   }
 
@@ -47,10 +44,29 @@ export class ProblemCategoryComponent implements OnInit {
   }
   
   redirectWithCategoryData(categoryData: any): void {
-    // this.router.navigate(['problems/new-category'], {
-    //   queryParams: { category: JSON.stringify(categoryData) }
-    // });
+
+    console.log("EVENT   ",categoryData)
     this.dataService.setData(categoryData);
     this.router.navigate(['problems/new-category']);
   }
+
+  obtenerListadoCategori(estado: string){
+    this.categoriaService.getListarCategoria(estado).subscribe( {
+      next: (data) => {
+        this.data = data
+      },
+      error: (err) =>{
+        console.log("Error ", err.error)
+      }
+    })
+  }
+
+  mostrarInactivos(){
+    if (this.showInactivos) {
+      this.obtenerListadoCategori('Activo');
+    } else {
+      this.obtenerListadoCategori('Inactivo');
+    }
+  }
+
 }

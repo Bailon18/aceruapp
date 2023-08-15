@@ -10,7 +10,7 @@ import { ProblemsComponent } from './problems.component';
 import { GridModule } from 'src/app/shared/components/grid/grid.module';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { DescriptionProblemComponent } from './description-problem/description-problem.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 
 @NgModule({
@@ -24,6 +24,7 @@ import { MaterialModule } from '../material/material.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MaterialModule,
     ProblemsRoutingModule,
     FontAwesomeModule,

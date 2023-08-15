@@ -30,9 +30,9 @@ public class CategoriaController {
     @Autowired
     CloudinaryServiceImpl cloudService;
 
-    @GetMapping("/lista")
-    public ResponseEntity<List<Categoria>> list(){
-        List<Categoria> lista = categoriService.listarCategoria();
+    @GetMapping("/lista/{estado}")
+    public ResponseEntity<List<Categoria>> list(@PathVariable("estado") String estado){
+        List<Categoria> lista = categoriService.obtenerCategoriasPorEstado(estado);
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
@@ -51,12 +51,23 @@ public class CategoriaController {
         categoria.setImagenid((String) result.get("public_id"));
         categoria.setImagenurl((String) result.get("url"));
 
-        // aqui validamos si el actualizado o creacion
+
         if(categoria.getId() != null){
             categoriService.actualizar(categoria);
         }else{
+            //categoria.setEstado("Activo");
             categoriService.guardarCategoria(categoria);
         }
         return new ResponseEntity<>(new Mensaje("imagen subida"), HttpStatus.OK);
     }
+
+    @GetMapping("/cambiarEstado/{categoriaId}/{estado}")
+    public void cambiarEstadoCategoria(
+            @PathVariable Long categoriaId,
+            @PathVariable String estado
+    ) {
+        categoriService.cambiarEstadoCategoria(categoriaId, estado);
+    }
+
+
 }

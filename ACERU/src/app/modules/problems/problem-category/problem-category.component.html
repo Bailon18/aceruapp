@@ -1,18 +1,17 @@
 <div class="container-categories">
   <div class="title text-secondary">Problemas</div>
   <div class="actions "><button class="button hiddenParticipante" (click)="redirect('problems/new-category')">Nueva categoria</button>
-    <div class="search" >
-      <div class="left-search">
-          <fa-icon [icon]="faSearch"></fa-icon>
-          <input class="input-text input-search"  placeholder="Buscar" />
-      </div>
-      <div class="right-search">
-          <fa-icon [icon]="faTimes" [styles]="{ color: '#797979' }" (click)="clearSearch()"></fa-icon>
-      </div>
+  <div class="search" >
+    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="showInactivos" (click)="mostrarInactivos()">Mostrar Inactivos</mat-checkbox>
   </div>
   </div>
   <div class="body-categories">
+    
     <app-grid [data]="data" (eventEmmiter)="redirectWithCategoryData($event)"></app-grid>
+
+    <div *ngIf="data.length === 0" class="no-category-message">
+      <p class="message-text">NO HAY CATEGORÍA</p>
+    </div>
   </div>
 </div>
 

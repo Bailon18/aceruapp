@@ -20,11 +20,11 @@ const routes: Routes = [
         data: { rol: 'Administrador' },
         component: NewCategoryComponent,
       },
-      { path: 'category/:id', component: ListProblemsComponent },
+      { path: 'category/:id/:nombre', component: ListProblemsComponent },
       {
-        path: 'category/:id/new-problem',
+        path: 'category/:id/:nombre/new-problem',
         //canActivate: [RoleGuardService],
-        data: { rol: 'Administrador' },
+        //data: { rol: 'Administrador' },
         component: NewProblemComponent,
       },
       {

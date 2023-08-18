@@ -45,7 +45,6 @@ export class ProblemCategoryComponent implements OnInit {
   
   redirectWithCategoryData(categoryData: any): void {
 
-    console.log("EVENT   ",categoryData)
     this.dataService.setData(categoryData);
     this.router.navigate(['problems/new-category']);
   }

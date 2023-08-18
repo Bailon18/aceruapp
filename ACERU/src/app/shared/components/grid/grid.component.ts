@@ -40,13 +40,14 @@ export class GridComponent {
   }
 
   handleCardClick(item: any) {
-    this.router.navigate(['/problems/category/'+item.id])
+    this.router.navigate(['/problems/category/'+item.id+'/'+item.nombre])
   }
 
-  handleAction(action: any, item: any) {
+  handleAction(event: Event, action: any, item: any) {
     if (action.event === 'edit') {
       this.sendEvent(item);
     } else if (action.event === 'delete') {
+      event.stopPropagation();
       swall
         .fire({
           html: `¿Estás seguro que deseas desabilitar :  <strong>${item.nombre}?</strong>`,

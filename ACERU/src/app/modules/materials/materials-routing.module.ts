@@ -8,19 +8,35 @@ import { NewMaterialComponent } from './new-material/new-material.component';
 import { MaterialPresentationComponent } from './material-presentation/material-presentation.component';
 import { RoleGuardService } from 'src/app/shared/services/guard/role-guard/roleGuard.service';
 
-
 const routes: Routes = [
-  {path:"",component:MaterialsComponent,children:[
-    {path:"",component:MaterialsCategoryComponent},
-    {path:"category/:id",component:ListMaterialsComponent},
-    {path:"new-category",canActivate:[RoleGuardService],data:{rol:"Administrador"},component:NewCategoryComponent},
-    {path:"category/:id/new-material",canActivate:[RoleGuardService],data:{rol:"Administrador"},component:NewMaterialComponent},
-    {path:"category/presentation-material/:idCategory/:idMaterial",component:MaterialPresentationComponent},
-  ]}
+  {
+    path: '',
+    component: MaterialsComponent,
+    children: [
+      { path: '', component: MaterialsCategoryComponent },
+      { path: 'category/:id', component: ListMaterialsComponent },
+      {
+        path: 'new-category',
+        // canActivate: [RoleGuardService],
+        // data: { rol: 'Administrador' },
+        component: NewCategoryComponent,
+      },
+      {
+        path: 'category/:id/new-material',
+        // canActivate: [RoleGuardService],
+        // data: { rol: 'Administrador' },
+        component: NewMaterialComponent,
+      },
+      {
+        path: 'category/presentation-material/:idCategory/:idMaterial',
+        component: MaterialPresentationComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MaterialsRoutingModule { }
+export class MaterialsRoutingModule {}

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
   DATA_CATEGORY_HEADERS,
@@ -17,6 +17,7 @@ import { Problema } from '../model/problema';
 import { ProblemaService } from '../services/problema.service';
 import { ThemePalette } from '@angular/material/core';
 import { DataService } from 'src/app/shared/services/data-service';
+import swall from 'sweetalert2';
 
 @Component({
   selector: 'app-list-problems',
@@ -32,6 +33,7 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
   faSearch = faSearch;
   faTimes = faTimes;
   idCategoria?: any;
+  nombreCategoria?: string;
   showInactivos = false; // Variable para controlar el estado del checkbox
 
   // ###########################################################
@@ -45,13 +47,15 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
     private route: ActivatedRoute,
     private serviceNavigation: NavigationService,
     private  problemaService: ProblemaService,
-    private dataservice: DataService<any>
+    private dataservice: DataService<any>,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(({ params }: any) => {
 
       this.idCategoria = parseInt(params.id);
+      this.nombreCategoria = params.nombre;
   
       if (typeof this.idCategoria === 'number') {
         this.listarProblemas(this.idCategoria, "Activo");
@@ -101,6 +105,63 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
       this.listarProblemas(this.idCategoria, "Inactivo")
     }
   }
+
+  editarProblema(fila: any){
+    
+    this.dataservice.clearData();
+    this.dataservice.setData(fila);
+    this.router.navigate(['/problems/category/'+this.idCategoria+'/'+this.nombreCategoria+'/new-problem'])
+
+  }
+
+  bloquearProblema(fila: any): void {
+    
+    const esInactivo = fila.estado === 'Inactivo';
+    const nuevoEstado = esInactivo ? 'Activo' : 'Inactivo';
+    const accion = esInactivo ? 'Habilitar' : 'Desabilitar';
+    const accion2 = esInactivo ? 'Habilitado' : 'Desabilitado';
+    const mensaje = `¿Estás seguro que deseas <strong>${accion}</strong>: <strong>${fila.nombre}</strong>?`;
+    const exitoMensaje = `${accion2} la problema correctamente`;
+  
+    swall
+      .fire({
+        html: mensaje,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'Cancelar',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.problemaService.cambiarEstadoProblema(fila.id, nuevoEstado).subscribe({
+            next: () => {
+              swall.fire(
+                accion2,
+                exitoMensaje,
+                'success'
+              );
+  
+              this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this.router.onSameUrlNavigation = 'reload';
+              this.router.navigate(['/problems/category/' + this.idCategoria + '/' + this.nombreCategoria], {
+                relativeTo: this.route,
+              });
+            },
+            error: (error) => {
+              console.error(error);
+              swall.fire(
+                accion2,
+                'No se pudo realizar la acción',
+                'warning'
+              );
+            },
+          });
+        }
+      });
+  }
+  
 
 
 }

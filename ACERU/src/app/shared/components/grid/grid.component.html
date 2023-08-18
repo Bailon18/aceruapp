@@ -5,7 +5,7 @@
         <img
           [src]="action.value"
           *ngIf="!(action.event === 'delete' && item.estado === 'Inactivo')"
-          (click)="handleAction(action, item)"
+          (click)="handleAction($event, action, item)"
         >
       </ng-container>
     </div>

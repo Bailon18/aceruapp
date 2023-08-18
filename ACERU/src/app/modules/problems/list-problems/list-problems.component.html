@@ -1,7 +1,7 @@
 <div class="container-list-problems">
-  <div class="name-category text-secondary">Ejercicios</div>
+  <div class="name-category text-secondary">Ejercicios - {{ nombreCategoria }}</div>
    <br>
-  <div class="actions "><button class="button hiddenParticipante" [routerLink]="['/problems/category/'+idCategoria+'/new-problem']">Nuevo problema</button>
+  <div class="actions "><button class="button hiddenParticipante" [routerLink]="['/problems/category/'+idCategoria+'/'+nombreCategoria+'/new-problem']">Nuevo problema</button>
     <div class="search" >
         <mat-checkbox color="primary" class="example-margin" [(ngModel)]="showInactivos" (click)="mostrarInactivos()">Mostrar Inactivos</mat-checkbox>
   </div>
@@ -54,14 +54,11 @@
                                 </td>
                               </ng-container>
                               
-                              
-                        
-                
                             <ng-container matColumnDef="ACCIONES">
                                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                                 <td mat-cell *matCellDef="let fila">
-                                    <a class="pointer iconosAccion" matTooltip="Editar Usuario" ><mat-icon class="success-icon">edit</mat-icon></a>
-                                    <a class="pointer iconosAccion" matTooltip="Bloquear Usuario" ><mat-icon class="danger-icon">not_interested</mat-icon></a>
+                                    <a class="pointer iconosAccion" matTooltip="Editar problema"  (click)="editarProblema(fila)"><mat-icon class="success-icon">edit</mat-icon></a>
+                                    <a class="pointer iconosAccion" matTooltip="Bloquear problema" (click)="bloquearProblema(fila)"><mat-icon class="danger-icon">not_interested</mat-icon></a>
                                 </td>
                             </ng-container>
                         

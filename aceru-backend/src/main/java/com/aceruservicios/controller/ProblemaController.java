@@ -29,8 +29,16 @@ public class ProblemaController {
 
     @PostMapping("/guardar")
     public ResponseEntity<Problema> guardarProblema(@RequestBody Problema problema) {
-        Problema nuevoProblema = problemaService.guardarProblema(problema);
-        return new ResponseEntity<>(nuevoProblema, HttpStatus.CREATED);
+
+        Problema problemaretorno;
+
+        if(problema.getId() != null){
+            problemaretorno = problemaService.actualizarProblema(problema);
+        }else{
+            problemaretorno = problemaService.guardarProblema(problema);
+        }
+
+        return new ResponseEntity<>(problemaretorno, HttpStatus.CREATED);
     }
 
     @PutMapping("/actualizar")
@@ -39,12 +47,13 @@ public class ProblemaController {
         return new ResponseEntity<>(problemaActualizado, HttpStatus.OK);
     }
 
-    @PostMapping("/cambiarEstado/{problemaId}/{estado}")
-    public ResponseEntity<String> cambiarEstadoProblema(
+    @PutMapping("/cambiarEstado/{problemaId}/{estado}")
+    public ResponseEntity<?> cambiarEstadoProblema(
             @PathVariable Long problemaId,
             @PathVariable String estado
     ) {
+
         problemaService.cambiarEstadoProblema(problemaId, estado);
-        return new ResponseEntity<>("Estado del problema actualizado", HttpStatus.OK);
+        return new ResponseEntity<>("{\"message\": \"Estado del problema actualizado\"}", HttpStatus.OK);
     }
 }

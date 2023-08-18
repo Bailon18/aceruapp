@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ProblemaService } from '../services/problema.service';
+import { Problema } from '../model/problema';
+import { DataService } from 'src/app/shared/services/data-service';
 
 @Component({
   selector: 'app-new-problem',
@@ -13,33 +16,61 @@ export class NewProblemComponent implements OnInit {
 
   dificultad = ['Fácil', 'Intermedio', 'Dificil'];
   idCategory: any;
-  nombreboton:string ="Crear"
-  titulo:string="Nuevo Problema"
+  nombreCategoria: any;
+  nombreboton: string = 'Guardar problema';
+  titulo: string = 'Nuevo Problema';
+  datoProblema?:any;
+  
 
-  public problemaForm  =  this.fb.group({
-    id:[''],
+  public problemaForm = this.fb.group({
+    id: [''],
     nombre: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
-    ingreso: ['', [Validators.required]],
-    salida: ['', [Validators.required]],
-    ejemplo_ingreso: ['', [Validators.required]],
-    ejemplo_salida: ['', [Validators.required]],
+    entradas: ['', [Validators.required]],
+    salidas: ['', [Validators.required]],
+    ejemploEntradas: ['', [Validators.required]],
+    ejemploSalidas: ['', [Validators.required]],
     dificultad: ['Facil', [Validators.required]],
-  })
+  });
 
   constructor(
     private serviceNavigation: NavigationService,
     private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private problemaService: ProblemaService,
+    private dataService: DataService<any>
   ) {}
 
   ngOnInit() {
-    
-    this.route.paramMap.subscribe(
-      ({ params }: any) => (this.idCategory = params.id)
-    );
-   
+
+    this.route.paramMap.subscribe(({ params }: any) => {
+
+      this.idCategory = parseInt(params.id);
+      this.nombreCategoria = params.nombre;
+
+    });
+
+    this.datoProblema = this.dataService.getData();
+
+    if( this.datoProblema != null){
+
+      this.nombreboton = "Actualizar problema";
+      this.titulo= "Editar Problema";
+
+      this.problemaForm.controls['id'].setValue(this.datoProblema.id);
+      this.problemaForm.controls['nombre'].setValue(this.datoProblema.nombre);
+      this.problemaForm.controls['descripcion'].setValue(this.datoProblema.descripcion);
+      this.problemaForm.controls['entradas'].setValue(this.datoProblema.entradas);
+      this.problemaForm.controls['salidas'].setValue(this.datoProblema.salidas);
+      this.problemaForm.controls['ejemploEntradas'].setValue(this.datoProblema.ejemploEntradas);
+      this.problemaForm.controls['ejemploSalidas'].setValue(this.datoProblema.ejemploSalidas);
+      this.problemaForm.controls['dificultad'].setValue(this.datoProblema.dificultad);
+
+
+    }
+
   }
 
   isValidField(field: string): boolean | null {
@@ -50,7 +81,6 @@ export class NewProblemComponent implements OnInit {
   }
 
   getFieldError(field: string): string | null {
-    
     if (!this.problemaForm.controls[field]) return null;
 
     const errors = this.problemaForm.controls[field].errors || {};
@@ -64,7 +94,6 @@ export class NewProblemComponent implements OnInit {
 
     return null;
   }
-  
 
   redirect(page: string, parameter?: any) {
     this.serviceNavigation.redirect(page + this.idCategory, parameter);
@@ -73,12 +102,33 @@ export class NewProblemComponent implements OnInit {
   saveProblem() {
     if (this.problemaForm.valid) {
 
+      let mensaje = "Problema creada con exito!"
+
+      if(this.problemaForm.value.id != ''){
+
+        mensaje = "Problema actualizado con exito!"
+      }
       
-
-
-
-      this.toaster.success('Se creo nuevo problema');
+      const nuevoProblema: Problema = this.problemaForm.value;
+      nuevoProblema.estado = "Activo"
+      
+      this.problemaService.guardarProblema(nuevoProblema, this.idCategory).subscribe({
+        next: () => {
+          this.toaster.success(mensaje);
+          this.retornar()
+        },
+        error:(error) => {
+          this.toaster.error('No se pudo crear el problema');
+        }}
+      );
     }
   }
+
+  retornar(){
+    this.router.navigate(['/problems/category/'+this.idCategory+'/'+this.nombreCategoria])
+    this.dataService.clearData(); // limpiamos los datos que se utilizo aqui
+  }
+  
+  
 
 }

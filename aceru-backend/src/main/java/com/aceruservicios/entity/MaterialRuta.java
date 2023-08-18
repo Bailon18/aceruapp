@@ -1,7 +1,6 @@
 package com.aceruservicios.entity;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 
 @Entity

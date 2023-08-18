@@ -1,10 +1,11 @@
 <div class="container-categories">
   <div class="left">
     <div class="form">
-      <div class="title"><strong>Nuevo problema</strong></div>
+      <div class="title"><strong>{{ titulo }} - {{ nombreCategoria }}</strong></div>
       <div class="subtitle">Nuevos retos para los conocimientos de los participantes</div>
       <div class="body-form" [formGroup]="problemaForm">
         <div class="div-input2">
+          <input type="hidden" formControlName="id">
           <mat-form-field appearance="outline">
             <mat-label>Nombre del problema</mat-label>
             <input matInput formControlName="nombre">
@@ -26,18 +27,18 @@
           <div class="div-input2">
             <mat-form-field appearance="outline">
               <mat-label>Entradas</mat-label>
-              <input matInput formControlName="ingreso">
-              <mat-error *ngIf="isValidField('ingreso')">
-                {{ getFieldError('ingreso') }}
+              <input matInput formControlName="entradas">
+              <mat-error *ngIf="isValidField('entradas')">
+                {{ getFieldError('entradas') }}
               </mat-error>
             </mat-form-field>
           </div>
           <div class="div-input2">
             <mat-form-field appearance="outline">
               <mat-label>Salidas</mat-label>
-              <input matInput formControlName="salida">
-              <mat-error *ngIf="isValidField('salida')">
-                {{ getFieldError('salida') }}
+              <input matInput formControlName="salidas">
+              <mat-error *ngIf="isValidField('salidas')">
+                {{ getFieldError('salidas') }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -45,18 +46,18 @@
         <div class="div-input2">
           <mat-form-field appearance="outline">
             <mat-label>Ejemplos entradas</mat-label>
-            <textarea matInput formControlName="ejemplo_ingreso"></textarea>
-            <mat-error *ngIf="isValidField('ejemplo_ingreso')">
-              {{ getFieldError('ejemplo_ingreso') }}
+            <textarea matInput formControlName="ejemploEntradas"></textarea>
+            <mat-error *ngIf="isValidField('ejemploEntradas')">
+              {{ getFieldError('ejemploEntradas') }}
             </mat-error>
           </mat-form-field>
         </div>
         <div class="div-input2">
           <mat-form-field appearance="outline">
             <mat-label>Ejemplos salidas</mat-label>
-            <textarea matInput formControlName="ejemplo_salida"></textarea>
-            <mat-error *ngIf="isValidField('ejemplo_salida')">
-              {{ getFieldError('ejemplo_salida') }}
+            <textarea matInput formControlName="ejemploSalidas"></textarea>
+            <mat-error *ngIf="isValidField('ejemploSalidas')">
+              {{ getFieldError('ejemploSalidas') }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -72,8 +73,8 @@
         </div>
         <div class="actions">
           <div class="buttons">
-            <button mat-raised-button color="warn" (click)="redirect('/problems/category/')">Cancelar</button>
-            <button mat-raised-button color="primary" [disabled]="problemaForm.invalid" (click)="saveProblem()">{{ titulo }}</button>
+            <button mat-raised-button color="warn" (click)="retornar()">Cancelar</button>
+            <button mat-raised-button color="primary" [disabled]="problemaForm.invalid" (click)="saveProblem()">{{ nombreboton }}</button>
           </div>
         </div>
       </div>

@@ -1,15 +1,6 @@
 <div class="container-description-problem">
   <div class="header">
-    <div class="name-problem text-secondary">{{data.name}}</div>
-    <div class="search">
-      <div class="left-search">
-        <fa-icon [icon]="faSearch"></fa-icon>
-        <input class="input-text input-search"  placeholder="Buscar" />
-      </div>
-      <div class="right-search">
-        <fa-icon [icon]="faTimes" [styles]="{ color: '#797979' }" (click)="clearSearch()"></fa-icon>
-      </div>
-    </div>
+    <div class="name-problem text-secondary">{{dataProblema.nombre}}</div>
   </div>
 
   <hr class="separator">
@@ -19,24 +10,24 @@
       <div class="card-description form">
         <div class="section-description">
           <label>Descripción</label>
-          <p>{{data.description}}</p>
+          <p>{{dataProblema.descripcion}}</p>
         </div>
         <div class="section-description">
           <label>Entrada</label>
-          <p>{{data.input}}</p>
+          <p>{{dataProblema.entradas}}</p>
         </div>
         <div class="section-description">
           <label>Salida</label>
-          <p>{{data.output}}</p>
+          <p>{{dataProblema.salidas}}</p>
         </div>
         <div class="examples">
           <div class="mini-card">
             <div class="head">Ejemplo de entrada</div>
-            <div class="description-example">{{data.inputExample}}</div>
+            <div class="description-example">{{dataProblema.ejemploEntradas}}</div>
           </div>
           <div class="mini-card">
             <div class="head">Ejemplo de salida</div>
-            <div class="description-example">{{data.outputExample}}</div>
+            <div class="description-example">{{dataProblema.ejemploSalidas}}</div>
           </div>
         </div>
       </div>
@@ -44,13 +35,12 @@
     <div class="right">
       <div class="card-profile">
         <div class="data-profile">
-          <div class="txt">Categoría:</div>
-          <div class="txt">Problema:</div>
-          <div class="txt">Dificultad:</div>
+          <div class="txt">Categoría: {{dataProblema.categoria.nombre}}</div>
+          <div class="txt">Problema: {{dataProblema.nombre}}</div>
+          <div class="txt">Dificultad: {{ dataProblema.dificultad }}</div>
           <div class="edit-profile"><button class="button" (click)="openConsol()">Resolver</button></div>
-          <div class="change-password" ><button class="button" (click)="redirect('problems/category/')">Cancelar</button></div>
+          <div class="change-password" ><button class="button" (click)="retornar()">Cancelar</button></div>
         </div>
-
       </div>
     </div>
   </div>

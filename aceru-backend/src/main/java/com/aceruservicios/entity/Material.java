@@ -1,6 +1,5 @@
 package com.aceruservicios.entity;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -10,70 +9,83 @@ import java.util.Arrays;
 
 public class Material implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, length = 200)
-    private String nombre;
-    private String imagenurl;
-    private String imagenid;
-    @Column(length = 50, columnDefinition = "VARCHAR(50) DEFAULT 'Activo'")
-    private String estado;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(nullable = false, length = 200)
+	private String nombre;
+	
+	private String imagenurl;
 
-    public Material() {
-        super();
-    }
+	@Column(length = 1000)
+	private String descripcion;
 
+	private String imagenid;
+	
+	@Column(length = 50, columnDefinition = "VARCHAR(50) DEFAULT 'Activo'")
+	private String estado;
 
-    public Material(String nombre, String imagenurl, String imagenid, String estado) {
-        this.nombre = nombre;
-        this.imagenurl = imagenurl;
-        this.imagenid = imagenid;
-        this.estado = estado;
-    }
+	public Material() {
+		super();
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Material(String nombre, String descripcion, String imagenurl, String imagenid, String estado) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.imagenurl = imagenurl;
+		this.imagenid = imagenid;
+		this.estado = estado;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getEstado() {
-        return estado;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+	public String getEstado() {
+		return estado;
+	}
 
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
-    public String getImagenurl() {
-        return imagenurl;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public void setImagenurl(String imagenurl) {
-        this.imagenurl = imagenurl;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public String getImagenid() {
-        return imagenid;
-    }
+	public String getImagenurl() {
+		return imagenurl;
+	}
 
-    public void setImagenid(String imagenid) {
-        this.imagenid = imagenid;
-    }
+	public void setImagenurl(String imagenurl) {
+		this.imagenurl = imagenurl;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public String getImagenid() {
+		return imagenid;
+	}
+
+	public void setImagenid(String imagenid) {
+		this.imagenid = imagenid;
+	}
+
+	private static final long serialVersionUID = 1L;
 
 }
-

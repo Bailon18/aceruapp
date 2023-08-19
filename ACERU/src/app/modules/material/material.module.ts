@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   exports: [
@@ -40,7 +41,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatCheckboxModule,
     MatPaginatorModule,
     MatTableModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
 
   ]
 })

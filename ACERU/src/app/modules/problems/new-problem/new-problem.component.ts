@@ -53,6 +53,8 @@ export class NewProblemComponent implements OnInit {
     });
 
     this.datoProblema = this.dataService.getData();
+    // OJO
+    //this.dataService.clearData()
 
     if( this.datoProblema != null){
 
@@ -126,7 +128,7 @@ export class NewProblemComponent implements OnInit {
 
   retornar(){
     this.router.navigate(['/problems/category/'+this.idCategory+'/'+this.nombreCategoria])
-    this.dataService.clearData(); // limpiamos los datos que se utilizo aqui
+    //this.dataService.clearData(); // limpiamos los datos que se utilizo aqui
   }
   
   

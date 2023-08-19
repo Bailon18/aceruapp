@@ -46,6 +46,8 @@ export class NewCategoryComponent implements OnInit {
   ngOnInit() { 
 
     this.datocategoria = this.dataService.getData();
+    // OJO
+    //this.dataService.clearData()
 
 
     if( this.datocategoria != null){

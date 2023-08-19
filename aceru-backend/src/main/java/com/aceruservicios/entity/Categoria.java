@@ -19,8 +19,11 @@ public class Categoria implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String nombre;
+    
     private String imagenurl;
+    
     private String imagenid;
+    
     @Column
     private String descripcion;
 

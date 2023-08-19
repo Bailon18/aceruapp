@@ -66,6 +66,10 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
 
   }
   
+  abrirVentanaNuevoProblema(){
+    this.dataservice.clearData();
+    this.router.navigate(['/problems/category/'+this.idCategoria+'/'+this.nombreCategoria+'/new-problem'])
+  }
 
   ngAfterViewInit(): void {
     this.paginator._intl.itemsPerPageLabel = 'Paginas';
@@ -163,5 +167,31 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
   }
   
 
+  resolverProblema(fila: any){
+    console.log("FDILA PARA RESOLVER ", fila)
+    //   {
+    //     "id": 3,
+    //     "categoria": {
+    //         "id": 3,
+    //         "nombre": "Git",
+    //         "imagenurl": "http://res.cloudinary.com/doyaxevum/image/upload/v1692416994/znppbwdiwgivnjgelnnz.jpg",
+    //         "imagenid": "znppbwdiwgivnjgelnnz",
+    //         "descripcion": "Fundamentos de git",
+    //         "estado": "Activo"
+    //     },
+    //     "nombre": "Problema 3",
+    //     "descripcion": "Descripción de Problema 3",
+    //     "entradas": "Entrada 3",
+    //     "salidas": "Salida 3",
+    //     "ejemploEntradas": "Entrada de ejemplo 3",
+    //     "ejemploSalidas": "Salida de ejemplo 3",
+    //     "dificultad": "Facil",
+    //     "estado": "Activo"
+    // }
+
+    this.dataservice.clearData();
+    this.dataservice.setData(fila);
+    this.router.navigate(['/problems/category/description-problem/'+fila.categoria.id+'/'+fila.id])
+  }
 
 }

@@ -43,8 +43,16 @@ export class ProblemCategoryComponent implements OnInit {
     this.serviceNavigation.redirect(page, parameter);
   }
   
-  redirectWithCategoryData(categoryData: any): void {
 
+  redireccionarNuevaCategoria(){
+    console.log("AQUIII ")
+    this.dataService.clearData()
+    this.router.navigate(['problems/new-category']);
+  }
+
+
+  redirectWithCategoryData(categoryData: any): void {
+    this.dataService.clearData()
     this.dataService.setData(categoryData);
     this.router.navigate(['problems/new-category']);
   }

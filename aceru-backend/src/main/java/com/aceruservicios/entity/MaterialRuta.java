@@ -11,12 +11,21 @@ public class MaterialRuta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    private String nombre;
+    
+    @Column(length = 1000)
+    private String descripcion;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "material_id")
     private Material material;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_material_id")
     private MaterialTipo tipoMaterial;
+    
+    
     @Column
     private String ruta;
 

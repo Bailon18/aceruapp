@@ -1,5 +1,8 @@
 package com.aceruservicios.enums;
 
 public enum TipoMaterial {
-	PDF, WORD, 
+	PDF,
+	WORD,
+	TXT,
+	VIDEO
 }

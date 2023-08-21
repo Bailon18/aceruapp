@@ -1,41 +1,61 @@
 package com.aceruservicios.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.aceruservicios.enums.TipoMaterial;
+
+
 import java.io.Serializable;
-import java.util.Arrays;
 
 @Entity
 @Table(name = "material")
-
 public class Material implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(nullable = false, length = 200)
+
 	private String nombre;
-	
-	private String imagenurl;
 
 	@Column(length = 1000)
 	private String descripcion;
 
-	private String imagenid;
-	
-	@Column(length = 50, columnDefinition = "VARCHAR(50) DEFAULT 'Activo'")
-	private String estado;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "material_id")
+	private MaterialCategoria materialCategoria;
+
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "tipo_material_id") private MaterialTipo tipoMaterial;
+	 */
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private TipoMaterial tipoMaterial;
+
+	@Column
+	private String ruta;
 
 	public Material() {
 		super();
 	}
 
-	public Material(String nombre, String descripcion, String imagenurl, String imagenid, String estado) {
+	public Material(Long id, String nombre, String descripcion, MaterialCategoria materialCategoria,
+			@NotNull TipoMaterial tipoMaterial, String ruta) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.imagenurl = imagenurl;
-		this.imagenid = imagenid;
-		this.estado = estado;
+		this.materialCategoria = materialCategoria;
+		this.tipoMaterial = tipoMaterial;
+		this.ruta = ruta;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Long getId() {
@@ -46,20 +66,36 @@ public class Material implements Serializable {
 		this.id = id;
 	}
 
+	public MaterialCategoria getMaterial() {
+		return materialCategoria;
+	}
+
+	public void setMaterial(MaterialCategoria materialCategoria) {
+		this.materialCategoria = materialCategoria;
+	}
+
+	public TipoMaterial getTipoMaterial() {
+		return tipoMaterial;
+	}
+
+	public void setTipoMaterial(TipoMaterial tipoMaterial) {
+		this.tipoMaterial = tipoMaterial;
+	}
+
+	public String getRuta() {
+		return ruta;
+	}
+
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 
 	public String getDescripcion() {
@@ -70,22 +106,27 @@ public class Material implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public String getImagenurl() {
-		return imagenurl;
+	public MaterialCategoria getMaterialCategoria() {
+		return materialCategoria;
 	}
 
-	public void setImagenurl(String imagenurl) {
-		this.imagenurl = imagenurl;
+	public void setMaterialCategoria(MaterialCategoria materialCategoria) {
+		this.materialCategoria = materialCategoria;
 	}
 
-	public String getImagenid() {
-		return imagenid;
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Material [id=");
+		builder.append(id);
+		builder.append(", materialCategoria=");
+		builder.append(materialCategoria);
+		builder.append(", tipoMaterial=");
+		builder.append(tipoMaterial);
+		builder.append(", ruta=");
+		builder.append(ruta);
+		builder.append("]");
+		return builder.toString();
 	}
-
-	public void setImagenid(String imagenid) {
-		this.imagenid = imagenid;
-	}
-
-	private static final long serialVersionUID = 1L;
-
 }
+

@@ -1,15 +1,7 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { UserService } from '../../services/user/user.service';
+import { Component,EventEmitter,Input,Output } from '@angular/core';
 import swall from 'sweetalert2';
 import { CategoriaService } from 'src/app/modules/problems/services/categoria.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-grid',

@@ -2,7 +2,6 @@ package com.aceruservicios.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Arrays;
 
 @Entity
 @Table(name = "materialcategoria")
@@ -17,8 +16,9 @@ public class MaterialCategoria implements Serializable {
 	
 	private String imagenurl;
 
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String descripcion;
+
 
 	private String imagenid;
 	

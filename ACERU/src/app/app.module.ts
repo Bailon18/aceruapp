@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon'
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { GridMaterialesComponent } from './shared/components/grid-materiales/grid-materiales.component';
 
 
 
@@ -24,7 +25,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     DialogComponent,
-    CodeWindowComponent
+    CodeWindowComponent,
   ],
   imports: [
     BrowserModule,

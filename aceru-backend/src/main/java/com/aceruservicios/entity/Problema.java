@@ -21,19 +21,19 @@ public class Problema implements Serializable {
 	@Column(nullable = false, length = 200)
 	private String nombre;
 	
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String descripcion;
-	
-	@Column
+
+	@Column(columnDefinition = "TEXT")
 	private String entradas;
 	
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String salidas;
 	
-	@Column(name = "ejemplo_entradas")
+	@Column(name = "ejemplo_entradas", columnDefinition = "TEXT")
 	private String ejemploEntradas;
 	
-	@Column(name = "ejemplo_salidas")
+	@Column(name = "ejemplo_salidas", columnDefinition = "TEXT")
 	private String ejemploSalidas;
 	
 	@Column(length = 20)

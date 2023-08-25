@@ -19,8 +19,9 @@ public class Competencia implements Serializable {
     @Column(nullable = false, length = 200)
     private String nombre;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
+
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_inicio")

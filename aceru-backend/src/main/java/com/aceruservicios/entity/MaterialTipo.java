@@ -9,40 +9,42 @@ import java.io.Serializable;
 
 public class MaterialTipo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, length = 100)
-    private String nombre;
+	private static final long serialVersionUID = 1L;
 
-    public MaterialTipo() {
-        super();
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(nullable = false, length = 100)
+	private String nombre;
 
-    public MaterialTipo(Long id, String nombre) {
-        super();
-        this.id = id;
-        this.nombre = nombre;
-    }
+	public MaterialTipo() {
+		super();
+	}
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
+	public MaterialTipo(Long id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 }

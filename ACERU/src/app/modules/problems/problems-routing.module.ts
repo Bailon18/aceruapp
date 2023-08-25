@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: 'new-category',
         //canActivate: [RoleGuardService],
-        data: { rol: 'Administrador' },
+        //data: { rol: 'Administrador' },
         component: NewCategoryComponent,
       },
       { path: 'category/:id/:nombre', component: ListProblemsComponent },

@@ -24,7 +24,7 @@ public class Categoria implements Serializable {
     
     private String imagenid;
     
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
 
     private String estado;

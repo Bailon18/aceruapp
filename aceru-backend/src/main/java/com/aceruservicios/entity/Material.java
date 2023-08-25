@@ -19,8 +19,9 @@ public class Material implements Serializable {
 
 	private String nombre;
 
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String descripcion;
+
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "material_id")

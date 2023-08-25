@@ -14,7 +14,7 @@ const routes: Routes = [
     component: MaterialsComponent,
     children: [
       { path: '', component: MaterialsCategoryComponent },
-      { path: 'category/:id/', component: ListMaterialsComponent },
+      { path: 'category/:id/:nombre', component: ListMaterialsComponent },
       {
         path: 'new-category',
         // canActivate: [RoleGuardService],
@@ -22,7 +22,7 @@ const routes: Routes = [
         component: NewCategoryComponent,
       },
       {
-        path: 'category/:id/new-material',
+        path: 'category/:id/:nombre/new-material',
         // canActivate: [RoleGuardService],
         // data: { rol: 'Administrador' },
         component: NewMaterialComponent,

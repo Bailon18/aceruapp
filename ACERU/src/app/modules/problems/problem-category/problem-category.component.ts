@@ -32,9 +32,7 @@ export class ProblemCategoryComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.obtenerListadoCategori("Activo");
-
   }
 
   clearSearch() {}

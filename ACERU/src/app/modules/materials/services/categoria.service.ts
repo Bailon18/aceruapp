@@ -13,15 +13,15 @@ export class CategoriaService {
   constructor(private http: HttpClient) { }
 
   getListarCategoria(estado: string):Observable<Categoria[]>{
-    return this.http.get<Categoria[]>(`${baseUrl}/categoria/lista/${estado}`);
+    return this.http.get<Categoria[]>(`${baseUrl}/materialcategoria/lista/${estado}`);
   }
 
   guardarCategoria(dato: FormData): Observable<any> {
-    return this.http.post(`${baseUrl}/categoria/nuevo`, dato);
+    return this.http.post(`${baseUrl}/materialcategoria/nuevo`, dato);
   }
 
   cambiarEstadoCategoria(categoriaId: number, estado: string): Observable<void> {
-    const url = `${baseUrl}/categoria/cambiarEstado/${categoriaId}/${estado}`;
+    const url = `${baseUrl}/materialcategoria/cambiarEstado/${categoriaId}/${estado}`;
     return this.http.get<void>(url);
   }
 

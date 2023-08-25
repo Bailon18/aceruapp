@@ -31,53 +31,52 @@ export class GridMaterialesComponent {
     }
 
     handleCardClick(item: any) {
-      //this.router.navigate(['/problems/category/'+item.id+'/'+item.nombre])
+      this.router.navigate(['/materials/category/'+item.id+'/'+item.nombre])
     }
-  
+
     handleAction(event: Event, action: any, item: any) {
-    //   if (action.event === 'edit') {
-    //     this.sendEvent(item);
-    //   } else if (action.event === 'delete') {
-    //     event.stopPropagation();
-    //     swall
-    //       .fire({
-    //         html: `¿Estás seguro que deseas desabilitar :  <strong>${item.nombre}?</strong>`,
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Si',
-    //         cancelButtonText: 'cancelar',
-    //       })
-    //       .then((result) => {
-    //         if (result.isConfirmed) {
-    //           this.categoriaService
-    //             .cambiarEstadoCategoria(item.id, 'Inactivo')
-    //             .subscribe({
-    //               next: () => {
-    //                 swall.fire(
-    //                   'Desabilitado!',
-    //                   'Se a desabilitado la categoria correctamente',
-    //                   'success'
-    //                 );
-  
-    //                 this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    //                 this.router.onSameUrlNavigation = 'reload';
-    //                 this.router.navigate(['/problems'], {
-    //                   relativeTo: this.route,
-    //                 });
-    //               },
-    //               error: () => {
-    //                 swall.fire(
-    //                   'Desabilitado',
-    //                   'No se pudo inabilitar la categoria',
-    //                   'warning'
-    //                 );
-    //               },
-    //             });
-    //         }
-    //       });
-    //   }
-    // }
-  }
+      if (action.event === 'edit') {
+        this.sendEvent(item);
+      } else if (action.event === 'delete') {
+        event.stopPropagation();
+        swall
+          .fire({
+            html: `¿Estás seguro que deseas desabilitar :  <strong>${item.nombre}?</strong>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'cancelar',
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.categoriaService
+                .cambiarEstadoCategoria(item.id, 'Inactivo')
+                .subscribe({
+                  next: () => {
+                    swall.fire(
+                      'Desabilitado!',
+                      'Se a desabilitado la categoria correctamente',
+                      'success'
+                    );
+
+                    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                    this.router.onSameUrlNavigation = 'reload';
+                    this.router.navigate(['/materials'], {
+                      relativeTo: this.route,
+                    });
+                  },
+                  error: () => {
+                    swall.fire(
+                      'Desabilitado',
+                      'No se pudo inabilitar la categoria',
+                      'warning'
+                    );
+                  },
+                });
+            }
+          });
+      }
+    }
 }

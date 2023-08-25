@@ -7,7 +7,7 @@
       <br>
       <form [formGroup]="categoriaform" style="width: 100%;" novalidate enctype="multipart/form-data">
         <input type="hidden" formControlName="id">
-        
+
         <mat-form-field class="div-input2">
           <mat-label>Nombre de la categoría</mat-label>
           <input class="input2" matInput formControlName="nombre">
@@ -25,15 +25,13 @@
         </mat-form-field>
 
         <mat-form-field class="div-input2">
-
-            <mat-label>Estado</mat-label>
-            <mat-select formControlName="estado">
-                <mat-option value="Activo">Activo</mat-option>
-                <mat-option value="Inactivo">Inactivo</mat-option>
-            </mat-select>
-
-          <mat-error *ngIf="isValidField('descripcion')">
-            {{ getFieldError('descripcion') }}
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option value="Activo">Activo</mat-option>
+            <mat-option value="Inactivo">Inactivo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="isValidField('estado')">
+            {{ getFieldError('estado') }}
           </mat-error>
         </mat-form-field>
 
@@ -48,9 +46,9 @@
             <input type="hidden" formControlName="imagenurl">
           </div>
           <br>
-          <div class="buttons" style="width: 100%; text-align: center;">
-            <button mat-stroked-button color="warn" style="width: 30%;" (click)="limpiardata()">Cancelar</button>&nbsp;
-            <button mat-flat-button color="primary" [disabled]="categoriaform.invalid" (click)="saveCategory()" style="width: 30%;">{{ nombreboton }}</button>
+          <div class="buttons">
+            <button mat-stroked-button color="warn" (click)="limpiardata()">Cancelar</button>&nbsp;
+            <button mat-flat-button color="primary" [disabled]="categoriaform.invalid" (click)="saveCategory()">{{ nombreboton }}</button>
           </div>
         </div>
       </form>

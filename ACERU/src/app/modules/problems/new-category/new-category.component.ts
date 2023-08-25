@@ -43,30 +43,27 @@ export class NewCategoryComponent implements OnInit {
   });
 
 
-  ngOnInit() { 
+  ngOnInit() {
 
     this.datocategoria = this.dataService.getData();
-    // OJO
-    //this.dataService.clearData()
-
-
+    
     if( this.datocategoria != null){
 
       this.nombreboton = "Actualizar";
       this.titulo= "Editar Categoría de Problemas"
-      
+
       this.categoriaform.controls['id'].setValue(this.datocategoria.id);
       this.categoriaform.controls['nombre'].setValue(this.datocategoria.nombre);
       this.categoriaform.controls['descripcion'].setValue(this.datocategoria.descripcion);
       this.categoriaform.controls['imagenurl'].setValue(this.datocategoria.imagenurl);
       this.categoriaform.controls['estado'].setValue(this.datocategoria.estado);
-     
-     
+
+
       const imagenPreview = document.getElementById('imagenPreview') as HTMLImageElement;
       imagenPreview.style.display = 'block';
       imagenPreview.src = this.datocategoria.imagenurl;
 
-    
+
     }
 
   }
@@ -105,7 +102,7 @@ export class NewCategoryComponent implements OnInit {
         const imagenPreview = document.getElementById('imagenPreview') as HTMLImageElement;
         imagenPreview.src = e.target.result;
         imagenPreview.style.display = 'block';
-        
+
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -119,7 +116,7 @@ export class NewCategoryComponent implements OnInit {
       let mensaje = "Categoria creada con exito!"
 
       const formData = new FormData();
-  
+
       const imagen = this.imagenInputFile?.nativeElement.files[0];
 
       this.nuevaCategoria = {
@@ -129,7 +126,7 @@ export class NewCategoryComponent implements OnInit {
         estado: this.categoriaform.value.estado,
       };
 
-      
+
       if( this.datocategoria != null){
         // acctualizado
         mensaje = "Categoria actualizado correctamente!"
@@ -154,7 +151,7 @@ export class NewCategoryComponent implements OnInit {
           this.mostrarmensaje("Error en la acción realizada", "Categoria", "error")
         },
       });
-  
+
       }
     }
 

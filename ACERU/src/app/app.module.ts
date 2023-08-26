@@ -19,6 +19,8 @@ import { GridMaterialesComponent } from './shared/components/grid-materiales/gri
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,10 @@ import { GridMaterialesComponent } from './shared/components/grid-materiales/gri
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+
+    //VgCoreModule,
+    // VgControlsModule,
+    //VgCoreModule
 
   ],
   providers: [

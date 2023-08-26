@@ -17,14 +17,11 @@ const routes: Routes = [
       { path: 'category/:id/:nombre', component: ListMaterialsComponent },
       {
         path: 'new-category',
-        // canActivate: [RoleGuardService],
-        // data: { rol: 'Administrador' },
         component: NewCategoryComponent,
       },
       {
-        path: 'category/:id/:nombre/new-material',
-        // canActivate: [RoleGuardService],
-        // data: { rol: 'Administrador' },
+        path: 'category/new-material',
+        // path: 'category/:id/:nombre/new-material',
         component: NewMaterialComponent,
       },
       {

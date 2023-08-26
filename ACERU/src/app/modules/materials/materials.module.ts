@@ -7,13 +7,15 @@ import { MaterialsCategoryComponent } from './materials-category/materials-categ
 import { ListMaterialsComponent } from './list-materials/list-materials.component';
 import { NewMaterialComponent } from './new-material/new-material.component';
 import { MaterialPresentationComponent } from './material-presentation/material-presentation.component';
-import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { MaterialModule } from '../material/material.module';
 import { GridMaterialesComponent } from 'src/app/shared/components/grid-materiales/grid-materiales.component';
 import { GridMaterialesModule } from 'src/app/shared/components/grid-materiales/grid-materiales.module';
 
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 @NgModule({
   imports: [
@@ -23,7 +25,10 @@ import { GridMaterialesModule } from 'src/app/shared/components/grid-materiales/
     FormsModule,
     GridMaterialesModule,
     NgxDocViewerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxExtendedPdfViewerModule
+
+
   ],
   declarations: [MaterialsComponent, MaterialsCategoryComponent, ListMaterialsComponent, NewMaterialComponent, MaterialPresentationComponent, NewCategoryComponent]
 })

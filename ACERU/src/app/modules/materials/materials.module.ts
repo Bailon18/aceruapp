@@ -16,6 +16,8 @@ import { GridMaterialesModule } from 'src/app/shared/components/grid-materiales/
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { GridListMaterialesComponent } from 'src/app/shared/components/grid-list-materiales/grid-list-materiales.component';
+import { GridListMaterialesModule } from 'src/app/shared/components/grid-list-materiales/grid-list-materiales.module';
 
 @NgModule({
   imports: [
@@ -26,7 +28,8 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     GridMaterialesModule,
     NgxDocViewerModule,
     ReactiveFormsModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    GridListMaterialesModule
 
 
   ],

@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DialogService } from 'src/app/shared/components/dialog/dialog.service';
-import { NavigationService } from 'src/app/shared/services/navigation.service';
+import { DataService } from 'src/app/shared/services/data-service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MaterialService } from '../services/material.service';
+//import * as mammoth from 'mammoth';
 
 @Component({
   selector: 'app-material-presentation',
@@ -9,29 +11,53 @@ import { NavigationService } from 'src/app/shared/services/navigation.service';
   styleUrls: ['./material-presentation.component.less']
 })
 export class MaterialPresentationComponent implements OnInit {
+  data: any = {};
+  idCategoria?: any;
+  nombreCategoria?: string;
+  resourceUrl: SafeResourceUrl | null = null; // Nombre más general para la URL segura
 
-  @Input() data={title:"Fundamentos de programación", name:"Introducción a la programación", author:"Yuli Sinza & Stefania", fields:[{url:"",icon:"assets/images/materials/doc.png"},{url:"",icon:"assets/images/materials/pdf.png"},{url:"",icon:"assets/images/materials/powerpoint.png"}]}
-
-  idCategory:any
-  idProblem:any
-  constructor(private serviceNavigation:NavigationService, private route:ActivatedRoute,private serviceDialog:DialogService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService<any>,
+    private sanitizer: DomSanitizer,
+    private materialService: MaterialService
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(({params}:any)=>{
-      this.idCategory=params.idCategory;
-      this.idProblem=params.idProblem;
-    })
-  }
-  clearSearch()
-  {
+    this.route.paramMap.subscribe(({ params }: any) => {
+      this.idCategoria = params.idMaterial;
+      console.log("ID: ", this.idCategoria);
+      this.materialService.getMaterialById(this.idCategoria).subscribe(
+        (response) => {
+          this.data = response;
 
+          this.resourceUrl = this.getSafeResourceUrl(this.data.archivoBase64, this.data.tipoMaterial);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    });
   }
-  redirect(page:string, parameter?:any)
-  {
-    this.serviceNavigation.redirect(page+this.idCategory,parameter)
-  }
-  download()
-  {
 
+  getSafeResourceUrl(archivoBase64: string, tipoMaterial: string): SafeResourceUrl {
+    let url = '';
+    if (tipoMaterial === 'PDF') {
+      url = `data:application/pdf;base64,${archivoBase64}`;
+    } else if (tipoMaterial === 'VIDEO') {
+      url = `data:video/mp4;base64,${archivoBase64}`;
+    } else if (tipoMaterial === 'WORD') {
+      url = `data:application/msword;base64,${archivoBase64}`;
+    } else if (tipoMaterial === 'TXT') {
+      url = `data:text/plain;base64,${archivoBase64}`;
+    }
+    
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+
+  clearSearch() {}
+
+  redirect(page: string, parameter?: any) {}
+
+  download() {}
 }

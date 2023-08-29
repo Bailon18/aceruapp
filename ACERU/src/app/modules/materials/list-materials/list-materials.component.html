@@ -1,9 +1,13 @@
 <div class="container-categories">
-  <div class="title text-secondary">{{title}}</div>
+  <div class="title text-secondary">{{nombreCategoria}}</div>
   <div class="actions hiddenParticipante"><button class="button" (click)="redirect('/category/new-material')">Nuevo Material</button>
 
   </div>
   <div class="body-categories">
-<!-- <app-grid [data]="data" (eventEmmiter)="redirect('materials/category/presentation-material/',$event.id)"></app-grid> -->
+  
+  <app-grid-materiales [data]="data" (eventEmmiter)="redirectWithCategoryData($event)" (click) ="holitas()"></app-grid-materiales>
+  <div *ngIf="data.length === 0" class="no-category-message">
+    <p class="message-text">NO HAY MATERIALES</p>
+  </div>
   </div>
 </div>

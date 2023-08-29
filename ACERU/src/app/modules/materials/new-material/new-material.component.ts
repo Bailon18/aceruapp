@@ -72,6 +72,7 @@ export class NewMaterialComponent implements OnInit {
   }
 
   onFileChange(event: any): void {
+    
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {

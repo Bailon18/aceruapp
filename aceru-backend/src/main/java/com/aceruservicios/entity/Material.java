@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.aceruservicios.enums.TipoMaterial;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 
@@ -22,37 +22,33 @@ public class Material implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String descripcion;
 
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "material_id")
-	private MaterialCategoria materialCategoria;
-
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "tipo_material_id") private MaterialTipo tipoMaterial;
-	 */
+    @OneToOne(fetch = FetchType.EAGER) // Cambia a EAGER si deseas cargar ansiosamente
+    @JoinColumn(name = "materialcategoria_id")
+    @JsonIgnore
+    private MaterialCategoria materialCategoria;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoMaterial tipoMaterial;
 
-	@Column
-	private String ruta;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+	private byte[] archivo;
 
 	public Material() {
 		super();
 	}
 
 	public Material(Long id, String nombre, String descripcion, MaterialCategoria materialCategoria,
-			@NotNull TipoMaterial tipoMaterial, String ruta) {
+			@NotNull TipoMaterial tipoMaterial, byte[] archivo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.materialCategoria = materialCategoria;
 		this.tipoMaterial = tipoMaterial;
-		this.ruta = ruta;
+		this.archivo = archivo;
 	}
 
 	public static long getSerialversionuid() {
@@ -83,12 +79,12 @@ public class Material implements Serializable {
 		this.tipoMaterial = tipoMaterial;
 	}
 
-	public String getRuta() {
-		return ruta;
+	public byte[] getArchivo() {
+		return archivo;
 	}
 
-	public void setRuta(String ruta) {
-		this.ruta = ruta;
+	public void setArchivo(byte[] archivo) {
+		this.archivo = archivo;
 	}
 
 	public String getNombre() {
@@ -124,8 +120,8 @@ public class Material implements Serializable {
 		builder.append(materialCategoria);
 		builder.append(", tipoMaterial=");
 		builder.append(tipoMaterial);
-		builder.append(", ruta=");
-		builder.append(ruta);
+		builder.append(", archivo=");
+		builder.append(archivo);
 		builder.append("]");
 		return builder.toString();
 	}

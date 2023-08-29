@@ -1,30 +1,52 @@
 <div class="container-description-problem">
   <div class="header">
-    <div class="name-problem text-secondary">{{data.name}}</div>
+    <div class="name-problem text-secondary">{{ data.nombre }}</div>
   </div>
   <hr class="separator">
-  <div class="body-description ">
-
-    <div class="left">
-      <ngx-doc-viewer
-      [url]="'https://docs.google.com/presentation/d/1_7c5ZNaSMTGcHi1uhEqJm3Knq6WhX36h/edit?usp=share_link&ouid=104589157518828536255&rtpof=true&sd=true'"
-      viewer="url"
-      style="width:100%;height:90%;"
-    ></ngx-doc-viewer>
-    </div>
-    <div class="right">
-      <div class="card-profile">
-        <div class="data-profile">
-          <div class="txt"><strong>Titulo:</strong> &nbsp;{{data.title}}</div>
-          <div class="txt"><strong>Autor:</strong> &nbsp;{{data.author}}</div>
-
-          <div class="edit-profile"><button class="button" (click)="download()">Descargarlo ahora</button></div>
-          <div class="list-files"> <img [src]="itemField.icon" alt="imagen no disponible" *ngFor="let itemField of data.fields"></div>
-          <div class="change-password" ><button class="button" (click)="redirect('materials/category/')">Cancelar</button></div>
-        </div>
+  <div class="body-description">
+    <ng-container [ngSwitch]="data.tipoMaterial">
+      <div class="left" *ngSwitchCase="'PDF'">
+        <iframe
+          *ngIf="resourceUrl"
+          [src]="resourceUrl"
+          frameborder="0"
+          width="100%"
+          height="600"
+        ></iframe>
+      </div>
+      <div class="left" *ngSwitchCase="'VIDEO'">
+        <video
+          *ngIf="resourceUrl"
+          [src]="resourceUrl"
+          controls
+          width="100%"
+          height="auto"
+        ></video>
+      </div>
+      <div class="left" *ngSwitchCase="'WORD'">
 
       </div>
-    </div>
+      <div class="left" *ngSwitchCase="'TXT'">
+        <div
+          *ngIf="resourceUrl"
+          [innerHTML]="resourceUrl"
+        ></div>
+      </div>
+      <!-- Agregar más casos para otros tipos de archivo si es necesario -->
+      <div class="right">
+        <div class="card-profile">
+          <div class="data-profile">
+            <div class="txt"><strong>Titulo:</strong> &nbsp;{{ data.nombre }}</div>
+            <div class="txt"><strong>Autor:</strong> &nbsp;{{ data.tipoMaterial }}</div>
+            <div class="edit-profile">
+              <button class="button" (click)="download()">Descargarlo ahora</button>
+            </div>
+            <div class="change-password">
+              <button class="button" (click)="redirect('materials/category/')">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
-
 </div>

@@ -2,6 +2,7 @@ import { Component,EventEmitter,Input,Output } from '@angular/core';
 import swall from 'sweetalert2';
 import { CategoriaService } from 'src/app/modules/problems/services/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../../services/data-service';
 
 @Component({
   selector: 'app-grid-materiales',
@@ -22,7 +23,9 @@ export class GridMaterialesComponent {
   constructor(
     private categoriaService: CategoriaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataservice: DataService<any>,
+
     ) { }
 
     sendEvent(event: any) {
@@ -31,7 +34,17 @@ export class GridMaterialesComponent {
     }
 
     handleCardClick(item: any) {
-      this.router.navigate(['/materials/category/'+item.id+'/'+item.nombre])
+      console.log("DATA: ", item)
+      if(item.tipoMaterial == null ){
+        this.router.navigate(['/materials/category/'+item.id+'/'+item.nombre])
+      }
+      else{
+        
+        this.dataservice.clearData();
+        //this.dataservice.setData(item);
+        //console.log("DATA a presentacion: "+ item)
+        this.router.navigate(['/materials/category/presentation-material/'+item.material.id+'/'+item.id])
+      }
     }
 
     handleAction(event: Event, action: any, item: any) {

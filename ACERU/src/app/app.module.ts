@@ -16,8 +16,9 @@ import {MatIconModule} from '@angular/material/icon'
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GridMaterialesComponent } from './shared/components/grid-materiales/grid-materiales.component';
+import { GridListMaterialesComponent } from './shared/components/grid-list-materiales/grid-list-materiales.component';
 
-
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 
 
@@ -47,6 +48,7 @@ import { GridMaterialesComponent } from './shared/components/grid-materiales/gri
     //VgCoreModule,
     // VgControlsModule,
     //VgCoreModule
+    NgxDocViewerModule
 
   ],
   providers: [

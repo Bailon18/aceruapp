@@ -71,6 +71,7 @@ public class MaterialController {
             materialDTO.setNombre(material.getNombre());
             materialDTO.setDescripcion(material.getDescripcion());
             materialDTO.setTipoMaterial(material.getTipoMaterial().toString());
+            materialDTO.setUrl(material.getUrl());
 
             if (material.getArchivo() != null) {
                 byte[] archivoBytes = material.getArchivo();

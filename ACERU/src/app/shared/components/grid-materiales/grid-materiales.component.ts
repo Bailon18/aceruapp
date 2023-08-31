@@ -1,8 +1,8 @@
 import { Component,EventEmitter,Input,Output } from '@angular/core';
 import swall from 'sweetalert2';
-import { CategoriaService } from 'src/app/modules/problems/services/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data-service';
+import { CategoriaService } from 'src/app/modules/materials/services/categoria.service';
 
 @Component({
   selector: 'app-grid-materiales',
@@ -39,7 +39,7 @@ export class GridMaterialesComponent {
         this.router.navigate(['/materials/category/'+item.id+'/'+item.nombre])
       }
       else{
-        
+
         this.dataservice.clearData();
         //this.dataservice.setData(item);
         //console.log("DATA a presentacion: "+ item)

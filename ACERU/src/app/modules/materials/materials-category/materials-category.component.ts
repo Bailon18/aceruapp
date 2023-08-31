@@ -29,9 +29,6 @@ export class MaterialsCategoryComponent implements OnInit {
   ngOnInit() {
     this.obtenerListadoCategori("Activo");
   }
-  clearSearch()
-  {
-  }
 
   redirect(page: string, parameter?: any) {
     this.serviceNavigation.redirect(page, parameter);

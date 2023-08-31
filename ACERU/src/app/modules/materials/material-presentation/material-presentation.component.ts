@@ -15,6 +15,7 @@ export class MaterialPresentationComponent implements OnInit {
   idCategoria?: any;
   nombreCategoria?: string;
   resourceUrl: SafeResourceUrl | null = null; // Nombre más general para la URL segura
+  resourceUrl2 = this.sanitizer.bypassSecurityTrustResourceUrl('https://drive.google.com/file/d/1rpbyBUK3OEJWoIY48JXkGepQcN1v6tXa/view?usp=sharing');
 
   constructor(
     private route: ActivatedRoute,
@@ -51,7 +52,7 @@ export class MaterialPresentationComponent implements OnInit {
     } else if (tipoMaterial === 'TXT') {
       url = `data:text/plain;base64,${archivoBase64}`;
     }
-    
+
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

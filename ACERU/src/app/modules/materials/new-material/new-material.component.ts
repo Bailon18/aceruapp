@@ -18,11 +18,12 @@ export class NewMaterialComponent implements OnInit {
   name = 'Angular';
   pdfSrc='';
   form: FormGroup;
-  tipoArchivo = ['Video', 'PDF', 'Word', 'TXT'];
+  tipoArchivo = ['VIDEO', 'PDF', 'WORD', 'TXT'];
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      name: '',
+      id:[''],
+      name:['',],
       description: '',
       linkField: '',
       typeField: '',
@@ -34,16 +35,16 @@ export class NewMaterialComponent implements OnInit {
     const selectedType = this.form.get('typeField')?.value;
 
     switch (selectedType) {
-      case 'Video':
+      case 'VIDEO':
         return 'video/*';
       case 'PDF':
         return 'application/pdf';
-      case 'Word':
+      case 'WORD':
         return 'application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       case 'TXT':
         return 'text/plain';
       default:
-        return ''; // Por defecto, aceptar cualquier tipo
+        return '';
     }
   }
 
@@ -72,7 +73,7 @@ export class NewMaterialComponent implements OnInit {
   }
 
   onFileChange(event: any): void {
-    
+
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {

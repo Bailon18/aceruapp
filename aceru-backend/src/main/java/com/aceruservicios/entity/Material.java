@@ -21,8 +21,11 @@ public class Material implements Serializable {
 
 	@Column(columnDefinition = "TEXT")
 	private String descripcion;
+	
+	@Column(columnDefinition = "TEXT")
+	private String url;
 
-    @OneToOne(fetch = FetchType.EAGER) // Cambia a EAGER si deseas cargar ansiosamente
+    @OneToOne(fetch = FetchType.EAGER) 
     @JoinColumn(name = "materialcategoria_id")
     @JsonIgnore
     private MaterialCategoria materialCategoria;
@@ -41,7 +44,7 @@ public class Material implements Serializable {
 	}
 
 	public Material(Long id, String nombre, String descripcion, MaterialCategoria materialCategoria,
-			@NotNull TipoMaterial tipoMaterial, byte[] archivo) {
+			@NotNull TipoMaterial tipoMaterial, byte[] archivo, String url) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -49,6 +52,7 @@ public class Material implements Serializable {
 		this.materialCategoria = materialCategoria;
 		this.tipoMaterial = tipoMaterial;
 		this.archivo = archivo;
+		this.url = url;
 	}
 
 	public static long getSerialversionuid() {
@@ -109,6 +113,16 @@ public class Material implements Serializable {
 
 	public void setMaterialCategoria(MaterialCategoria materialCategoria) {
 		this.materialCategoria = materialCategoria;
+	}
+	
+	
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override

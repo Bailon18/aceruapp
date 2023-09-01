@@ -4,7 +4,7 @@ export class Material {
     nombre?:       string;
     descripcion?:  string;
     tipoMaterial?: string;
-    archivo!:      string;
+    archivo?:      string;
     material?:     MaterialCategoria;
 }
 

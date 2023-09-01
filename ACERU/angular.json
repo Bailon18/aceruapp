@@ -34,6 +34,8 @@
               "src/assets",
               "src/assets/pdf-3.9.605-es5.min.js"
             ],
+     
+        
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.less",

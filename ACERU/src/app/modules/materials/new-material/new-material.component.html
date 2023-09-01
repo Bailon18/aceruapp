@@ -1,48 +1,62 @@
 <mat-card class="container-categories">
   <div class="left">
     <mat-card class="form">
-      <mat-card-title class="title"><strong>Nuevo Material</strong></mat-card-title>
+      <mat-card-title class="title"><strong>{{ titulo }}</strong></mat-card-title>
       <mat-card-subtitle class="subtitle">Nuevos temarios de retos</mat-card-subtitle>
-      <mat-card-content [formGroup]="form">
+      <p class="archivo-message" *ngIf="!isFileSelected">
+        <i class="fas fa-file-upload"></i> Ningún archivo seleccionado
+      </p>
+      <p class="archivo-message selected" *ngIf="isFileSelected">
+        <i class="fas fa-check-circle"></i> Archivo seleccionado
+      </p>
+      <form [formGroup]="naterialform" style="width: 100%;" novalidate enctype="multipart/form-data">
+        <input type="hidden" formControlName="id">
         <div class="div-input2">
           <mat-form-field>
             <mat-label>Nombre del material</mat-label>
-            <input matInput formControlName="name">
+            <input matInput formControlName="nombre">
+            <mat-error *ngIf="isValidField('nombre')">
+              {{ getFieldError('nombre') }}
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="div-input2">
           <mat-form-field>
             <mat-label>Descripción del material</mat-label>
-            <textarea matInput formControlName="description"></textarea>
-          </mat-form-field>
-        </div>
-        <div class="div-input2">
-          <mat-form-field>
-            <mat-label>Link de archivo</mat-label>
-            <textarea matInput formControlName="linkField"></textarea>
+            <textarea matInput formControlName="descripcion"></textarea>
+            <mat-error *ngIf="isValidField('descripcion')">
+              {{ getFieldError('descripcion') }}
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="div-input-row">
           <div class="div-input2">
             <mat-form-field>
               <mat-label>Tipo de archivo</mat-label>
-              <mat-select formControlName="typeField">
-                <mat-option *ngFor="let item of tipoArchivo" [value]="item">{{item}}</mat-option>
+              <mat-select formControlName="tipoMaterial">
+                <mat-option *ngFor="let item of tipoArchivo" [value]="item">{{ item }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="isValidField('tipoMaterial')">
+                {{ getFieldError('tipoMaterial') }}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="div-file">
-            <p class="texto">Adicionar archivo</p>
-            <input type="file" formControlName="field" [accept]="getFileAcceptValue()">
+            <label for="archivo" class="texto">Seleccionar archivo</label>
+            <input type="file" formControlName="archivo" [accept]="getFileAcceptValue()" (change)="onFileChange($event)">
           </div>
         </div>
         <div class="actions">
           <div class="buttons">
-            <button mat-button class="button" (click)="redirect('/materials/category/')">Cancelar</button>
-            <button mat-button class="button" (click)="saveMaterial()">Crear</button>
+            <button mat-stroked-button color="warn" (click)="redirect()">
+              <i class="fas fa-times"></i> Cancelar
+            </button>&nbsp;&nbsp;
+            <button mat-flat-button color="primary" [disabled]="naterialform.invalid" (click)="saveMaterial()">
+              <i class="fas fa-check"></i> {{ nombreBoton }}
+            </button>
           </div>
         </div>
-      </mat-card-content>
+      </form>
     </mat-card>
   </div>
   <div class="right">

@@ -10,5 +10,7 @@ public interface IMaterialService {
     List<Material> getMaterialsByCategory(Long categoryId);
     Material saveMaterial(Material material);
     void deleteMaterial(Long id);
-    
+    void actualizarMaterial(Material material);
+  
+  
 }

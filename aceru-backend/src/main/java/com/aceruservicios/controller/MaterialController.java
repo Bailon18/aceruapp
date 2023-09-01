@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,15 +41,35 @@ public class MaterialController {
     @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8" })
     public ResponseEntity<Material> createMaterial(
             @RequestPart("material") Material material,
-            @RequestPart("archivo") MultipartFile archivo) throws IOException {
+            @RequestPart(name = "archivo", required = false) MultipartFile archivo) throws IOException {
+    	
+    	System.out.println("ID: "+material.getId());
 
-        byte[] archivoBytes = archivo.getBytes();
+        if (archivo == null || archivo.isEmpty()) {
+            System.out.println("ARCHIVO NULO O VACÍO");
+
+        } else {
+            System.out.println("ARCHIVO OK");
+            byte[] archivoBytes = archivo.getBytes();
+            material.setArchivo(archivoBytes);
+        }
         
-        material.setArchivo(archivoBytes);
-        materialService.saveMaterial(material);
+        
+        if(material.getId() != null) {
+        	System.out.println("ACTUALIZARRRR");
+        	materialService.actualizarMaterial(material);
+        }
+        else {
+        	System.out.println("NUEVOOO");
+            byte[] archivoBytes = archivo.getBytes();
+            material.setArchivo(archivoBytes);
+        	materialService.saveMaterial(material);
+        }
 
+   
         return new ResponseEntity<>(material, HttpStatus.CREATED);
     }
+
 
     
     /*@GetMapping("/{id5}")
@@ -91,6 +112,12 @@ public class MaterialController {
     public ResponseEntity<List<Material>> getMaterialsByCategory(@PathVariable Long categoryId) {
         List<Material> material = materialService.getMaterialsByCategory(categoryId);
         return new ResponseEntity<>(material, HttpStatus.OK);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarMaterial(@PathVariable Long id) {
+        materialService.deleteMaterial(id);
+        return new ResponseEntity<>("Material eliminado exitosamente", HttpStatus.OK);
     }
     
     

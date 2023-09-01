@@ -26,17 +26,12 @@ import swall from 'sweetalert2';
 })
 export class ListProblemsComponent implements AfterViewInit , OnInit {
 
-  @Input() exercises: any = DATA_CATEGORY_PROBLEMS;
-  @Input() headers = DATA_CATEGORY_HEADERS;
-
   data: any;
   faSearch = faSearch;
   faTimes = faTimes;
   idCategoria?: any;
   nombreCategoria?: string;
-  showInactivos = false; // Variable para controlar el estado del checkbox
-
-  // ###########################################################
+  showInactivos = false; 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -168,27 +163,6 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
   
 
   resolverProblema(fila: any){
-    console.log("FDILA PARA RESOLVER ", fila)
-    //   {
-    //     "id": 3,
-    //     "categoria": {
-    //         "id": 3,
-    //         "nombre": "Git",
-    //         "imagenurl": "http://res.cloudinary.com/doyaxevum/image/upload/v1692416994/znppbwdiwgivnjgelnnz.jpg",
-    //         "imagenid": "znppbwdiwgivnjgelnnz",
-    //         "descripcion": "Fundamentos de git",
-    //         "estado": "Activo"
-    //     },
-    //     "nombre": "Problema 3",
-    //     "descripcion": "Descripción de Problema 3",
-    //     "entradas": "Entrada 3",
-    //     "salidas": "Salida 3",
-    //     "ejemploEntradas": "Entrada de ejemplo 3",
-    //     "ejemploSalidas": "Salida de ejemplo 3",
-    //     "dificultad": "Facil",
-    //     "estado": "Activo"
-    // }
-
     this.dataservice.clearData();
     this.dataservice.setData(fila);
     this.router.navigate(['/problems/category/description-problem/'+fila.categoria.id+'/'+fila.id])

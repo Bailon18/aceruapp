@@ -40,5 +40,25 @@ public class MaterialServiceImple implements IMaterialService {
 		return materialrepo.findByMaterialCategoriaId(categoryId);
 	}
 
+	@Override
+	public void actualizarMaterial(Material material) {
+		
+		Material matbase = this.getMaterialPorId(material.getId());
+		System.out.println("ID EN SERVICIO : "+ matbase.getId());
+		if(matbase != null) {
+			matbase.setId(material.getId());
+			matbase.setNombre(matbase.getNombre());
+			matbase.setDescripcion(material.getDescripcion());
+			matbase.setTipoMaterial(material.getTipoMaterial());
+			if(material.getArchivo() != null) {
+				matbase.setArchivo(material.getArchivo());
+			}
+			matbase.setMaterialCategoria(material.getMaterialCategoria());
+		}
+		
+		materialrepo.save(matbase);
+		
+	}
+
 	
 }

@@ -11,11 +11,12 @@ import { MaterialService } from '../services/material.service';
   styleUrls: ['./material-presentation.component.less']
 })
 export class MaterialPresentationComponent implements OnInit {
+  
   data: any = {};
   idCategoria?: any;
   nombreCategoria?: string;
-  resourceUrl: SafeResourceUrl | null = null; // Nombre más general para la URL segura
-  resourceUrl2 = this.sanitizer.bypassSecurityTrustResourceUrl('https://drive.google.com/file/d/1rpbyBUK3OEJWoIY48JXkGepQcN1v6tXa/view?usp=sharing');
+  resourceUrl: SafeResourceUrl | null = null; 
+
 
   constructor(
     private route: ActivatedRoute,
@@ -28,15 +29,15 @@ export class MaterialPresentationComponent implements OnInit {
     this.route.paramMap.subscribe(({ params }: any) => {
       this.idCategoria = params.idMaterial;
       console.log("ID: ", this.idCategoria);
-      this.materialService.getMaterialById(this.idCategoria).subscribe(
-        (response) => {
+      this.materialService.getMaterialById(this.idCategoria).subscribe({
+        next:(response) => {
           this.data = response;
-
           this.resourceUrl = this.getSafeResourceUrl(this.data.archivoBase64, this.data.tipoMaterial);
         },
-        (error) => {
+        error:(error) => {
           console.error(error);
         }
+      }
       );
     });
   }

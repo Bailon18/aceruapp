@@ -1,13 +1,93 @@
 <div class="container-categories">
-  <div class="title text-secondary">{{nombreCategoria}}</div>
-  <div class="actions hiddenParticipante"><button class="button" (click)="redirect('/category/new-material')">Nuevo Material</button>
+  <div class="title text-secondary">Material - {{ nombreCategoria }}</div>
+  <br>
+  <div class="actions ">
+    <button class="button hiddenParticipante" (click)="mostrarformnuevomaterial()">
+      <i class="fas fa-plus"></i> Nuevo Material
+    </button>
+  </div>
+  <br>
+  <mat-card>
+    <div class="row">
+      <div class="row">
+        <div class="col">
+          <mat-card-content>
+            <div class="row">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-8">
+                    <mat-form-field style="width: 30%;">
+                      <mat-label>Filtrar busqueda</mat-label>
+                      <input matInput (keyup)="aplicarFiltro($event)" placeholder="Ejemplo.. xxxx" #input>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="ID">
+                  <th mat-header-cell *matHeaderCellDef> Id</th>
+                  <td mat-cell *matCellDef="let fila"> {{fila.id}} </td>
+                </ng-container>
 
-  </div>
-  <div class="body-categories">
-  
-  <app-grid-materiales [data]="data" (eventEmmiter)="redirectWithCategoryData($event)" (click) ="holitas()"></app-grid-materiales>
-  <div *ngIf="data.length === 0" class="no-category-message">
-    <p class="message-text">NO HAY MATERIALES</p>
-  </div>
-  </div>
+                <ng-container matColumnDef="MATERIAL">
+                  <th mat-header-cell *matHeaderCellDef> Material </th>
+                  <td mat-cell *matCellDef="let fila"> {{fila.nombre}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="DESCRIPCION">
+                  <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                  <td mat-cell *matCellDef="let fila"> {{fila.descripcion}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="TIPO MATERIAL" style="width: 100%;">
+                  <th mat-header-cell *matHeaderCellDef> Tipo material </th>
+
+                  <td mat-cell *matCellDef="let fila">
+                    <div [ngClass]="{
+                                    'badge badge-success': fila.tipoMaterial === 'PDF',
+                                    'badge badge-info': fila.tipoMaterial === 'WORD',
+                                    'badge badge-warning': fila.tipoMaterial === 'VIDEO',
+                                    'badge badge-danger': fila.tipoMaterial === 'TXT'
+                                  }">
+                      {{ fila.tipoMaterial }}
+                    </div>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ACCIONES">
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let fila">
+                    <a class="pointer iconosAccion" matTooltip="Editar material" (click)="editarMaterial(fila)">
+                      <mat-icon class="success-icon">
+                        <i class="fa-solid fa-pen-to-square" style="color: #036839;"></i>
+                      </mat-icon>
+                    </a>
+                    <a class="pointer iconosAccion" matTooltip="Eliminar material" (click)="eliminarMaterial(fila)">
+                      <mat-icon class="danger-icon">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </mat-icon>
+                    </a>
+                    <a class="pointer iconosAccion" matTooltip="Detalle material" (click)="detalleMaterial(fila)">
+                      <mat-icon class="info-icon">
+                        <i class="fa-solid fa-file-lines" style="color: #183153;"></i>
+                      </mat-icon>
+                    </a>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="">
+              </mat-paginator>
+            </div>
+          </mat-card-content>
+        </div>
+      </div>
+    </div>
+  </mat-card>
 </div>

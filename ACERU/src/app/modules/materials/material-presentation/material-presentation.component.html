@@ -7,8 +7,8 @@
     <ng-container [ngSwitch]="data.tipoMaterial">
       <div class="left" *ngSwitchCase="'PDF'">
         <iframe
-          *ngIf="resourceUrl2"
-          [src]="resourceUrl2"
+          *ngIf="resourceUrl"
+          [src]="resourceUrl"
           frameborder="0"
           width="100%"
           height="600"
@@ -24,7 +24,7 @@
         ></video>
       </div>
       <div class="left" *ngSwitchCase="'WORD'">
-
+        <a *ngIf="resourceUrl" [href]="resourceUrl" download="nombre_del_archivo.docx">Descargar archivo</a>
       </div>
       <div class="left" *ngSwitchCase="'TXT'">
         <div

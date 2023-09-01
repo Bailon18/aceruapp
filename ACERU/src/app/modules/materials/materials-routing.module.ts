@@ -20,8 +20,11 @@ const routes: Routes = [
         component: NewCategoryComponent,
       },
       {
-        path: 'category/new-material',
-        // path: 'category/:id/:nombre/new-material',
+        path: 'new-material/:id/:nombre',
+        component: NewMaterialComponent,
+      },
+      {
+        path: 'new-material/:id/:nombre/:idmaterial',
         component: NewMaterialComponent,
       },
       {

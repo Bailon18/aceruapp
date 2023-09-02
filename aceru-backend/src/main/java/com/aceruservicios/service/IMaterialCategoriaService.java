@@ -2,7 +2,6 @@ package com.aceruservicios.service;
 
 import java.util.List;
 
-import com.aceruservicios.entity.Categoria;
 import com.aceruservicios.entity.MaterialCategoria;
 
 public interface IMaterialCategoriaService {

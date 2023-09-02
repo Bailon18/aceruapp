@@ -1,24 +1,104 @@
 <div class="container-list-skills">
-<div class="row-title">
-  <div class="title text-secondary">Maratones</div>
-  <button class="button hiddenParticipante" (click)="redirect('skills/new-skill')">Crear maratón</button>
-</div>
-<hr class="separator">
-<div class="row-actions ">
-  <div class="buttons "><button class="button hiddenParticipante">Vigentes</button>
-    <button class="button hiddenParticipante">Terminadas</button>
+  <div class="row-title">
+    <div class="title text-secondary">Maratones</div>
   </div>
-  <div class="search" >
-    <div class="left-search">
-        <fa-icon [icon]="faSearch"></fa-icon>
-        <input class="input-text input-search"  placeholder="Buscar" />
+  <hr class="separator">
+  <div class="row-actions ">
+    <div class="buttons ">
+      <button class="button hiddenParticipante" routerLink="/skills/new-skill"><i class="fas fa-plus" ></i> Crear maratón</button>
     </div>
-    <div class="right-search">
-        <fa-icon [icon]="faTimes" [styles]="{ color: '#797979' }" (click)="clearSearch()"></fa-icon>
+    <div>
+      <mat-checkbox color="primary" class="example-margin" [(ngModel)]="showInactivos" (click)="mostrarInactivos()">Mostrar Terminadas</mat-checkbox>
     </div>
+  </div>
+  <div class="body-list">
+    <mat-card>
+      <div class="row">
+          <div class="row">
+              <div class="col">
+                  <mat-card-content>
+                      <div class="row">
+                          <div class="col-6">
+                              <div class="row">
+                                  <div class="col-8">
+                                      <mat-form-field style="width: 30%;">
+                                          <mat-label>Filtrar busqueda</mat-label>
+                                          <input matInput (keyup)="aplicarFiltro($event)" placeholder="Ejemplo.. xxxx" #input>
+                                      </mat-form-field>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mat-elevation-z8">
+                          <table mat-table [dataSource]="dataSource" >
+                              <ng-container matColumnDef="ID">
+                                <th mat-header-cell *matHeaderCellDef> Id</th>
+                                <td mat-cell *matCellDef="let fila"> {{fila.id}} </td>
+                              </ng-container>
+
+                              <ng-container matColumnDef="COMPETENCIA">
+                                <th mat-header-cell *matHeaderCellDef> Competencia </th>
+                                <td mat-cell *matCellDef="let fila"> {{fila.nombre}} </td>
+                              </ng-container>
+
+
+                              <ng-container matColumnDef="FECHA INICIO">
+                                <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
+                                <td mat-cell *matCellDef="let fila">
+                                  <span class="fecha-inicio">{{ fila.fechaInicio | date:'yyyy-MM-dd' }}</span>
+                                  <span class="hora-inicio" style="color: black; font-size: 15px; font-weight: bold;">{{ fila.fechaInicio | date: '   HH:mm:ss' }}</span>
+                                </td>
+                              </ng-container>
+                              
+                              
+
+                              <ng-container matColumnDef="ESTADO" style="width: 100%;">
+                                <th mat-header-cell *matHeaderCellDef> Estado </th>
+
+                                <td mat-cell *matCellDef="let fila">
+                                  <div [ngClass]="{
+                                    'badge badge-success': fila.estado === 'VIGENTE',
+                                    'badge badge-info': fila.dificultad === 'VIGENTE2',
+                                    'badge badge-warning': fila.estado === 'TERMINADO',
+                                    'badge badge-danger': fila.dificultad === 'VIGENTE2'
+                                  }">
+                                    {{ fila.estado }}
+                                  </div>
+                                </td>
+                              </ng-container>
+                                <ng-container matColumnDef="ACCIONES">
+                                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                                  <td mat-cell *matCellDef="let fila">
+                                      <a class="pointer iconosAccion" matTooltip="Editar problema" (click)="editarCompetencia(fila)">
+                                          <mat-icon class="success-icon">
+                                              <i class="fa-solid fa-pen-to-square" style="color: #036839;"></i>
+                                          </mat-icon>
+                                      </a>
+                                      <a class="pointer iconosAccion" matTooltip="Eliminar material" (click)="eliminarCompetencia(fila)">
+                                        <mat-icon class="danger-icon">
+                                          <i class="fa-solid fa-trash-can"></i>
+                                        </mat-icon>
+                                      </a>
+                                      <a class="pointer iconosAccion" matTooltip="Configurar problema" (click)="detalleCompetencia(fila)">
+                                          <mat-icon class="info-icon">
+                                              <i class="fa-solid fa-gear" style="color: #183153;"></i>
+                                          </mat-icon>
+                                      </a>
+                                  </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                              <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+                          </table>
+                          <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                              aria-label="">
+                          </mat-paginator>
+                      </div>
+                  </mat-card-content>
+              </div>
+          </div>
+      </div>
+  </mat-card>
+
+  </div>
 </div>
-</div>
-<div class="body-list">
-  <app-table  [data]="{headers,data}" (eventEmmiter)="redirect('skills/description/'+$event.item.id)"></app-table>
-</div>
-</div>
+

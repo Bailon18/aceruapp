@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aceruservicios.security.entity.Usuario;
 import com.aceruservicios.security.repository.UsuarioRepository;
 
-import java.util.Optional;
 
 @Service
 @Transactional

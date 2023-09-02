@@ -8,7 +8,9 @@ import { NavigationService } from 'src/app/shared/services/navigation.service';
   styleUrls: ['./new-skill.component.less']
 })
 export class NewSkillComponent implements OnInit {
+  
   form: FormGroup = new FormGroup({});
+
 
   constructor(private formBuilder: FormBuilder,private serviceNavigation:NavigationService) { }
   ngOnInit() {

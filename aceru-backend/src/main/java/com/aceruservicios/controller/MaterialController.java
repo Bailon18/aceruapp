@@ -70,18 +70,6 @@ public class MaterialController {
         return new ResponseEntity<>(material, HttpStatus.CREATED);
     }
 
-
-    
-    /*@GetMapping("/{id5}")
-    public ResponseEntity<Material> getMaterialById(@PathVariable Long id) {
-        Material material = materialService.getMaterialPorId(id);
-        	
-        if (material != null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(material, HttpStatus.OK);
-    }*/
-    
     @GetMapping("/{id}")
     public ResponseEntity<MaterialDTO> metodobusqueda(@PathVariable Long id) {
         Material material = materialService.getMaterialPorId(id);

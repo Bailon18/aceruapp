@@ -1,39 +1,80 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { DATA_CATEGORY_HEADERS, DATA_CATEGORY_HEADERS_P, DATA_CATEGORY_SKILLS, DATA_CATEGORY_SKILLS_P } from 'src/app/shared/constants/constants-skills';
-import { NavigationService } from 'src/app/shared/services/navigation.service';
-import { UserService } from 'src/app/shared/services/user/user.service';
+import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Competencia } from '../model/competencia';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/shared/services/data-service';
+import { MatPaginator } from '@angular/material/paginator';
+import { CompetenciaService } from '../services/competencia.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-list-skills',
   templateUrl: './list-skills.component.html',
   styleUrls: ['./list-skills.component.less']
 })
-export class ListSkillsComponent implements OnInit {
-  @Input() data:any = DATA_CATEGORY_SKILLS
-  @Input() headers = DATA_CATEGORY_HEADERS
+export class ListSkillsComponent implements  AfterViewInit, OnInit {
 
-  faSearch = faSearch;
-  faTimes = faTimes;
-  idActual: any
+  competencias: Competencia[] = [];
+  showInactivos = false; 
 
-  constructor( private serviceNavigation: NavigationService, private userService: UserService) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  columnas: string[] = ['ID', 'COMPETENCIA', 'FECHA INICIO', 'ESTADO', 'ACCIONES'];
+  dataSource = new MatTableDataSource<Competencia>([]);
+
+  constructor(
+    private router: Router,
+    private dataservice: DataService<any>,
+    private competenciaService: CompetenciaService,
+  ) { }
 
   ngOnInit() {
+    this.listarCompetencias("VIGENTE");
+  }
 
-    if(this.userService.getRegisterUserLogged()?.rol==="Participante")
-    {
-        this.data=DATA_CATEGORY_SKILLS_P;
-        this.headers= DATA_CATEGORY_HEADERS_P ;
+  ngAfterViewInit(): void {
+    this.paginator._intl.itemsPerPageLabel = 'Paginas';
+    this.paginator._intl.nextPageLabel = 'Siguiente';
+    this.paginator._intl.previousPageLabel = 'Atras';
+    this.dataSource.paginator = this.paginator;
+  }
+
+  aplicarFiltro(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  listarCompetencias(estado: string): void {
+    this.competenciaService.listarCompetencias(estado).subscribe({
+      next: (data) =>{
+        this.competencias = data;
+        this.dataSource = new MatTableDataSource(this.competencias);
+        this.dataSource.paginator = this.paginator;
+      },
+      error: (error) =>{
+        console.log("ERROR EN LISTAR: ", error)
+      }
+    })
+
+  }
+
+  mostrarInactivos(){
+    if (this.showInactivos) {
+      this.listarCompetencias("VIGENTE")
+    } else {
+      this.listarCompetencias("TERMINADO")
     }
   }
-  clearSearch() {
+
+  editarCompetencia(fila: any){
 
   }
 
-  redirect(page: string, parameter?: any) {
-    console.log(page);
+  eliminarCompetencia(fila: any){
 
-    this.serviceNavigation.redirect(page, parameter)
+  }
+
+  detalleCompetencia(fila: any){
+    
   }
 }

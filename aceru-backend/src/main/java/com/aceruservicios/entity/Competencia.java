@@ -1,15 +1,14 @@
 package com.aceruservicios.entity;
 
-
-
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.aceruservicios.enums.TipoEstadoCompetencia;
 
 @Entity
 @Table(name = "competencia")
-
 public class Competencia implements Serializable {
 
     @Id
@@ -22,35 +21,28 @@ public class Competencia implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-
-    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDateTime fechaInicio;
 
-    @Column(name = "hora_inicio")
-    private Time horaInicio;
-
-    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_final")
-    private Date fechaFinal;
+    private LocalDateTime fechaFinal;
 
-    @Column(name = "hora_final")
-    private Time horaFinal;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private TipoEstadoCompetencia estado;
 
     public Competencia() {
         super();
     }
 
-    public Competencia(Long id, String nombre, String descripcion, Date fechaInicio, Time horaInicio, Date fechaFinal,
-                       Time horaFinal) {
+    public Competencia(Long id, String nombre, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFinal, TipoEstadoCompetencia estado) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
-        this.horaInicio = horaInicio;
         this.fechaFinal = fechaFinal;
-        this.horaFinal = horaFinal;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -77,62 +69,32 @@ public class Competencia implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaInicio() {
+
+    public LocalDateTime getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDateTime fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Time getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(Time horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public Date getFechaFinal() {
+    public LocalDateTime getFechaFinal() {
         return fechaFinal;
     }
 
-    public void setFechaFinal(Date fechaFinal) {
+    public void setFechaFinal(LocalDateTime fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
 
-    public Time getHoraFinal() {
-        return horaFinal;
+    public TipoEstadoCompetencia getEstado() {
+        return estado;
     }
 
-    public void setHoraFinal(Time horaFinal) {
-        this.horaFinal = horaFinal;
+    public void setEstado(TipoEstadoCompetencia estado) {
+        this.estado = estado;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Competencia [id=");
-        builder.append(id);
-        builder.append(", nombre=");
-        builder.append(nombre);
-        builder.append(", descripcion=");
-        builder.append(descripcion);
-        builder.append(", fechaInicio=");
-        builder.append(fechaInicio);
-        builder.append(", horaInicio=");
-        builder.append(horaInicio);
-        builder.append(", fechaFinal=");
-        builder.append(fechaFinal);
-        builder.append(", horaFinal=");
-        builder.append(horaFinal);
-        builder.append("]");
-        return builder.toString();
-    }
 
     private static final long serialVersionUID = 1L;
+
 }

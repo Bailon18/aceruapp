@@ -2,10 +2,7 @@ package com.aceruservicios.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "materialcategoria")
@@ -29,9 +26,6 @@ public class MaterialCategoria implements Serializable {
 	@Column(length = 50, columnDefinition = "VARCHAR(50) DEFAULT 'Activo'")
 	private String estado;
 	
-    /*@OneToMany(mappedBy = "materialCategoria", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Material> materiales;*/
 
 	public MaterialCategoria() {
 		super();

@@ -7,7 +7,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { DescriptionSkillComponent } from './description-skill/description-skill.component';
 import { NewSkillComponent } from './new-skill/new-skill.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     SkillsRoutingModule,
     FontAwesomeModule,
     TableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
+    FormsModule,
   ],
   declarations: [SkillsComponent,ListSkillsComponent,DescriptionSkillComponent,NewSkillComponent]
 })

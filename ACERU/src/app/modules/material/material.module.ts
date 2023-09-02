@@ -21,6 +21,8 @@ import {MatTableModule} from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+
+
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -42,7 +44,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatTableModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+
+
 
   ]
 })

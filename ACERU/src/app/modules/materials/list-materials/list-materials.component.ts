@@ -127,16 +127,8 @@ export class ListMaterialsComponent implements AfterViewInit , OnInit {
   }
 
 
-  // vistanuevacategoria(){
-  //   // path: 'category/new-material/:id',
-  //   this.router.navigate(['/materials/category/new-material', this.idCategoria]); // no funciiona!!!! 
-  // }
-
-  // edit
   redirectWithCategoryData(categoryData: any): void {
-    // this.dataService.clearData()
-    // this.dataService.setData(categoryData);
-    // this.router.navigate(['materials/new-category']);
+
   }
 
   obtenerListadoCategori(id: number) {

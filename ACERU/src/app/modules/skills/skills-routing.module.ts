@@ -7,20 +7,26 @@ import { DescriptionSkillComponent } from './description-skill/description-skill
 import { NewSkillComponent } from './new-skill/new-skill.component';
 import { RoleGuardService } from 'src/app/shared/services/guard/role-guard/roleGuard.service';
 
-
 const routes: Routes = [
   {
-    path: "", component: SkillsComponent, children: [
-      { path: "", component: ListSkillsComponent },
-      { path: "new-skill",canActivate:[RoleGuardService],data:{rol:"Administrador"}, component: NewSkillComponent },
-      { path: "new-skill/description",canActivate:[RoleGuardService],data:{rol:"Administrador"}, component: DescriptionSkillComponent },
-      { path: "description/:id", component: DescriptionSkillComponent }
-    ]
-  }
+    path: '',
+    component: SkillsComponent,
+    children: [
+      { path: '', component: ListSkillsComponent },
+      { path: 'new-skill', component: NewSkillComponent },
+      {
+        path: 'new-skill/description',
+        canActivate: [RoleGuardService],
+        data: { rol: 'Administrador' },
+        component: DescriptionSkillComponent,
+      },
+      { path: 'description/:id', component: DescriptionSkillComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SkillsRoutingModule { }
+export class SkillsRoutingModule {}

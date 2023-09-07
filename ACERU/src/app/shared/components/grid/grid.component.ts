@@ -2,6 +2,7 @@ import { Component,EventEmitter,Input,Output } from '@angular/core';
 import swall from 'sweetalert2';
 import { CategoriaService } from 'src/app/modules/problems/services/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenService } from 'src/app/modules/auth/services/token.service';
 
 @Component({
   selector: 'app-grid',
@@ -22,7 +23,8 @@ export class GridComponent {
   constructor(
     private categoriaService: CategoriaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public tokenService: TokenService
     ) { }
 
 

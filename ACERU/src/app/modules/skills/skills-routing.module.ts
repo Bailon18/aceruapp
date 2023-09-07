@@ -14,13 +14,11 @@ const routes: Routes = [
     children: [
       { path: '', component: ListSkillsComponent },
       { path: 'new-skill', component: NewSkillComponent },
+      { path: 'new-skill/edit/:id', component: NewSkillComponent },
       {
-        path: 'new-skill/description',
-        canActivate: [RoleGuardService],
-        data: { rol: 'Administrador' },
+        path: 'new-skill/description/:id',
         component: DescriptionSkillComponent,
       },
-      { path: 'description/:id', component: DescriptionSkillComponent },
     ],
   },
 ];

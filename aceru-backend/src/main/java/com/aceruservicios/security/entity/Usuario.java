@@ -12,18 +12,26 @@ import java.util.Set;
 
 @Entity
 public class Usuario {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @NotNull
     private String nombre;
+    
     @NotNull
     @Column(unique = true)
     private String nombreUsuario;
+    
     @NotNull
     private String email;
+    
     @NotNull
     private String password;
+    
+    private String rango;
+    
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
@@ -35,7 +43,7 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "problema_id"))
     private List<Problema> problemas = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_competencia", joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "competencia_id"))
     private List<Competencia> competencias = new ArrayList<>();
@@ -126,4 +134,14 @@ public class Usuario {
     public void setCompetencias(List<Competencia> competencias) {
         this.competencias = competencias;
     }
+
+	public String getRango() {
+		return rango;
+	}
+
+	public void setRango(String rango) {
+		this.rango = rango;
+	}
+    
+    
 }

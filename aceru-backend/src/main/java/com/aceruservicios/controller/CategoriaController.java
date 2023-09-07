@@ -38,18 +38,23 @@ public class CategoriaController {
 
     @PostMapping(value="/nuevo", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8" })
     public ResponseEntity<?> nuevaCategoria(@RequestPart("categoria") Categoria categoria,
-                                            @RequestPart("imagen") MultipartFile multipartFile)
+                                            @RequestPart(name = "imagen", required = false) MultipartFile multipartFile)
             throws IOException {
+    	
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            System.out.println("ARCHIVO NULO O VACÍO");
+        }else {
+        	
+            BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+            if(bi == null){
+                return new ResponseEntity<>(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
+            }
 
-        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-        if(bi == null){
-            return new ResponseEntity<>(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
+            Map result = cloudService.upload(multipartFile);
+
+            categoria.setImagenid((String) result.get("public_id"));
+            categoria.setImagenurl((String) result.get("url"));
         }
-
-        Map result = cloudService.upload(multipartFile);
-
-        categoria.setImagenid((String) result.get("public_id"));
-        categoria.setImagenurl((String) result.get("url"));
 
 
         if(categoria.getId() != null){

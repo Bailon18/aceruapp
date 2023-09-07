@@ -22,6 +22,7 @@ export class NewCategoryComponent implements OnInit {
   titulo:string="Nueva Categoría de Problemas"
   nuevaCategoria?: Categoria;
   datocategoria?: any;
+  banImagen:boolean=false;
 
   constructor(
     private serviceNavigation: NavigationService,
@@ -57,13 +58,11 @@ export class NewCategoryComponent implements OnInit {
       this.categoriaform.controls['descripcion'].setValue(this.datocategoria.descripcion);
       this.categoriaform.controls['imagenurl'].setValue(this.datocategoria.imagenurl);
       this.categoriaform.controls['estado'].setValue(this.datocategoria.estado);
-
+      this.categoriaform.controls['imagen'].setValue(this.datocategoria.imagen);
 
       const imagenPreview = document.getElementById('imagenPreview') as HTMLImageElement;
       imagenPreview.style.display = 'block';
       imagenPreview.src = this.datocategoria.imagenurl;
-
-
     }
 
   }
@@ -95,6 +94,7 @@ export class NewCategoryComponent implements OnInit {
   }
 
   mostrarVistaPrevia(): void {
+
     const input = this.imagenInputFile?.nativeElement;
     if (input.files && input.files[0]) {
       const reader = new FileReader();
@@ -102,9 +102,17 @@ export class NewCategoryComponent implements OnInit {
         const imagenPreview = document.getElementById('imagenPreview') as HTMLImageElement;
         imagenPreview.src = e.target.result;
         imagenPreview.style.display = 'block';
-
       };
       reader.readAsDataURL(input.files[0]);
+    }
+
+
+  }
+
+  banImagenprev(){
+    if(this.datocategoria != null){
+      this.banImagen = true;
+      this.categoriaform.controls['imagen'].setErrors(null);
     }
   }
 
@@ -126,20 +134,24 @@ export class NewCategoryComponent implements OnInit {
         estado: this.categoriaform.value.estado,
       };
 
-
       if( this.datocategoria != null){
-        // acctualizado
         mensaje = "Categoria actualizado correctamente!"
         this.nuevaCategoria.id = this.datocategoria.id;
+
+        if(imagen==null){
+
+        }
+        else{
+          formData.append('imagen', imagen);
+        }
+
+      }else{
+        formData.append('imagen', imagen);
       }
 
       formData.append(
         'categoria',
         new Blob([JSON.stringify(this.nuevaCategoria)], { type: 'application/json' }));
-
-      formData.append('imagen', imagen);
-
-      console.log("DATA ",this.nuevaCategoria )
 
       this.categoriaService.guardarCategoria(formData).subscribe({
         next: () => {

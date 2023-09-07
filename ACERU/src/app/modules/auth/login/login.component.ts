@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.loginUsuario).subscribe({
         next: (dato) => {
+  
           this.isLogin = true;
           this.isLoginError = false;
       

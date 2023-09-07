@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categoria } from '../model/categoria';
 import { faThList } from '@fortawesome/free-solid-svg-icons';
@@ -31,6 +31,16 @@ export class ProblemaService {
   cambiarEstadoProblema(problemaId: number, estado: string): Observable<void> {
     const url = `${baseUrl}/problema/cambiarEstado/${problemaId}/${estado}`;
     return this.http.put<void>(url, null); 
+  }
+
+  insertProblema(nombreusuario: string, problemaId: number): Observable<void> {
+    const url = `${baseUrl}/usuario/insertProblema/${nombreusuario}/${problemaId}`;
+    return this.http.get<void>(url);
+  }
+
+  existsByUsuarioIdAndProblemaId(nombreusuario: string, problemaId: number): Observable<boolean> {
+
+    return this.http.get<boolean>(`${baseUrl}/exists/${nombreusuario}/${problemaId}`);
   }
 
 }

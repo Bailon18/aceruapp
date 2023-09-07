@@ -1,3 +1,4 @@
+import { TokenService } from 'src/app/modules/auth/services/token.service';
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { DATA_CATEGORY_PROBLEMS } from 'src/app/shared/constants/constants-problems';
@@ -20,14 +21,16 @@ export class ProblemCategoryComponent implements OnInit {
   data: Categoria[] = [];
   estadoFiltro:any;
 
-  showInactivos = false; // Variable para controlar el estado del checkbox
+  showInactivos = false;
 
 
   constructor(
     private serviceNavigation: NavigationService,
     private categoriaService: CategoriaService,
     private router: Router,
-    private dataService: DataService<any>
+    private dataService: DataService<any>,
+    public tokenService: TokenService
+    
   ) {}
 
 
@@ -43,7 +46,6 @@ export class ProblemCategoryComponent implements OnInit {
   
 
   redireccionarNuevaCategoria(){
-    console.log("AQUIII ")
     this.dataService.clearData()
     this.router.navigate(['problems/new-category']);
   }
@@ -54,6 +56,7 @@ export class ProblemCategoryComponent implements OnInit {
     this.dataService.setData(categoryData);
     this.router.navigate(['problems/new-category']);
   }
+
 
   obtenerListadoCategori(estado: string){
     this.categoriaService.getListarCategoria(estado).subscribe( {

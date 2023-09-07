@@ -1,7 +1,7 @@
 <div class="container-list-problems">
   <div class="name-category text-secondary">Ejercicios - {{ nombreCategoria }}</div>
    <br>
-  <div class="actions "><button class="button hiddenParticipante" (click)="abrirVentanaNuevoProblema()">Nuevo problema</button>
+  <div *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')"  class="actions "><button class="button hiddenParticipante" (click)="abrirVentanaNuevoProblema()">Nuevo problema</button>
     <div class="search" >
         <mat-checkbox color="primary" class="example-margin" [(ngModel)]="showInactivos" (click)="mostrarInactivos()">Mostrar Inactivos</mat-checkbox>
   </div>
@@ -55,12 +55,12 @@
                               <ng-container matColumnDef="ACCIONES">
                                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                                 <td mat-cell *matCellDef="let fila">
-                                    <a class="pointer iconosAccion" matTooltip="Editar problema" (click)="editarProblema(fila)">
+                                    <a *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')" class="pointer iconosAccion" matTooltip="Editar problema" (click)="editarProblema(fila)">
                                         <mat-icon class="success-icon">
                                             <i class="fa-solid fa-pen-to-square" style="color: #036839;"></i>
                                         </mat-icon>
                                     </a>
-                                    <a class="pointer iconosAccion" matTooltip="Inhabilitar problema" (click)="bloquearProblema(fila)">
+                                    <a *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')" class="pointer iconosAccion" matTooltip="Inhabilitar problema" (click)="bloquearProblema(fila)">
                                         <mat-icon class="danger-icon">
                                             <i class="fa-solid fa-circle-xmark" style="color: #7a2e2e;"></i>
                                         </mat-icon>

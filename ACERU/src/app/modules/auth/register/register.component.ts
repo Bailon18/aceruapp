@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
           this.isRegistroError = true;
           this.errorMensaje = err.error.mensaje;
           console.log('ERROR REGISTRO: ', this.errorMensaje);
-          this.toastr.error("Error en el servidor", "Registro")
+          this.toastr.error(this.errorMensaje, "Registro")
         }
       });
 

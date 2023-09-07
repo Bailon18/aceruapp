@@ -1,3 +1,4 @@
+import { TokenService } from 'src/app/modules/auth/services/token.service';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -43,7 +44,8 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
     private serviceNavigation: NavigationService,
     private  problemaService: ProblemaService,
     private dataservice: DataService<any>,
-    private router: Router
+    private router: Router,
+    public tokenService: TokenService
   ) {}
 
   ngOnInit() {
@@ -160,7 +162,6 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
         }
       });
   }
-  
 
   resolverProblema(fila: any){
     this.dataservice.clearData();

@@ -94,6 +94,15 @@ public class Competencia implements Serializable {
         this.estado = estado;
     }
 
+    
+
+    @Override
+    public String toString() {
+        return "Competencia [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fechaInicio="
+                + fechaInicio + ", fechaFinal=" + fechaFinal + ", estado=" + estado + "]";
+    }
+
+
 
     private static final long serialVersionUID = 1L;
 

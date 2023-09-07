@@ -6,12 +6,12 @@
   align-items: center;
   min-height: 80vh;
   .form{
-    width: 80%;
-    background: @color-blue-administrator;
+    width: 40%;
+    background: #9ac8fd;
     min-height: 500px;
     padding: 20px 40px;
     .subtitle{
-      color:@color-text-primary;
+      color:#171717AB;
       margin-bottom: 20px;
     }
     .section-description {
@@ -25,20 +25,20 @@
     }
     .div-input{
       margin-bottom: 20px;
-      color: black;
+      color: #171717AB;
       textarea{
         min-height: 100px;
-        margin-bottom: 20px;
+        background-color: transparent;
       }
     }
     .input-flex{
       display: flex;
       margin-bottom: 20px;
-      align-items: center;
+      align-items: left;
       width: 100%;
-      justify-content: center;
+      justify-content: left;
       gap: 20px;
-      color: black;
+      color: #171717AB;
       img{
         width: 30px;
       }
@@ -73,4 +73,23 @@ border:2px solid @color-background-button-enter;
     }
 
   }
+}
+
+
+/* Estilos personalizados para el campo datetime-local */
+.custom-datetime-input {
+  /* Cambiar el fondo del campo */
+  background-color: transparent;
+  width: 98%;
+
+  /* Cambiar el color del texto */
+  color: #171717AB;
+
+  /* Cambiar el tamaño del texto */
+  font-size: 16px;
+
+  /* Cambiar el borde y sus propiedades */
+
+  border-radius: 5px;
+  padding: 5px;
 }

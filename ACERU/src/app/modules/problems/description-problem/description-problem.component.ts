@@ -6,6 +6,9 @@ import { DialogService } from 'src/app/shared/components/dialog/dialog.service';
 import { EXERCISES } from 'src/app/shared/constants/constants-submissions';
 import { DataService } from 'src/app/shared/services/data-service';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
+import { TokenService } from '../../auth/services/token.service';
+import { ToastrService } from 'ngx-toastr';
+import { ProblemaService } from '../services/problema.service';
 
 @Component({
   selector: 'app-description-problem',
@@ -24,7 +27,10 @@ export class DescriptionProblemComponent implements OnInit {
     private serviceNavigation: NavigationService,
     private route: ActivatedRoute,
     private dataservice: DataService<any>,
-    private router: Router
+    private router: Router,
+    private autoservice: TokenService,
+    private toster: ToastrService,
+    private problemaService: ProblemaService
   ) {}
 
   ngOnInit() {
@@ -41,8 +47,48 @@ export class DescriptionProblemComponent implements OnInit {
     this.serviceNavigation.redirect(page + this.idCategory, parameter);
   }
 
-  openConsol(event = EXERCISES.data[0]) {
+  openConsol() {
+    const userName = this.autoservice.getUserName();
+    const authorities = this.autoservice.getAuthorities();
+  
+    if (userName === null) {
+      this.toster.error('Debes iniciar sesión para resolver el problema.');
+      return;
+    }
+  
+    if (authorities === null) {
+      this.toster.error('No se pudo determinar tu rol. Por favor, vuelve a iniciar sesión.');
+      return;
+    }
+  
+    if (authorities.includes('ROLE_ADMIN')) {
+      this.toster.error('Los administradores no pueden resolver el problema.');
+      return;
+    }
+  
+    // Verificar si el usuario ya está inscrito para resolver el problema
+    this.problemaService.existsByUsuarioIdAndProblemaId(userName, this.idProblem).subscribe({
+      next: (existe) => {
+        if (existe) {
+          this.toster.warning('Ya estás inscrito para resolver el problema.');
+        } else {
+          // Si no está inscrito, inscríbelo
+          this.problemaService.insertProblema(userName, this.idProblem).subscribe({
+            next: (data) => {
+              this.toster.info('Te has inscrito para resolver el problema correctamente.');
+            },
+            error: (error) => {
+              this.toster.error('Ocurrió un error en la operación. Por favor, inténtalo de nuevo más tarde.');
+            }
+          });
+        }
+      },
+      error: (error) => {
+        this.toster.error('Ocurrió un error en la operación. Por favor, inténtalo de nuevo más tarde.');
+      }
+    });
   }
+  
 
   retornar(){
     this.router.navigate(['/problems/category/'+this.idCategory+'/'+this.dataProblema.categoria.nombre]);

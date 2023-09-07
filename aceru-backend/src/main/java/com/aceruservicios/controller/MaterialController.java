@@ -43,8 +43,7 @@ public class MaterialController {
             @RequestPart("material") Material material,
             @RequestPart(name = "archivo", required = false) MultipartFile archivo) throws IOException {
     	
-    	System.out.println("ID: "+material.getId());
-
+   
         if (archivo == null || archivo.isEmpty()) {
             System.out.println("ARCHIVO NULO O VACÍO");
 

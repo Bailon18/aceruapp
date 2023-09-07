@@ -1,27 +1,16 @@
 <div class="container-categories">
   <div class="title text-secondary">Problemas</div>
-  <div class="actions "><button class="button hiddenParticipante" (click)="redireccionarNuevaCategoria()">Nueva categoria</button>
-  <div class="search" >
-    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="showInactivos" (click)="mostrarInactivos()">Mostrar Inactivos</mat-checkbox>
-  </div>
+  <div class="actions" *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')">
+    <button class="button hiddenParticipante" 
+            (click)="redireccionarNuevaCategoria()">Nueva categoría</button>
+    <div class="search">
+      <mat-checkbox color="primary" class="example-margin" [(ngModel)]="showInactivos" (click)="mostrarInactivos()">Mostrar Inactivos</mat-checkbox>
+    </div>
   </div>
   <div class="body-categories">
-    
     <app-grid [data]="data" (eventEmmiter)="redirectWithCategoryData($event)"></app-grid>
     <div *ngIf="data.length === 0" class="no-category-message">
       <p class="message-text">NO HAY CATEGORÍA</p>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

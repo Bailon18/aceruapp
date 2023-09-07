@@ -15,7 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon'
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -45,7 +48,8 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     //VgCoreModule,
     // VgControlsModule,
     //VgCoreModule
-    NgxDocViewerModule
+    NgxDocViewerModule,
+    NgxPaginationModule
 
   ],
   providers: [

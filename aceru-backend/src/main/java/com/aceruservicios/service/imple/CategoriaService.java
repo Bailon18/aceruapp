@@ -37,6 +37,7 @@ public class CategoriaService implements ICategoriaService {
     @Override
     public void actualizar(Categoria categoria) {
 
+    	System.out.println("CATEGORIA IMAGEN "+ categoria.getImagenurl());
         Categoria categoriabase = this.buscarCategoriId(categoria.getId());
 
         if( categoriabase != null){
@@ -44,8 +45,12 @@ public class CategoriaService implements ICategoriaService {
             categoriabase.setId(categoria.getId());
             categoriabase.setNombre(categoria.getNombre());
             categoriabase.setDescripcion(categoria.getDescripcion());
-            categoriabase.setImagenurl(categoria.getImagenurl());
-            categoriabase.setImagenid(categoria.getImagenid());
+            
+            if(categoria.getImagenurl() != null) {
+                categoriabase.setImagenurl(categoria.getImagenurl());
+                categoriabase.setImagenid(categoria.getImagenid());
+            }
+            
             categoriabase.setEstado(categoria.getEstado());
             categoriarepo.save(categoriabase);
         }

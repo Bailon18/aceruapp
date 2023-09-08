@@ -6,6 +6,7 @@ import { Categoria } from '../../problems/model/categoria';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data-service';
 import { CategoriaService } from '../services/categoria.service';
+import { TokenService } from '../../auth/services/token.service';
 
 @Component({
   selector: 'app-materials-category',
@@ -23,7 +24,8 @@ export class MaterialsCategoryComponent implements OnInit {
     private serviceNavigation: NavigationService,
     private categoriaService: CategoriaService,
     private router: Router,
-    private dataService: DataService<any>
+    private dataService: DataService<any>,
+    public tokenService: TokenService
   ) {}
 
   ngOnInit() {

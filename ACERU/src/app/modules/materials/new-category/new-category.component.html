@@ -42,8 +42,8 @@
           </div>
           <br>
           <div>
-            <img id="imagenPreview" src="#" alt="Vista previa de la imagen seleccionada" height="170px" width="100%">
-            <input type="hidden" formControlName="imagenurl">
+            <img id="imagenPreview" src="#" alt="Vista previa de la imagen seleccionada" height="170px" width="100%" (load)="banImagenprev()">
+            <input type="hidden" formControlName="imagenurl" (change)="banImagenprev()">
           </div>
           <br>
           <div class="buttons">

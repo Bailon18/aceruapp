@@ -24,6 +24,8 @@ const routes: Routes = [
       {
         path: 'category/:id/:nombre/new-problem',
         component: NewProblemComponent,
+        canActivate: [RoleGuardService],
+        data: { expectedRole: 'ROLE_ADMIN' }
       },
       {
         path: 'category/description-problem/:idCategory/:idProblem',

@@ -3,6 +3,7 @@ import swall from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data-service';
 import { CategoriaService } from 'src/app/modules/materials/services/categoria.service';
+import { TokenService } from 'src/app/modules/auth/services/token.service';
 
 @Component({
   selector: 'app-grid-materiales',
@@ -25,6 +26,7 @@ export class GridMaterialesComponent {
     private router: Router,
     private route: ActivatedRoute,
     private dataservice: DataService<any>,
+    public tokenService: TokenService
 
     ) { }
 

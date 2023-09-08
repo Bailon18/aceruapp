@@ -45,19 +45,24 @@ public class MaterialCategoriaController {
 
     @PostMapping(value="/nuevo", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8" })
     public ResponseEntity<?> nuevaMaterialCategoria(@RequestPart("materialcategoria") MaterialCategoria materialCategoria,
-                                            @RequestPart("imagen") MultipartFile multipartFile)
+    		@RequestPart(name = "imagen", required = false) MultipartFile multipartFile)
             throws IOException {
 
-        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-        if(bi == null){
-            return new ResponseEntity<>(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            System.out.println("ARCHIVO NULO O VACÍO");
+        }else {
+            	
+            BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+            if(bi == null){
+                return new ResponseEntity<>(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
+            }
+
+            Map result = cloudService.upload(multipartFile);
+
+            materialCategoria.setImagenid((String) result.get("public_id"));
+            materialCategoria.setImagenurl((String) result.get("url"));
         }
-
-        Map result = cloudService.upload(multipartFile);
-
-        materialCategoria.setImagenid((String) result.get("public_id"));
-        materialCategoria.setImagenurl((String) result.get("url"));
-
+    	
         if(materialCategoria.getId() != null){
             materialcatService.actualizar(materialCategoria);
         }else{

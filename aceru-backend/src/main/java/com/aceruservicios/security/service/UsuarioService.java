@@ -44,7 +44,8 @@ public class UsuarioService {
     }
     
     public boolean existsByUsuarioIdAndProblemaId(Long usuarioId, Long problemaId) {
-        return usuarioRepository.existeUsuarioProblema(usuarioId, problemaId);
+    	boolean resultado = (usuarioRepository.existeUsuarioProblema(usuarioId, problemaId) == 1);
+        return resultado ;
     }
     
     public List<Usuario> obtenerTodosUsuarios() {

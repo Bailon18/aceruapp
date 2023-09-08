@@ -18,14 +18,20 @@ const routes: Routes = [
       {
         path: 'new-category',
         component: NewCategoryComponent,
+        canActivate: [RoleGuardService],
+        data: { expectedRole: 'ROLE_ADMIN' }
       },
       {
         path: 'new-material/:id/:nombre',
         component: NewMaterialComponent,
+        canActivate: [RoleGuardService],
+        data: { expectedRole: 'ROLE_ADMIN' }
       },
       {
         path: 'new-material/:id/:nombre/:idmaterial',
         component: NewMaterialComponent,
+        canActivate: [RoleGuardService],
+        data: { expectedRole: 'ROLE_ADMIN' }
       },
       {
         path: 'category/presentation-material/:idCategory/:idMaterial',

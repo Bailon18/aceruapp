@@ -52,6 +52,8 @@ export class MaterialPresentationComponent implements OnInit {
       url = `data:application/msword;base64,${archivoBase64}`;
     } else if (tipoMaterial === 'TXT') {
       url = `data:text/plain;base64,${archivoBase64}`;
+    } else if (tipoMaterial === 'PPT') {
+      url = `data:application/vnd.ms-powerpoint;base64,${archivoBase64}`;
     }
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

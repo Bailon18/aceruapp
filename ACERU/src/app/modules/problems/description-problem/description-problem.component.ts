@@ -66,13 +66,11 @@ export class DescriptionProblemComponent implements OnInit {
       return;
     }
   
-    // Verificar si el usuario ya está inscrito para resolver el problema
     this.problemaService.existsByUsuarioIdAndProblemaId(userName, this.idProblem).subscribe({
       next: (existe) => {
         if (existe) {
           this.toster.warning('Ya estás inscrito para resolver el problema.');
         } else {
-          // Si no está inscrito, inscríbelo
           this.problemaService.insertProblema(userName, this.idProblem).subscribe({
             next: (data) => {
               this.toster.info('Te has inscrito para resolver el problema correctamente.');
@@ -85,6 +83,7 @@ export class DescriptionProblemComponent implements OnInit {
       },
       error: (error) => {
         this.toster.error('Ocurrió un error en la operación. Por favor, inténtalo de nuevo más tarde.');
+        console.log("ERROR:", error)
       }
     });
   }

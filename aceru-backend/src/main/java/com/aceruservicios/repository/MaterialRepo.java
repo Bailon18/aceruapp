@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface MaterialRepo extends JpaRepository<Material, Long> {
 	
-	 @Query("SELECT m FROM Material m WHERE m.materialCategoria.id = :categoriaId")
+	@Query("SELECT m FROM Material m WHERE m.materialCategoria.id = :categoriaId ORDER BY m.id DESC")
 	 List<Material> findByMaterialCategoriaId(@Param("categoriaId") Long categoriaId);
 
 }

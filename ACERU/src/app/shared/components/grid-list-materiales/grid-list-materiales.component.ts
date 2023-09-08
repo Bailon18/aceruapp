@@ -1,3 +1,4 @@
+import { TokenService } from 'src/app/modules/auth/services/token.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaService } from 'src/app/modules/problems/services/categoria.service';
@@ -25,7 +26,8 @@ export class GridListMaterialesComponent implements OnInit {
     private categoriaService: CategoriaService,
     private route: ActivatedRoute,
     private dataservice: DataService<any>,
-    private router: Router
+    private router: Router,
+    public tokenService: TokenService
     ) { }
 
   ngOnInit(): void {

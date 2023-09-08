@@ -39,8 +39,7 @@ export class ProblemaService {
   }
 
   existsByUsuarioIdAndProblemaId(nombreusuario: string, problemaId: number): Observable<boolean> {
-
-    return this.http.get<boolean>(`${baseUrl}/exists/${nombreusuario}/${problemaId}`);
+    return this.http.get<boolean>(`${baseUrl}/usuario/exists/${nombreusuario}/${problemaId}`);
   }
 
 }

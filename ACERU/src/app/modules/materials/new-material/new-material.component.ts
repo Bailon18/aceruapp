@@ -12,7 +12,7 @@ import { Material } from '../model/model';
 })
 export class NewMaterialComponent implements OnInit {
 
-  tipoArchivo = ['VIDEO', 'PDF', 'WORD', 'TXT'];
+  tipoArchivo = ['VIDEO', 'PDF', 'WORD', 'TXT', 'PPT'];
   isFileSelected = false;
   idCategoria: any;
   archivoSeleccionado: any;
@@ -101,6 +101,8 @@ export class NewMaterialComponent implements OnInit {
         return 'application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       case 'TXT':
         return 'text/plain';
+      case 'PPT': 
+        return '.pptx';
       default:
         return '';
     }

@@ -4,5 +4,6 @@ public enum TipoMaterial {
 	PDF,
 	WORD,
 	TXT,
-	VIDEO
+	VIDEO,
+	PPT
 }

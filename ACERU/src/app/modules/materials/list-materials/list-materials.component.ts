@@ -13,6 +13,7 @@ import { Material } from '../model/model';
 import swall from 'sweetalert2';
 import { ChangeDetectorRef } from '@angular/core';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { TokenService } from '../../auth/services/token.service';
 
 @Component({
   selector: 'app-list-materials',
@@ -35,7 +36,8 @@ export class ListMaterialsComponent implements AfterViewInit , OnInit {
     private router: Router,
     private materialService: MaterialService,
     private dataservice: DataService<any>,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public tokenService: TokenService
   ) {}
 
   ngOnInit() {

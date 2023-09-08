@@ -29,8 +29,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "INSERT INTO usuario_problema (usuario_id, problema_id) VALUES (?1, ?2)", nativeQuery = true)
     void insertUsuarioProblema(Long usuarioId, Long problema_id);
     
-    @Query(value="SELECT COUNT(*) > 0 FROM usuario_problema  WHERE usuario.id = ?1 AND up.problema.id = ?2", nativeQuery = true)
-    boolean existeUsuarioProblema(Long usuarioId, Long problemaId);
+    @Query(value="SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END FROM usuario_problema WHERE usuario_id = ?1 AND problema_id = ?2", nativeQuery = true)
+    int existeUsuarioProblema(Long usuarioId, Long problemaId);
+
     
     @Query(value = "SELECT ur.rol_id FROM usuario_rol ur WHERE ur.usuario_id = :usuarioId and ur.rol_id = 2", nativeQuery = true)
     Long buscarUsuarioRolUser(@Param("usuarioId") Long usuarioId);

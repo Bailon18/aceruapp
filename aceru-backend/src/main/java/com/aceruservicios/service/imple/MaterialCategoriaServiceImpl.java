@@ -41,8 +41,12 @@ public class MaterialCategoriaServiceImpl implements IMaterialCategoriaService {
 			materialcatbase.setNombre(materialcat.getNombre());
 			materialcatbase.setDescripcion(materialcat.getDescripcion());
 			materialcatbase.setEstado(materialcat.getEstado());
-			materialcatbase.setImagenid(materialcat.getImagenid());
-			materialcatbase.setImagenurl(materialcat.getImagenurl());
+			
+			if(materialcat.getImagenurl() != null) {
+				materialcatbase.setImagenid(materialcat.getImagenid());
+				materialcatbase.setImagenurl(materialcat.getImagenurl());
+			}
+			
 			materialcaterepo.save(materialcatbase);
 		}
 

@@ -46,6 +46,15 @@
             <input type="file" formControlName="archivo" [accept]="getFileAcceptValue()" (change)="onFileChange($event)">
           </div>
         </div>
+        <div class="div-input2">
+          <mat-form-field>
+            <mat-label>Url</mat-label>
+            <textarea matInput formControlName="url"></textarea>
+            <mat-error *ngIf="isValidField('url')">
+              {{ getFieldError('url') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
         <div class="actions">
           <div class="buttons">
             <button mat-stroked-button color="warn" (click)="redirect()">

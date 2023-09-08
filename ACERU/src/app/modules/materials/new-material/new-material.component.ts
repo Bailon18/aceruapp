@@ -36,6 +36,7 @@ export class NewMaterialComponent implements OnInit {
     nombre: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
     tipoMaterial: ['PDF', [Validators.required]],
+    url:['', [Validators.required]],
     archivo: [null, [Validators.required]],
   });
 
@@ -58,6 +59,7 @@ export class NewMaterialComponent implements OnInit {
             this.naterialform.controls['descripcion'].setValue(data.descripcion);
             this.naterialform.controls['tipoMaterial'].setValue(data.tipoMaterial);
             this.naterialform.controls['archivo'].setErrors(null); 
+            this.naterialform.controls['url'].setErrors(null); 
             this.isFileSelected = true;
 
           },
@@ -121,6 +123,7 @@ export class NewMaterialComponent implements OnInit {
       nombre: this.naterialform.get('nombre')?.value,
       descripcion: this.naterialform.get('descripcion')?.value,
       tipoMaterial: this.naterialform.get('tipoMaterial')?.value,
+      url: this.naterialform.get('url')?.value,
       material: {
         id: this.idCategoria
       }

@@ -12,6 +12,7 @@ import { MaterialService } from '../services/material.service';
 })
 export class MaterialPresentationComponent implements OnInit {
   
+  urlOk?: string;
   data: any = {};
   idCategoria?: any;
   nombreCategoria?: string;
@@ -32,6 +33,7 @@ export class MaterialPresentationComponent implements OnInit {
       this.materialService.getMaterialById(this.idCategoria).subscribe({
         next:(response) => {
           this.data = response;
+          this.data.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url);
           this.resourceUrl = this.getSafeResourceUrl(this.data.archivoBase64, this.data.tipoMaterial);
         },
         error:(error) => {
@@ -43,6 +45,7 @@ export class MaterialPresentationComponent implements OnInit {
   }
 
   getSafeResourceUrl(archivoBase64: string, tipoMaterial: string): SafeResourceUrl {
+    
     let url = '';
     if (tipoMaterial === 'PDF') {
       url = `data:application/pdf;base64,${archivoBase64}`;

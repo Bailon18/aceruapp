@@ -4,6 +4,7 @@ export class Material {
     nombre?:       string;
     descripcion?:  string;
     tipoMaterial?: string;
+    url?:          string;
     archivo?:      string;
     material?:     MaterialCategoria;
 }

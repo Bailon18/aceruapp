@@ -84,10 +84,69 @@ margin: 0 10px;
 }
 
 .badge-ppt {
-  width: 9%;
+  width: 26px;
   background-color: rgb(167, 119, 18); /* Color rojo */
   border-radius: 10px; /* Sin bordes redondeados */
   padding: 3px 7px; /* Espaciado interno */
   color: white; /* Texto en blanco */
+}
+
+.badge-txt {
+  width: 26px;
+  background-color: rgb(124, 124, 124); /* Color rojo */
+  border-radius: 10px; /* Sin bordes redondeados */
+  padding: 3px 7px; /* Espaciado interno */
+  color: white; /* Texto en blanco */
+}
+
+.badge-excel {
+  width: 39px;
+  background-color: rgb(12, 92, 9); /* Color rojo */
+  border-radius: 10px; /* Sin bordes redondeados */
+  padding: 3px 7px; /* Espaciado interno */
+  color: white; /* Texto en blanco */
+}
+
+/* Establece anchos fijos para las columnas en la tabla */
+.mat-table {
+  table-layout: fixed;
+  width: 100%; /* Ancho total de la tabla */
+}
+
+/* Define anchos fijos para las columnas en porcentaje */
+// .mat-column-ID{
+//   width: 7%;
+// }
+
+// .mat-column-MATERIAL{
+//   width: 13%;
+// }
+
+// .mat-column-TIPO-MATERIAL{
+//   width: 10%;
+// }
+
+// .mat-column-ACCIONES {
+//   width: 10%; /* Puedes ajustar el porcentaje según tus necesidades */
+// }
+
+// .mat-column-DESCRIPCION{
+//   width: 70%;
+// }
+
+/* Asegúrate de que el contenido en las celdas no se desborde */
+.mat-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Permite el desplazamiento vertical en celdas con contenido largo */
+.mat-column-DESCRIPCION {
+  width: 30%; /* Ancho fijo para la columna DESCRIPCION */
+  white-space: normal;
+  word-wrap: break-word; /* Rompe palabras largas si es necesario */
+  max-height: 100px; /* Ajusta la altura máxima deseada */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
 }
 

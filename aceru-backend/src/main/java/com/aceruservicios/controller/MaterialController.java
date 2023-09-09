@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,20 +39,19 @@ public class MaterialController {
     }
 
    
-    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8" })
+    @PostMapping // consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8" }
     public ResponseEntity<Material> createMaterial(
-            @RequestPart("material") Material material,
-            @RequestPart(name = "archivo", required = false) MultipartFile archivo) throws IOException {
+    		@RequestBody Material material) {
     	
    
-        if (archivo == null || archivo.isEmpty()) {
+        /*if (archivo == null || archivo.isEmpty()) {
             System.out.println("ARCHIVO NULO O VACÍO");
 
         } else {
             System.out.println("ARCHIVO OK");
             byte[] archivoBytes = archivo.getBytes();
             material.setArchivo(archivoBytes);
-        }
+        }*/
         
         
         if(material.getId() != null) {
@@ -60,8 +60,8 @@ public class MaterialController {
         }
         else {
         	System.out.println("NUEVOOO");
-            byte[] archivoBytes = archivo.getBytes();
-            material.setArchivo(archivoBytes);
+            /*byte[] archivoBytes = archivo.getBytes();
+            material.setArchivo(archivoBytes);*/
         	materialService.saveMaterial(material);
         }
 
@@ -81,11 +81,11 @@ public class MaterialController {
             materialDTO.setTipoMaterial(material.getTipoMaterial().toString());
             materialDTO.setUrl(material.getUrl());
 
-            if (material.getArchivo() != null) {
+            /*if (material.getArchivo() != null) {
                 byte[] archivoBytes = material.getArchivo();
                 String base64Archivo = Base64Utils.encodeToString(archivoBytes);
                 materialDTO.setArchivoBase64(base64Archivo);
-            }
+            }*/
 
             return new ResponseEntity<>(materialDTO, HttpStatus.OK);
         } else {

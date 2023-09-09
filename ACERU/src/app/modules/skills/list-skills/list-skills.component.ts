@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { TokenService } from './../../auth/services/token.service';
+import {
+  Component,
+  Input,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Competencia } from '../model/competencia';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,19 +15,27 @@ import { CompetenciaService } from '../services/competencia.service';
 import { DatePipe } from '@angular/common';
 import swall from 'sweetalert2';
 
-
 @Component({
   selector: 'app-list-skills',
   templateUrl: './list-skills.component.html',
-  styleUrls: ['./list-skills.component.less']
+  styleUrls: ['./list-skills.component.less'],
 })
-export class ListSkillsComponent implements  AfterViewInit, OnInit {
-
+export class ListSkillsComponent implements AfterViewInit, OnInit {
   competencias: Competencia[] = [];
-  showInactivos = false; 
+  showInactivos = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  columnas: string[] = ['ID', 'COMPETENCIA', 'FECHA INICIO', 'FECHA FINAL','ESTADO','TIEMPO DE COMPETENCIA', 'ACCIONES'];
+
+  columnas: string[] = [
+    'ID',
+    'COMPETENCIA',
+    'FECHA INICIO',
+    'FECHA FINAL',
+    'ESTADO',
+    'TIEMPO DE COMPETENCIA',
+    'ACCIONES',
+  ];
+
   dataSource = new MatTableDataSource<Competencia>([]);
 
   constructor(
@@ -28,10 +43,11 @@ export class ListSkillsComponent implements  AfterViewInit, OnInit {
     private router: Router,
     private dataservice: DataService<any>,
     private competenciaService: CompetenciaService,
-  ) { }
+    public tokenService: TokenService
+  ) {}
 
   ngOnInit() {
-    this.listarCompetencias("VIGENTE");
+    this.listarCompetencias('VIGENTE');
   }
 
   ngAfterViewInit(): void {
@@ -48,101 +64,95 @@ export class ListSkillsComponent implements  AfterViewInit, OnInit {
 
   listarCompetencias(estado: string): void {
     this.competenciaService.listarCompetencias(estado).subscribe({
-      next: (data) =>{
+      next: (data) => {
         this.competencias = data;
         console.log(this.competencias);
         this.dataSource = new MatTableDataSource(this.competencias);
         this.dataSource.paginator = this.paginator;
       },
-      error: (error) =>{
-        console.log("ERROR EN LISTAR: ", error)
-      }
-    })
-
-  }
-
-  // listadoCompetencias2(estado: string): void{
-  //   this.competenciaService.getCompetenciasPorEstadoSSE(estado).subscribe((competencias) => {
-  //     this.competencias = competencias;
-  // });
-  
-  // }
-
-  mostrarInactivos(){
-    if (this.showInactivos) {
-      this.listarCompetencias("VIGENTE")
-    } else {
-      this.listarCompetencias("TERMINADO")
-    }
-  }
-
-  editarCompetencia(fila: any){
-    this.router.navigate(['skills/new-skill/edit/'+fila.id])
-  }
-
-  eliminarCompetencia(fila: any){
-
-    const mensaje = `¿Estás seguro que deseas <strong>Eliminar</strong>: <strong>${fila.nombre}</strong>?`;
-
-    swall
-    .fire({
-      html: mensaje,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText: 'Cancelar',
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-        this.competenciaService.eliminarCompetencia(fila.id).subscribe({
-          next: () => {
-            swall.fire(
-              'Eliminado!',
-              'Se realizo la operacion exitosamente!',
-              'success'
-            );
-
-            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-            this.router.onSameUrlNavigation = 'reload';
-            this.router.navigate(['/skills'], {
-              relativeTo: this.route,
-            });
-          },
-          error: (error) => {
-            console.error(error);
-            swall.fire(
-              'Eliminado',
-              'No se pudo realizar la acción',
-              'warning'
-            );
-          },
-        });
-      }
+      error: (error) => {
+        console.log('ERROR EN LISTAR: ', error);
+      },
     });
   }
 
-  detalleCompetencia(fila: any){
-    this.router.navigate(['skills/new-skill/description/'+fila.id])
+  mostrarInactivos() {
+    if (this.showInactivos) {
+      this.listarCompetencias('VIGENTE');
+    } else {
+      this.listarCompetencias('TERMINADO');
+    }
   }
 
+  editarCompetencia(fila: any) {
+    this.router.navigate(['skills/new-skill/edit/' + fila.id]);
+  }
+
+  eliminarCompetencia(fila: any) {
+    const mensaje = `¿Estás seguro que deseas <strong>Eliminar</strong>: <strong>${fila.nombre}</strong>?`;
+
+    swall
+      .fire({
+        html: mensaje,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'Cancelar',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.competenciaService.eliminarCompetencia(fila.id).subscribe({
+            next: () => {
+              swall.fire(
+                'Eliminado!',
+                'Se realizo la operacion exitosamente!',
+                'success'
+              );
+
+              this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this.router.onSameUrlNavigation = 'reload';
+              this.router.navigate(['/skills'], {
+                relativeTo: this.route,
+              });
+            },
+            error: (error) => {
+              console.error(error);
+              swall.fire(
+                'Eliminado',
+                'No se pudo realizar la acción',
+                'warning'
+              );
+            },
+          });
+        }
+      });
+  }
+
+  detalleCompetencia(fila: any) {
+    this.router.navigate(['skills/new-skill/description/' + fila.id]);
+  }
 
   calculateTimeDifference(fechaInicio: any, fechaFinal: any): string {
     const currentDate = new Date();
     const startDate = new Date(fechaInicio);
     const endDate = new Date(fechaFinal);
-  
+
     if (currentDate < startDate) {
       const timeDifference = startDate.getTime() - currentDate.getTime();
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  
+
       if (days > 0) {
-        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (hours > 0) {
-        return `Faltan ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (minutes > 0) {
         return `Faltan ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else {
@@ -153,11 +163,15 @@ export class ListSkillsComponent implements  AfterViewInit, OnInit {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  
+
       if (days > 0) {
-        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (hours > 0) {
-        return `Faltan ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (minutes > 0) {
         return `Faltan ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else {
@@ -168,11 +182,15 @@ export class ListSkillsComponent implements  AfterViewInit, OnInit {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  
+
       if (days > 0) {
-        return `Hace ${days} día${days === 1 ? '' : 's'}, ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Hace ${days} día${days === 1 ? '' : 's'}, ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (hours > 0) {
-        return `Hace ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Hace ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${
+          minutes === 1 ? '' : 's'
+        }`;
       } else if (minutes > 0) {
         return `Hace ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else {
@@ -180,14 +198,4 @@ export class ListSkillsComponent implements  AfterViewInit, OnInit {
       }
     }
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 }

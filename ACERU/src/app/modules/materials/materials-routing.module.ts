@@ -34,7 +34,7 @@ const routes: Routes = [
         data: { expectedRole: 'ROLE_ADMIN' }
       },
       {
-        path: 'category/presentation-material/:idCategory/:idMaterial',
+        path: 'category/presentation-material/:idCategory/:idMaterial/:nombreCategoria',
         component: MaterialPresentationComponent,
       },
     ],

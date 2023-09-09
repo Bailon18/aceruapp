@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MaterialService } from '../services/material.service';
 import { Material } from '../model/model';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-new-material',
@@ -12,7 +14,7 @@ import { Material } from '../model/model';
 })
 export class NewMaterialComponent implements OnInit {
 
-  tipoArchivo = ['VIDEO', 'PDF', 'WORD', 'TXT', 'PPT'];
+  tipoArchivo = ['VIDEO', 'PDF', 'WORD', 'TXT', 'PPT', 'EXCEL'];
   isFileSelected = false;
   idCategoria: any;
   archivoSeleccionado: any;
@@ -22,6 +24,11 @@ export class NewMaterialComponent implements OnInit {
   nombreBoton:string = "Crear"
   dataMaterial:any;
   material?:Material;
+  //urlSafe?:any;
+  urlPrueba?:any;
+
+  googleSheetsUrl: string = '';
+  urlSafe: any;
 
   constructor(
     private toster: ToastrService,
@@ -29,6 +36,7 @@ export class NewMaterialComponent implements OnInit {
     private materiaService: MaterialService,
     private route: ActivatedRoute,
     private router: Router,
+    private sanitizer: DomSanitizer
   ) { }
 
   public naterialform = this.fb.group({
@@ -37,7 +45,7 @@ export class NewMaterialComponent implements OnInit {
     descripcion: ['', [Validators.required]],
     tipoMaterial: ['PDF', [Validators.required]],
     url:['', [Validators.required]],
-    archivo: [null, [Validators.required]],
+    archivo: '',
   });
 
   ngOnInit() {
@@ -58,8 +66,8 @@ export class NewMaterialComponent implements OnInit {
             this.naterialform.controls['nombre'].setValue(data.nombre);
             this.naterialform.controls['descripcion'].setValue(data.descripcion);
             this.naterialform.controls['tipoMaterial'].setValue(data.tipoMaterial);
-            this.naterialform.controls['archivo'].setErrors(null); 
-            this.naterialform.controls['url'].setErrors(null); 
+            this.naterialform.controls['url'].setValue(data.url);
+            this.mostrarvistaprevia();
             this.isFileSelected = true;
 
           },
@@ -129,23 +137,14 @@ export class NewMaterialComponent implements OnInit {
       }
     };
 
-    const formData = new FormData();
+    //const formData = new FormData();
   
     if(this.idmaterial){
       mensaje = "Material actualizado exitosamente!"
       this.material.id = parseInt(this.idmaterial);
-      if(this.archivoSeleccionado == null){
-      }else{
-        formData.append('archivo', this.archivoSeleccionado);
-      }
- 
-    }else{
-      formData.append('archivo', this.archivoSeleccionado);
     }
     
-    formData.append('material', new Blob([JSON.stringify(this.material)], { type: 'application/json' }));
-
-    this.materiaService.createMaterial(formData).subscribe({
+    this.materiaService.createMaterial(this.material).subscribe({
       next: (resp) => {
         this.toster.success(mensaje);
         this.redirect();
@@ -160,16 +159,51 @@ export class NewMaterialComponent implements OnInit {
     this.router.navigate(['materials/category/' + this.idCategoria + '/' + this.nombreCategoria]);
   }
 
-  onFileChange(event: any): void {
-    const selectedFile = event.target.files[0];
-
-    if (selectedFile) {
+  mostrarvistaprevia() {
+    console.log(this.naterialform.get('tipoMaterial')?.value)
+  
+    if(this.naterialform.get('tipoMaterial')?.value && this.naterialform.get('url')?.value ){
+      let tipo = this.naterialform.get('tipoMaterial')?.value;
+      let url = this.naterialform.get('url')?.value;
+      if(tipo == "PDF" ||  tipo == "TXT" || tipo == "VIDEO"){
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.convertirVistaPreviaPdf(url));
+      }else if( tipo == "PPT"){
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.convertirVistaPreviaPpt(url));
+      }else if(tipo == "WORD" || tipo == "EXCEL"){
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.naterialform.get('url')?.value)
+      }
       this.isFileSelected = true;
-      this.archivoSeleccionado = selectedFile;
-      this.toster.info('Archivo seleccionado: ' + selectedFile.name);
-    } else {
+    }
+    else{
       this.isFileSelected = false;
+      this.urlSafe = "";
+    }
+
+  }
+
+  convertirVistaPreviaPpt(editUrl: string): string {
+    if (editUrl.includes('/edit')) {
+      const baseUrl = editUrl.split('/edit')[0];
+      const previewUrl = `${baseUrl}/embed`;
+      return previewUrl;
+    } else {
+      return editUrl;
     }
   }
+
+  convertirVistaPreviaPdf(editUrl: string){
+    // Reemplaza "view" por "preview" en la URL de Google Drive
+    const previewUrl = editUrl.replace("/view", "/preview");
+    return previewUrl;
+  }
+  
+  borrarVistaPreviaYURL() {
+    // Establece la URL en blanco (vacío)
+    this.naterialform.get('url')?.setValue('');
+    // Establece la vista previa del iframe en blanco (vacío)
+    this.urlSafe = "sjsjsjsdhdhj";
+   
+  }
+  
 
 }

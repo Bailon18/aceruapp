@@ -6,14 +6,12 @@ import { ToastrService } from 'ngx-toastr';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
 import { TokenService } from '../../auth/services/token.service';
 
-
 @Component({
   selector: 'app-description-skill',
   templateUrl: './description-skill.component.html',
   styleUrls: ['./description-skill.component.less'],
 })
 export class DescriptionSkillComponent implements OnInit {
-  
   idCompetencia: any;
   dataCompetencia: any;
   currentDate: Date = new Date();
@@ -25,7 +23,7 @@ export class DescriptionSkillComponent implements OnInit {
     descripcion: ['', [Validators.required]],
     fechaInicio: ['', [Validators.required]],
     fechaFinal: ['', [Validators.required]],
-    estado:['VIGENTE']
+    estado: ['VIGENTE'],
   });
 
   constructor(
@@ -35,8 +33,8 @@ export class DescriptionSkillComponent implements OnInit {
     private toaster: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
-    private autoservice: TokenService,
-    private toster: ToastrService,
+    public autoservice: TokenService,
+    private toster: ToastrService
   ) {}
 
   ngOnInit() {
@@ -59,7 +57,10 @@ export class DescriptionSkillComponent implements OnInit {
                 estado: data.estado,
               });
 
-              this.diferencia = this.calculateTimeDifference(this.dataCompetencia.fechaInicio, this.dataCompetencia.fechaFinal);
+              this.diferencia = this.calculateTimeDifference(
+                this.dataCompetencia.fechaInicio,
+                this.dataCompetencia.fechaFinal
+              );
             },
             error: (error) => {},
           });
@@ -73,55 +74,68 @@ export class DescriptionSkillComponent implements OnInit {
     this.serviceNavigation.redirect(page, parameter);
   }
 
-
   inscribirse() {
-    
     const userName = this.autoservice.getUserName();
     const authorities = this.autoservice.getAuthorities();
-  
+
     if (userName === null) {
-      this.toster.error('Debes iniciar sesión para inscribirte en la competencia.');
+      this.toster.error(
+        'Debes iniciar sesión para inscribirte en la competencia.'
+      );
       return;
     }
-  
+
     if (authorities === null) {
-      this.toster.error('No se pudo determinar tu rol. Por favor, vuelve a iniciar sesión.');
+      this.toster.error(
+        'No se pudo determinar tu rol. Por favor, vuelve a iniciar sesión.'
+      );
       return;
     }
-  
+
     if (authorities[0] === 'ROLE_ADMIN') {
-      this.toster.error('Los administradores no pueden inscribirse en competencias.');
+      this.toster.error(
+        'Los administradores no pueden inscribirse en competencias.'
+      );
       return;
     }
-  
+
     // Si pasa todas las validaciones, se realiza la inscripción
-    this.competenciaService.insertCompetencia(userName, this.idCompetencia).subscribe({
-      next: (data) => {
-        this.toster.info('Te has inscrito en esta competencia correctamente.');
-      },
-      error: (error) => {
-        this.toster.error('Ocurrió un error en la operación. Por favor, inténtalo de nuevo más tarde.');
-      }
-    });
+    this.competenciaService
+      .insertCompetencia(userName, this.idCompetencia)
+      .subscribe({
+        next: (data) => {
+          this.toster.info(
+            'Te has inscrito en esta competencia correctamente.'
+          );
+        },
+        error: (error) => {
+          this.toster.error(
+            'Ocurrió un error en la operación. Por favor, inténtalo de nuevo más tarde.'
+          );
+        },
+      });
   }
-  
-  
 
   calculateTimeDifference(fechaInicio: any, fechaFinal: any): string {
+    
     const currentDate = new Date();
     const startDate = new Date(fechaInicio);
     const endDate = new Date(fechaFinal);
-  
+
     if (currentDate < startDate) {
       const timeDifference = startDate.getTime() - currentDate.getTime();
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  
+
       if (days > 0) {
-        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (hours > 0) {
-        return `Faltan ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (minutes > 0) {
         return `Faltan ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else {
@@ -132,11 +146,15 @@ export class DescriptionSkillComponent implements OnInit {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  
+
       if (days > 0) {
-        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${days} día${days === 1 ? '' : 's'}, ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (hours > 0) {
-        return `Faltan ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Faltan ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (minutes > 0) {
         return `Faltan ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else {
@@ -147,11 +165,15 @@ export class DescriptionSkillComponent implements OnInit {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-  
+
       if (days > 0) {
-        return `Hace ${days} día${days === 1 ? '' : 's'}, ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Hace ${days} día${days === 1 ? '' : 's'}, ${hours} hora${
+          hours === 1 ? '' : 's'
+        }, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else if (hours > 0) {
-        return `Hace ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${minutes === 1 ? '' : 's'}`;
+        return `Hace ${hours} hora${hours === 1 ? '' : 's'}, ${minutes} minuto${
+          minutes === 1 ? '' : 's'
+        }`;
       } else if (minutes > 0) {
         return `Hace ${minutes} minuto${minutes === 1 ? '' : 's'}`;
       } else {
@@ -159,9 +181,4 @@ export class DescriptionSkillComponent implements OnInit {
       }
     }
   }
-  
-  
-  
-
-  
 }

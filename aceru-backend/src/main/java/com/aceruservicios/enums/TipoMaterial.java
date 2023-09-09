@@ -5,5 +5,6 @@ public enum TipoMaterial {
 	WORD,
 	TXT,
 	VIDEO,
-	PPT
+	PPT,
+	EXCEL
 }

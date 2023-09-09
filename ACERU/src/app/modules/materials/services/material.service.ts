@@ -39,8 +39,8 @@ export class MaterialService {
     return this.http.get<Material>(`${baseUrl}/material/${id}`);
   }
 
-  createMaterial(formData: FormData): Observable<any> {
-    return this.http.post(`${baseUrl}/material`, formData);
+  createMaterial(material: any): Observable<any> {
+    return this.http.post(`${baseUrl}/material`, material);
   }
 
   eliminarMaterial(id: number): Observable<any> {

@@ -51,7 +51,9 @@
                                     'badge badge-success': fila.tipoMaterial === 'PDF',
                                     'badge badge-info': fila.tipoMaterial === 'WORD',
                                     'badge badge-warning': fila.tipoMaterial === 'VIDEO',
-                                    'badge badge-ppt': fila.tipoMaterial === 'PPT'
+                                    'badge badge-ppt': fila.tipoMaterial === 'PPT',
+                                    'badge badge-txt': fila.tipoMaterial === 'TXT',
+                                    'badge badge-excel': fila.tipoMaterial === 'EXCEL'
                                   }">
                       {{ fila.tipoMaterial }}
                     </div>
@@ -81,7 +83,7 @@
                 <tr mat-header-row *matHeaderRowDef="columnas"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
               </table>
-              <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="">
+              <mat-paginator [pageSizeOptions]="[10, 5, 20]" aria-label="">
               </mat-paginator>
             </div>
           </mat-card-content>

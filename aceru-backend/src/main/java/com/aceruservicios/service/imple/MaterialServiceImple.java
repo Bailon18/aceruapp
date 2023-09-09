@@ -51,9 +51,9 @@ public class MaterialServiceImple implements IMaterialService {
 			matbase.setDescripcion(material.getDescripcion());
 			matbase.setTipoMaterial(material.getTipoMaterial());
 			matbase.setUrl(material.getUrl());
-			if(material.getArchivo() != null) {
+			/*if(material.getArchivo() != null) {
 				matbase.setArchivo(material.getArchivo());
-			}
+			}*/
 			matbase.setMaterialCategoria(material.getMaterialCategoria());
 		}
 		

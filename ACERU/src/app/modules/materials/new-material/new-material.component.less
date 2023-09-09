@@ -13,7 +13,7 @@ justify-content: center;
 
 }
 .right{
-  width: 40%;
+  width: 60%;
   align-items: center;
 }
 .left{
@@ -86,4 +86,29 @@ justify-content: center;
   background-color: #dff0d8;
   border-color: #d6e9c6;
   color: #3c763d;
+}
+
+
+.container-categories {
+  display: flex; /* Activa el modo flexbox */
+}
+
+.left {
+  flex: 40%; /* "left" ocupa el 30% del espacio disponible */
+  padding: 20px; /* Agrega un espaciado interno opcional para separar el contenido del borde */
+  box-sizing: border-box; /* Asegura que el padding se tenga en cuenta en el ancho total */
+}
+
+.right {
+  flex: 60%; /* "right" ocupa el 70% del espacio disponible */
+  padding: 10px; /* Agrega un espaciado interno opcional para separar el contenido del borde */
+  box-sizing: border-box; /* Asegura que el padding se tenga en cuenta en el ancho total */
+  height: 100%;
+}
+
+
+/* Contenido interno de left y right */
+.left > *, .right > * {
+  width: 100%; /* Establece el ancho del contenido interno al 100% */
+  box-sizing: border-box; /* Asegura que el padding se tenga en cuenta en el ancho total */
 }

@@ -1,28 +1,54 @@
 <div class="container-profile">
   <hr class="separator">
   <div class="container-data">
-    <div class="form-profile" [formGroup]="form">
+    <div class="form-profile" [formGroup]="perfilForm">
       <div class="title text-secondary"> Datos Personales</div>
+      <input type="hidden" formControlName="id" placeholder="Nombre">
       <div class="div-input">
-        <div class="txt"> Nombre</div>
-        <input formControlName="nombre" class="input"  placeholder="Nombre">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" placeholder="Nombre">
+          <mat-error *ngIf="isValidField('nombre')">
+            {{ getFieldError('nombre') }}
+          </mat-error>
+        </mat-form-field>
       </div>
+      <br>
       <div class="div-input">
-        <div class="txt"> Usuario</div>
-        <input formControlName="usuario" class="input"  placeholder="E-mail">
+        <mat-form-field appearance="outline">
+          <mat-label>Nick</mat-label>
+          <input matInput formControlName="nick" placeholder="nick">
+          <mat-error *ngIf="isValidField('nick')">
+            {{ getFieldError('nick') }}
+          </mat-error>
+        </mat-form-field>
       </div>
+      <br>
       <div class="div-input">
-        <div class="txt">Rol</div>
-        <select class="input select" formControlName="rol" name="miselect">
-          <option [value]="item" *ngFor="let item of roles">{{item}}</option>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="E-mail" (keyup)="isValidadEmail($event)">
+          <mat-error *ngIf="isValidField('email')">
+            {{ getFieldError('email') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+      <div class="div-input">
+        <mat-form-field appearance="outline">
+          <mat-label>Rol</mat-label>
+          <select matNativeControl formControlName="rol" name="miselect" class="mi-select">
+            <option value="admin">Administrador</option>
+            <option value="user">Participante</option>
           </select>
+        </mat-form-field>
       </div>
     </div>
     <div class="card-profile">
       <img src="assets/images/profile/foto-perfil.jpeg" alt="imagen no disponible">
       <div class="data-profile">
         <div class="level">Nivel</div>
-        <div class="name">{{this.form.controls['nombre'].value}}</div>
+        <div class="name">{{this.perfilForm.controls['nombre'].value}}</div>
         <div class="edit-profile"><button class="button">Editar perfil</button></div>
         <div class="change-password" routerLink="change-password"><button class="button">Cambiar contraseña</button></div>
       </div>

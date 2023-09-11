@@ -36,4 +36,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "SELECT ur.rol_id FROM usuario_rol ur WHERE ur.usuario_id = :usuarioId and ur.rol_id = 2", nativeQuery = true)
     Long buscarUsuarioRolUser(@Param("usuarioId") Long usuarioId);
     
+    @Modifying
+    @Query("UPDATE Usuario u SET u.rango = :nuevoRango WHERE u.id = :id")
+    void actualizarRangoById(@Param("id") Long id, @Param("nuevoRango") String nuevoRango);
+    
 }

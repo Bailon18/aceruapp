@@ -36,6 +36,12 @@ public class UsuarioController {
         usuarioService.insertProblema(usuarioencontrado.getId(), problemaId);
     }
     
+    @GetMapping("/buscar/{nombreusuario}")
+    public Usuario buscarUsuario(@PathVariable String nombreusuario) {
+    	Usuario usuarioencontrado = usuarioService.obtenerUsuarioporNombre(nombreusuario);
+        return usuarioencontrado;
+    }
+    
     @GetMapping("/list")
     public ResponseEntity<List<Usuario>> getAllMaterials() {
         List<Usuario> usuarios = usuarioService.listarUsuariosParticipantes();
@@ -50,5 +56,11 @@ public class UsuarioController {
     	Usuario usuarioencontrado = usuarioService.obtenerUsuarioporNombre(nombreusuario);
         boolean exists = usuarioService.existsByUsuarioIdAndProblemaId(usuarioencontrado.getId(), problemaId);
         return ResponseEntity.ok(exists);
+    }
+    
+    @GetMapping("/cambiarRango/{id}/{nuevoRango}")
+    public ResponseEntity<Boolean> actualizarRangoUsuario(@PathVariable Long id, @PathVariable String nuevoRango) {
+        usuarioService.actualizarRangoUsuario2(id, nuevoRango);
+        return ResponseEntity.ok(true);
     }
 }

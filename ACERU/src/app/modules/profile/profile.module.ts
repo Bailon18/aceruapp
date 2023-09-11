@@ -5,6 +5,7 @@ import { ProfileRoutingModule } from './profile.routing.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DataProfileComponent } from './data-profile/data-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ProfileRoutingModule,
     ReactiveFormsModule,
+    MaterialModule
 
   ],
   declarations: [ProfileComponent,ChangePasswordComponent,DataProfileComponent],

@@ -7,16 +7,12 @@ import { Usuario } from '../../auth/models/usuario';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class PerfilService {
 
   constructor(private http: HttpClient) { }
 
-  getListarUsuarioParticipantes():Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(`${baseUrl}/usuario/list`);
-  }
-
-  actualizarRangoUsuario(id: number, nuevoRango: string) {
-    return this.http.get(`${baseUrl}/usuario/cambiarRango/${id}/${nuevoRango}`);
+  buscarUsuarioPorNombre(nombreUsuario: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${baseUrl}/usuario/buscar/${nombreUsuario}`);
   }
 
 }

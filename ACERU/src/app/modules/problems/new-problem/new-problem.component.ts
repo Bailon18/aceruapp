@@ -61,14 +61,7 @@ export class NewProblemComponent implements OnInit {
       this.nombreboton = "Actualizar problema";
       this.titulo= "Editar Problema";
 
-      this.problemaForm.controls['id'].setValue(this.datoProblema.id);
-      this.problemaForm.controls['nombre'].setValue(this.datoProblema.nombre);
-      this.problemaForm.controls['descripcion'].setValue(this.datoProblema.descripcion);
-      this.problemaForm.controls['entradas'].setValue(this.datoProblema.entradas);
-      this.problemaForm.controls['salidas'].setValue(this.datoProblema.salidas);
-      this.problemaForm.controls['ejemploEntradas'].setValue(this.datoProblema.ejemploEntradas);
-      this.problemaForm.controls['ejemploSalidas'].setValue(this.datoProblema.ejemploSalidas);
-      this.problemaForm.controls['dificultad'].setValue(this.datoProblema.dificultad);
+
 
 
     }

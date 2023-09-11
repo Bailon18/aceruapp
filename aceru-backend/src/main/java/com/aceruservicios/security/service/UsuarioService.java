@@ -3,6 +3,8 @@ package com.aceruservicios.security.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,19 +55,29 @@ public class UsuarioService {
     }
     
     public List<Usuario> listarUsuariosParticipantes() {
-    	
-    	List<Usuario> listausuarioParticipante = new ArrayList<>();
-    	
-        List<Usuario> listadogeneral =  usuarioRepository.findAll();
-        
-        for (Usuario usuario : listadogeneral) {
-			Usuario usuarioverificado = this.verificarrolUser(usuario) ;
-			if( usuarioverificado != null) {
-				listausuarioParticipante.add(usuarioverificado);
-			}
-		}
-        
-        return listausuarioParticipante;
+        List<Usuario> listaUsuarioGeneral = usuarioRepository.findAll();
+
+        List<Usuario> listaUsuarioFiltrada = listaUsuarioGeneral.stream()
+                .filter(usuario -> verificarrolUser(usuario) != null)
+                .collect(Collectors.toList());
+
+        return listaUsuarioFiltrada.stream()
+        		.sorted(Comparator.comparing(Usuario::getRango, (rango1, rango2) -> {
+        		    // Definir el orden deseado de los rangos
+        		    List<String> ordenRangos = new ArrayList<>();
+        		    ordenRangos.add("PLATINO");
+        		    ordenRangos.add("DIAMANTE");
+        		    ordenRangos.add("ORO");
+        		    ordenRangos.add("PLATA");
+        		    ordenRangos.add("BRONCE");
+
+        		    int index1 = ordenRangos.indexOf(rango1);
+        		    int index2 = ordenRangos.indexOf(rango2);
+
+        		    return Integer.compare(index2, index1);
+                }).reversed())
+                .collect(Collectors.toList());
+  
     }
     
     public Usuario verificarrolUser(Usuario usuario) {
@@ -89,5 +101,10 @@ public class UsuarioService {
         } else {
         	return null;
         }
+    }
+    
+    public void actualizarRangoUsuario2(Long idUsuario, String nuevoRango) {
+       
+        usuarioRepository.actualizarRangoById(idUsuario, nuevoRango);
     }
 }

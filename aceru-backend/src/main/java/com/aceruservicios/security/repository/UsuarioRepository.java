@@ -24,6 +24,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "INSERT INTO usuario_competencia (usuario_id, competencia_id) VALUES (?1, ?2)", nativeQuery = true)
     void insertUsuarioCompetencia(Long usuarioId, Long competenciaId);
     
+    
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO usuario_problema (usuario_id, problema_id) VALUES (?1, ?2)", nativeQuery = true)

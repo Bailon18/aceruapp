@@ -106,6 +106,8 @@ export class RegisterComponent implements OnInit {
         roles: roles
       };
 
+      console.log("USUARIO : ", this.nuevoUsuario )
+
       this.authService.nuevo(this.nuevoUsuario).subscribe({
         next: (response) => {
           this.isRegistro = true;

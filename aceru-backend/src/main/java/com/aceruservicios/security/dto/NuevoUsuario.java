@@ -55,4 +55,12 @@ public class NuevoUsuario {
     public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
+
+	@Override
+	public String toString() {
+		return "NuevoUsuario [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", email=" + email
+				+ ", password=" + password + ", roles=" + roles + "]";
+	}
+    
+    
 }

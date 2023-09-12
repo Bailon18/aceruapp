@@ -28,7 +28,7 @@ export class NewMaterialComponent implements OnInit {
   urlPrueba?:any;
 
   googleSheetsUrl: string = '';
-  urlSafe: any;
+  urlSafe?: any;
 
   constructor(
     private toster: ToastrService,
@@ -37,7 +37,9 @@ export class NewMaterialComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   public naterialform = this.fb.group({
     id: [''],
@@ -45,7 +47,7 @@ export class NewMaterialComponent implements OnInit {
     descripcion: ['', [Validators.required]],
     tipoMaterial: ['PDF', [Validators.required]],
     url:['', [Validators.required]],
-    archivo: '',
+    archivo: [''],
   });
 
   ngOnInit() {
@@ -111,7 +113,7 @@ export class NewMaterialComponent implements OnInit {
         return 'application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       case 'TXT':
         return 'text/plain';
-      case 'PPT': 
+      case 'PPT':
         return '.pptx';
       default:
         return '';
@@ -138,12 +140,12 @@ export class NewMaterialComponent implements OnInit {
     };
 
     //const formData = new FormData();
-  
+
     if(this.idmaterial){
       mensaje = "Material actualizado exitosamente!"
       this.material.id = parseInt(this.idmaterial);
     }
-    
+
     this.materiaService.createMaterial(this.material).subscribe({
       next: (resp) => {
         this.toster.success(mensaje);
@@ -161,7 +163,7 @@ export class NewMaterialComponent implements OnInit {
 
   mostrarvistaprevia() {
     console.log(this.naterialform.get('tipoMaterial')?.value)
-  
+
     if(this.naterialform.get('tipoMaterial')?.value && this.naterialform.get('url')?.value ){
       let tipo = this.naterialform.get('tipoMaterial')?.value;
       let url = this.naterialform.get('url')?.value;
@@ -176,7 +178,7 @@ export class NewMaterialComponent implements OnInit {
     }
     else{
       this.isFileSelected = false;
-      this.urlSafe = "";
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl("");
     }
 
   }
@@ -196,14 +198,14 @@ export class NewMaterialComponent implements OnInit {
     const previewUrl = editUrl.replace("/view", "/preview");
     return previewUrl;
   }
-  
+
   borrarVistaPreviaYURL() {
     // Establece la URL en blanco (vacío)
     this.naterialform.get('url')?.setValue('');
     // Establece la vista previa del iframe en blanco (vacío)
-    this.urlSafe = "sjsjsjsdhdhj";
-   
+    //this.urlSafe = "sjsjsjsdhdhj";
+
   }
-  
+
 
 }

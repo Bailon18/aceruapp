@@ -6,19 +6,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DATA_CATEGORY_PROBLEMS } from 'src/app/shared/constants/constants-problems';
-import { NavigationService } from 'src/app/shared/services/navigation.service';
-import { UserService } from 'src/app/shared/services/user/user.service';
-import { Categoria } from '../../problems/model/categoria';
-import { DataService } from 'src/app/shared/services/data-service';
-import { CategoriaService } from '../services/categoria.service';
 import { MaterialService } from '../services/material.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Material } from '../model/model';
 import swall from 'sweetalert2';
 import { ChangeDetectorRef } from '@angular/core';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from '../../auth/services/token.service';
 
 @Component({
@@ -108,20 +101,9 @@ export class ListMaterialsComponent implements AfterViewInit, OnInit {
                 'success'
               );
 
-              this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-              this.router.onSameUrlNavigation = 'reload';
-              this.router.navigate(
-                [
-                  '/materials/category/' +
-                    this.idCategoria +
-                    '/' +
-                    this.nombreCategoria,
-                ],
-                {
-                  // la url para ir a la lista
-                  relativeTo: this.route,
-                }
-              );
+              this.obtenerListadoCategori(this.idCategoria);
+              //this.router.navigate(['materials/category/' + this.idCategoria +'/'+this.nombreCategoria ])
+
             },
             error: () => {
               swall.fire(

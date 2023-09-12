@@ -49,7 +49,11 @@ public class AuthController {
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
+        
+    	
+    	System.out.println("USUARIO 2 "+ nuevoUsuario);
+    	
+    	if(bindingResult.hasErrors())
             return new ResponseEntity<>(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
         if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity<>(new Mensaje("Nick ya existe"), HttpStatus.BAD_REQUEST);
@@ -66,8 +70,8 @@ public class AuthController {
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).orElse(null));
         }
         usuario.setRoles(roles);
-
         usuarioService.save(usuario);
+        
         return new ResponseEntity<>(new Mensaje("usuario guardado"), HttpStatus.CREATED);
     }
 

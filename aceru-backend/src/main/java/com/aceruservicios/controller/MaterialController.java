@@ -102,9 +102,9 @@ public class MaterialController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarMaterial(@PathVariable Long id) {
+    public ResponseEntity<?> eliminarMaterial(@PathVariable Long id) {
         materialService.deleteMaterial(id);
-        return new ResponseEntity<>("Material eliminado exitosamente", HttpStatus.OK);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
     
     

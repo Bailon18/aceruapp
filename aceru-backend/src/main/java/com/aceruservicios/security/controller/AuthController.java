@@ -29,7 +29,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
@@ -60,7 +60,6 @@ public class AuthController {
                         passwordEncoder.encode(nuevoUsuario.getPassword()));
 
         Set<Rol> roles = new HashSet<>();
-        //roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).orElse(null));
         if(nuevoUsuario.getRoles().contains("admin"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).orElse(null));
         else{
@@ -89,5 +88,15 @@ public class AuthController {
     @GetMapping("/existEmail/{email}")
     public boolean validExistenceEmail(@PathVariable("email") String email){
         return usuarioService.existsByEmail(email);
+    }
+    
+    
+    
+    @PutMapping("/actualizar")
+    public ResponseEntity<?> actualizarPerfil(@RequestBody Usuario nuevoUsuario) {
+    	
+    	System.out.println("USUARIOO_"+ nuevoUsuario);
+        usuarioService.actualizarPerfil(nuevoUsuario);
+        return ResponseEntity.ok(true);
     }
 }

@@ -19,21 +19,20 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
-
-  // metodo para ingresar un registrar un usuario
   public nuevo(nuevoUsuario: NuevoUsuario): Observable<any> {
     return this.httpClient.post<any>(`${baseUrl}/auth/nuevo` ,nuevoUsuario);
   }
 
-  // metodo para logearse
   public login(loginUsuario: LoginUsuario): Observable<JwtDTO> {
     return this.httpClient.post<JwtDTO>(`${baseUrl}/auth/login`, loginUsuario);
   }
 
-  // validar existencia de correo
   getValidarCorreo(correo: string): Observable<boolean> {
     return this.httpClient.get<boolean>(`${baseUrl}/auth/existEmail/${correo}`);
   }
 
+  actualizarPerfil(usuario: any): Observable<any> {
+    return this.httpClient.put(`${baseUrl}/auth/actualizar`, usuario);
+  }
 
 }

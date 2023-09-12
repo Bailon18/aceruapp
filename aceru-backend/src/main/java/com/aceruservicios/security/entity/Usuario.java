@@ -142,6 +142,31 @@ public class Usuario {
 	public void setRango(String rango) {
 		this.rango = rango;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Usuario [id=");
+		builder.append(id);
+		builder.append(", nombre=");
+		builder.append(nombre);
+		builder.append(", nombreUsuario=");
+		builder.append(nombreUsuario);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", rango=");
+		builder.append(rango);
+		builder.append(", roles=");
+		builder.append(roles);
+		builder.append(", problemas=");
+		builder.append(problemas);
+		builder.append(", competencias=");
+		builder.append(competencias);
+		builder.append("]");
+		return builder.toString();
+	}
     
     
 }

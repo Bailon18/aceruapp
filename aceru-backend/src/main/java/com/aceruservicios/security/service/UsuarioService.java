@@ -63,7 +63,7 @@ public class UsuarioService {
 
         return listaUsuarioFiltrada.stream()
         		.sorted(Comparator.comparing(Usuario::getRango, (rango1, rango2) -> {
-        		    // Definir el orden deseado de los rangos
+        		    
         		    List<String> ordenRangos = new ArrayList<>();
         		    ordenRangos.add("PLATINO");
         		    ordenRangos.add("DIAMANTE");
@@ -104,7 +104,20 @@ public class UsuarioService {
     }
     
     public void actualizarRangoUsuario2(Long idUsuario, String nuevoRango) {
-       
         usuarioRepository.actualizarRangoById(idUsuario, nuevoRango);
     }
+    
+    public void actualizarPerfil(Usuario usuario) {
+    	
+    	Usuario usuariobase = usuarioRepository.findById(usuario.getId()).orElse(null);
+    	if(usuariobase != null) {
+    		
+    		usuariobase.setNombre(usuario.getNombre());
+    		usuariobase.setNombreUsuario(usuario.getNombreUsuario());
+    		usuariobase.setEmail(usuario.getEmail());
+    		usuarioRepository.save(usuariobase);
+    	}
+    }
+    
+    
 }

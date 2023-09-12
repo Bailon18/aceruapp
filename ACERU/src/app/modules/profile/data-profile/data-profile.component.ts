@@ -6,6 +6,8 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 import { TokenService } from '../../auth/services/token.service';
 import { PerfilService } from '../service/perfil.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -17,22 +19,23 @@ export class DataProfileComponent implements OnInit {
   
   roles = ROLES;
   rolesDisponibles = ['Administrador', 'Participante'];
+  correoBan:any;
   
 
   public perfilForm = this.fb.group({
     id: '',
     nombre: ['', [Validators.required]],
-    nick: ['', [Validators.required]],
+    nombreUsuario: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     rol: ['', Validators.required],
   });
 
   constructor(
     private fb: FormBuilder,
-    private serviceuser: UserService,
     private autoservice: TokenService,
     private perfilService: PerfilService,
     private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -45,11 +48,12 @@ export class DataProfileComponent implements OnInit {
         next: (respuesta) =>{
           this.perfilForm = this.fb.group({
             id: [respuesta.id],
-            nombre: [respuesta.nombre],
-            nick: [respuesta.nombreUsuario],
-            email: [respuesta.email],
-            rol: [{ value: rolNombre, disabled: rolNombre !== 'admin' }]
+            nombre: [respuesta.nombre, Validators.required],
+            nombreUsuario: [respuesta.nombreUsuario, Validators.required],
+            email: [ respuesta.email, [Validators.required, Validators.email] ],
+            rol: [{ value: rolNombre, disabled: true }] // rolNombre !== 'admin'
           });
+          this.correoBan = respuesta.email;
         },
         error:(error) => {
     
@@ -91,7 +95,7 @@ export class DataProfileComponent implements OnInit {
 
   isValidadEmail(event: any) {
 
-    if (this.perfilForm.controls['email'].valid){
+    if (this.perfilForm.controls['email'].valid && this.perfilForm.controls['email'].value != this.correoBan){
 
       const email = (event.target as HTMLInputElement).value;
 
@@ -104,6 +108,25 @@ export class DataProfileComponent implements OnInit {
       });
     }
   }
+
+  actualizarPerfil() {
+    if (this.perfilForm.valid) {
+      const usuarioData = this.perfilForm.value;
+      this.authService.actualizarPerfil(usuarioData).subscribe({
+        next: (response) => {
+          this.toastr.info('Perfil actualizado exitosamente');
+        },
+        error:(error) => {
+          this.toastr.error('Error al actualizar el perfil', error);
+        }
+    });
+    }
+  }
+
+
+
+
+
 
 
 }

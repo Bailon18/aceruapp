@@ -20,6 +20,7 @@ export class DataProfileComponent implements OnInit {
   roles = ROLES;
   rolesDisponibles = ['Administrador', 'Participante'];
   correoBan:any;
+  foto?: any
   
 
   public perfilForm = this.fb.group({
@@ -46,6 +47,10 @@ export class DataProfileComponent implements OnInit {
     if(userName){
       this.perfilService.buscarUsuarioPorNombre(userName).subscribe({
         next: (respuesta) =>{
+
+          console.log("USUARIO: ", respuesta) // foto : base64
+          this.foto = respuesta.foto;
+
           this.perfilForm = this.fb.group({
             id: [respuesta.id],
             nombre: [respuesta.nombre, Validators.required],

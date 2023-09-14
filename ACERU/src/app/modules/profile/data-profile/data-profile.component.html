@@ -45,11 +45,11 @@
       </div>
     </div>
     <div class="card-profile">
-      <img src="assets/images/profile/foto-perfil.jpeg" alt="imagen no disponible">
+      <img [src]="foto ? 'data:image/jpeg;base64,' + foto : 'assets/images/profile/foto-perfil.jpeg'" alt="imagen no disponible" style="height: 260px; width: 200px;">
       <div class="data-profile">
-        <div class="level">Nivel</div>
-        <div class="name">{{this.perfilForm.controls['nombre'].value}}</div>
-        <div class="edit-profile"><button class="button"  [disabled]="perfilForm.invalid" (click)="actualizarPerfil()">Actualizar perfil</button></div>
+        <div class="level">Nivel</div><br>
+        <div class="name">{{this.perfilForm.controls['nombre'].value}}</div><br>
+        <div class="edit-profile"><button class="button"  [disabled]="perfilForm.invalid" (click)="actualizarPerfil()">Actualizar perfil</button></div><br>
         <div class="change-password" routerLink="change-password"><button class="button">Cambiar contraseña</button></div>
       </div>
 

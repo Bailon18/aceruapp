@@ -8,5 +8,6 @@ export class Usuario {
     password?: string;
     roles?: string;
     rango?: string;
+    foto?: '';
 
 }

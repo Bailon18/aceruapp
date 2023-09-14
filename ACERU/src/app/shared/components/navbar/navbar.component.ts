@@ -1,10 +1,13 @@
 import { TokenService } from './../../../modules/auth/services/token.service';
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { TEXT_LINKS_ADMINISTRATOR, TEXT_LINKS_P } from "../../constants/constants-navbar";
+import { TEXT_LINKS_P } from "../../constants/constants-navbar";
 import { NavigationService } from '../../services/navigation.service';
 import { UserService } from '../../services/user/user.service';
-import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { PerfilService } from 'src/app/modules/profile/service/perfil.service';
+import { DataService } from '../../services/data-service';
+import { Usuario } from 'src/app/modules/auth/models/usuario';
+import { da } from 'date-fns/locale';
 
 @Component({
   selector: 'app-navbar',
@@ -17,16 +20,33 @@ export class NavbarComponent implements OnInit {
   faTimes = faTimes;
   TEXT_LINKS = TEXT_LINKS_P;
   textLinks: any;
+  foto:any;
+  rol?: string;
+  usuario?: Usuario;
+
 
   constructor(
     private serviceNavigation: NavigationService,
     public userService: UserService,
     public tokenService: TokenService,
-  ) { }
+    private perfilService: PerfilService,
+    private dataService: DataService<any>,
+  ) { 
+    
+    this.textLinks = TEXT_LINKS_P;
+    this.usuario = this.dataService.getUsuario();
+    console.log("USUARIO: ", this.usuario)
+    this.rol =  this.tokenService.getAuthorities()[0] !== 'ROLE_ADMIN'? 'Participante':'Administrador';
+
+
+  }
 
   ngOnInit() {
-    this.textLinks = TEXT_LINKS_P;
+
+
   }
+
+
 
   redirect(page: string) {
     this.serviceNavigation.redirect(page);
@@ -38,7 +58,9 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this.tokenService.logOut();
+    this.dataService.clearData()
     this.redirect('home');
+    window.location.reload()
   }
 
   mostra(): boolean {

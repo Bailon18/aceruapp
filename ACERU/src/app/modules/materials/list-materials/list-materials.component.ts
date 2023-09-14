@@ -160,6 +160,5 @@ export class ListMaterialsComponent implements AfterViewInit, OnInit {
   }
 
   holitas() {
-    console.log('holaaaaaaaaaaaaaaaaaaaaaa');
   }
 }

@@ -126,8 +126,6 @@ export class NewCategoryComponent implements OnInit {
 
       const imagen = this.imagenInputFile?.nativeElement.files[0];
 
-      console.log("IMAGEN :" , imagen)
-
       this.nuevaCategoria = {
         nombre: this.categoriaform.value.nombre,
         descripcion: this.categoriaform.value.descripcion,

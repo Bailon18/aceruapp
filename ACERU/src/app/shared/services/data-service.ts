@@ -1,24 +1,4 @@
-// import { Injectable } from '@angular/core';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class  DataService<T> {
-  
-//   private data!: T | null;
-
-//   setData(data: T) {
-//     this.data = data;
-//   }
-
-//   getData(): T| null {
-//     return this.data;
-//   }
-
-//   clearData() {
-//     this.data = null;
-//   }
-// }
 
 import { Injectable } from '@angular/core';
 
@@ -28,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class DataService<T> {
 
   private storageKey = 'dataServiceData';
+  private usuario: any;
 
   setData(data: T) {
     localStorage.setItem(this.storageKey, JSON.stringify(data));
@@ -40,5 +21,18 @@ export class DataService<T> {
 
   clearData() {
     localStorage.removeItem(this.storageKey);
+  }
+
+  setUsuario(usuario: any) {
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+  }
+
+  getUsuario(): any {
+    const storedUsuario = localStorage.getItem('usuario');
+    return storedUsuario ? JSON.parse(storedUsuario) : null;
+  }
+
+  clearUsuario() {
+    localStorage.removeItem('usuario');
   }
 }

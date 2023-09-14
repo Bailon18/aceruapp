@@ -36,7 +36,6 @@ export class MaterialPresentationComponent implements OnInit {
       this.materialService.getMaterialById(this.idMaterial).subscribe({
         next:(response) => {
           this.data = response;
-          console.log("DATA: ",this.data)
           this.getSafeResourceUrl(this.data.url, this.data.tipoMaterial);
         },
         error:(error) => {
@@ -60,7 +59,6 @@ export class MaterialPresentationComponent implements OnInit {
       }
     }
     else{
-      console.log("Vacio tipo o url")
     }
    
   }
@@ -109,9 +107,7 @@ export class MaterialPresentationComponent implements OnInit {
       document.body.appendChild(hiddenLink);
       hiddenLink.click();
       document.body.removeChild(hiddenLink);
-    } else {
-      console.log("URL de Google Drive no válida.");
-    }
+    } 
   }
   
   getFileIdFromGoogleDriveUrl(url: string): string | null {

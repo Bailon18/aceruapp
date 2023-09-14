@@ -125,7 +125,6 @@ export class RegisterComponent implements OnInit {
       };
 
 
-      console.log("FOTO: ", this.selectedFile) // FOTO:  C:\fakepath\perfil.jpg
       formData.append(
         'nuevoUsuario',
         new Blob([JSON.stringify(this.nuevoUsuario)], { type: 'application/json' }));
@@ -133,7 +132,6 @@ export class RegisterComponent implements OnInit {
       if (this.selectedFile) {
         formData.append('foto', this.selectedFile);
       }
-
 
 
       this.authService.nuevo(formData).subscribe({
@@ -146,7 +144,6 @@ export class RegisterComponent implements OnInit {
           this.isRegistro = false;
           this.isRegistroError = true;
           this.errorMensaje = err.error.mensaje;
-          console.log('ERROR REGISTRO: ', this.errorMensaje);
           this.toastr.error(this.errorMensaje, "Registro")
         }
       });

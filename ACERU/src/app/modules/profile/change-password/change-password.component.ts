@@ -49,6 +49,10 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 
+  cancelar(){
+    this.router.navigate(['/profile']);
+  }
+
   changePassword() {
     if (this.form.valid) {
       let nombreUsuario2 = this.tokenService.getUserName() || '';

@@ -7,6 +7,8 @@ import { TokenService } from '../services/token.service';
 import { AuthService } from '../services/auth.service';
 import { LoginUsuario } from '../models/login-usuario';
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from 'src/app/shared/services/data-service';
+import { PerfilService } from '../../profile/service/perfil.service';
 
 
 @Component({
@@ -36,7 +38,9 @@ export class LoginComponent implements OnInit {
     private serviceNavigation: NavigationService,
     private tokenService: TokenService,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dataService: DataService<any>,
+    private perfilService: PerfilService,
   ) {}
 
   ngOnInit(): void {
@@ -73,8 +77,25 @@ export class LoginComponent implements OnInit {
           this.tokenService.setUserName(dato.nombreUsuario!);
           this.tokenService.setAuthorities(dato.authorities!);
           this.roles = dato.authorities!;
-      
+
+
+          const nombre = this.tokenService.getUserName();
+        
+          if(nombre){
+            this.perfilService.buscarUsuarioPorNombre(nombre).subscribe({
+              next: (respuesta) =>{
+                this.dataService.clearData();
+                this.dataService.setUsuario(respuesta); // enviamos la data hacia navbar
+              },
+              error:(error) => {
+          
+              }
+            })
+          }
+
+
           this.redirect('home');
+         
         },
         error: (err) => {
           this.isLogin = false;

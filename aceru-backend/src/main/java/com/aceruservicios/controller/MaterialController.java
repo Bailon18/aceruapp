@@ -1,11 +1,10 @@
 package com.aceruservicios.controller;
 
-import java.io.IOException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,14 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.aceruservicios.dto.MaterialDTO;
 import com.aceruservicios.entity.Material;
 import com.aceruservicios.service.IMaterialService;
-import org.springframework.util.Base64Utils;
+
 
 @RestController
 @RequestMapping("/material")
@@ -52,7 +50,6 @@ public class MaterialController {
             byte[] archivoBytes = archivo.getBytes();
             material.setArchivo(archivoBytes);
         }*/
-        
         
         if(material.getId() != null) {
         	System.out.println("ACTUALIZARRRR");
@@ -92,8 +89,6 @@ public class MaterialController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
-    
     
     @GetMapping("/porcategory/{categoryId}")
     public ResponseEntity<List<Material>> getMaterialsByCategory(@PathVariable Long categoryId) {

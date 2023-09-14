@@ -21,7 +21,6 @@ export class NewProblemComponent implements OnInit {
   titulo: string = 'Nuevo Problema';
   datoProblema?:any;
   
-
   public problemaForm = this.fb.group({
     id: [''],
     nombre: ['', [Validators.required]],
@@ -53,16 +52,20 @@ export class NewProblemComponent implements OnInit {
     });
 
     this.datoProblema = this.dataService.getData();
-    // OJO
-    //this.dataService.clearData()
 
     if( this.datoProblema != null){
 
       this.nombreboton = "Actualizar problema";
       this.titulo= "Editar Problema";
 
-
-
+      this.problemaForm.controls['id'].setValue(this.datoProblema.id);
+      this.problemaForm.controls['nombre'].setValue(this.datoProblema.nombre);
+      this.problemaForm.controls['descripcion'].setValue(this.datoProblema.descripcion);
+      this.problemaForm.controls['entradas'].setValue(this.datoProblema.entradas);
+      this.problemaForm.controls['salidas'].setValue(this.datoProblema.salidas);
+      this.problemaForm.controls['ejemploEntradas'].setValue(this.datoProblema.ejemploEntradas);
+      this.problemaForm.controls['ejemploSalidas'].setValue(this.datoProblema.ejemploSalidas);
+      this.problemaForm.controls['dificultad'].setValue(this.datoProblema.dificultad);
 
     }
 
@@ -121,9 +124,7 @@ export class NewProblemComponent implements OnInit {
 
   retornar(){
     this.router.navigate(['/problems/category/'+this.idCategory+'/'+this.nombreCategoria])
-    //this.dataService.clearData(); // limpiamos los datos que se utilizo aqui
   }
-  
   
 
 }

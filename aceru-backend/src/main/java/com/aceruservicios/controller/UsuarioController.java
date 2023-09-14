@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aceruservicios.security.entity.Usuario;
@@ -61,6 +63,14 @@ public class UsuarioController {
     @GetMapping("/cambiarRango/{id}/{nuevoRango}")
     public ResponseEntity<Boolean> actualizarRangoUsuario(@PathVariable Long id, @PathVariable String nuevoRango) {
         usuarioService.actualizarRangoUsuario2(id, nuevoRango);
+        return ResponseEntity.ok(true);
+    }
+    
+    @PutMapping("/cambiar-contrasena")
+    public ResponseEntity<?> cambiarContrasena(@RequestParam String nombreUsuario,
+                                                    @RequestParam String contrasenaActual,
+                                                    @RequestParam String nuevaContrasena) {
+        usuarioService.cambiarContrasena(nombreUsuario, contrasenaActual, nuevaContrasena);
         return ResponseEntity.ok(true);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ROLES } from 'src/app/shared/constants/constants-auth';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
@@ -17,17 +17,23 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
+
+  @ViewChild('imagenInputFile', { static: false }) imagenInputFile?: ElementRef;
+
   isRegistro = false;
   isRegistroError = false;
   nuevoUsuario?: NuevoUsuario;
   errorMensaje?: string;
+  selectedFile?:  null;
+
 
   public registerForm = this.fb.group({
     nombre: ['', [Validators.required]],
     nick: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     contrasena: ['', [Validators.required, Validators.minLength(5)]],
-    rol: ['user', Validators.required],
+    rol: ['user', Validators.required ],
+    foto: [ '', Validators.required ]
   });
 
 
@@ -45,6 +51,15 @@ export class RegisterComponent implements OnInit {
   redirect(page: string) {
     this.serviceNavigation.redirect(page);
   }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+  
+
 
   isValidField(field: string): boolean | null {
     return this.registerForm.controls[field].errors
@@ -98,17 +113,30 @@ export class RegisterComponent implements OnInit {
 
       const roles = [this.registerForm.value.rol];
 
+      const formData = new FormData();
+
       this.nuevoUsuario = {
         nombre: this.registerForm.value.nombre,
         nombreUsuario: this.registerForm.value.nick,
         email: this.registerForm.value.email,
         password: this.registerForm.value.contrasena,
-        roles: roles
+        roles: roles,
+        foto: '',
       };
 
-      console.log("USUARIO : ", this.nuevoUsuario )
 
-      this.authService.nuevo(this.nuevoUsuario).subscribe({
+      console.log("FOTO: ", this.selectedFile) // FOTO:  C:\fakepath\perfil.jpg
+      formData.append(
+        'nuevoUsuario',
+        new Blob([JSON.stringify(this.nuevoUsuario)], { type: 'application/json' }));
+
+      if (this.selectedFile) {
+        formData.append('foto', this.selectedFile);
+      }
+
+
+
+      this.authService.nuevo(formData).subscribe({
         next: (response) => {
           this.isRegistro = true;
           this.isRegistroError = false;

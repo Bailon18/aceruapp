@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import swall from 'sweetalert2';
 import { Usuario } from '../auth/models/usuario';
 import { UsuarioService } from './services/usuario.service';
+import { TokenService } from '../auth/services/token.service';
 
 @Component({
   selector: 'app-ranking',
@@ -31,7 +32,6 @@ export class RankingComponent implements AfterViewInit, OnInit {
     'NICK',
     'EMAIL',
     'RANGO',
-    'ACCIONES',
   ];
 
   dataSource = new MatTableDataSource<Usuario>([]);
@@ -39,10 +39,16 @@ export class RankingComponent implements AfterViewInit, OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    public tokenService: TokenService
   ) {}
 
   ngOnInit() {
+
+    if (this.tokenService.getAuthorities().includes('ROLE_ADMIN')) {
+      this.columnas.push('ACCIONES');
+    }
+
     this.listarUsuariosParticipantes();
   }
 

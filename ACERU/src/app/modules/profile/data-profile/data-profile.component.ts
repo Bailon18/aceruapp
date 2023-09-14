@@ -51,7 +51,7 @@ export class DataProfileComponent implements OnInit {
             nombre: [respuesta.nombre, Validators.required],
             nombreUsuario: [respuesta.nombreUsuario, Validators.required],
             email: [ respuesta.email, [Validators.required, Validators.email] ],
-            rol: [{ value: rolNombre, disabled: true }] // rolNombre !== 'admin'
+            rol: [{ value: rolNombre, disabled: true }] 
           });
           this.correoBan = respuesta.email;
         },

@@ -17,7 +17,6 @@ export class ProblemaService {
     return this.http.get<Problema[]>(`${baseUrl}/problema/listar/${idCategoria}/${estado}`);
   }
 
-
   guardarProblema(problema: Problema, idCategory: number): Observable<Problema> {
     const problemaConCategoria = {
       ...problema,

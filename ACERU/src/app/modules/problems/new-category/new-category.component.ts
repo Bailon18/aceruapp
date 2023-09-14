@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
 import { Categoria } from '../model/categoria';
-import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data-service';
 
@@ -126,6 +125,8 @@ export class NewCategoryComponent implements OnInit {
       const formData = new FormData();
 
       const imagen = this.imagenInputFile?.nativeElement.files[0];
+
+      console.log("IMAGEN :" , imagen)
 
       this.nuevaCategoria = {
         nombre: this.categoriaform.value.nombre,

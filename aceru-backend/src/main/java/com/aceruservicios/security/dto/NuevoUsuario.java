@@ -1,66 +1,83 @@
 package com.aceruservicios.security.dto;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class NuevoUsuario {
-    @NotBlank
-    private String nombre;
-    @NotBlank
-    private String nombreUsuario;
-    @Email
-    private String email;
-    @NotBlank
-    private String password;
-    private Set<String> roles = new HashSet<>();
+	@NotBlank
+	private String nombre;
+	@NotBlank
+	private String nombreUsuario;
+	@Email
+	private String email;
 
-    public String getNombre() {
-        return nombre;
-    }
+	@NotBlank
+	private String password;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	@Lob
+	private byte[] foto;
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
+	private Set<String> roles = new HashSet<>();
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Set<String> getRoles() {
-        return roles;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Set<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<String> roles) {
+		this.roles = roles;
+	}
+	
+	
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
 
 	@Override
 	public String toString() {
 		return "NuevoUsuario [nombre=" + nombre + ", nombreUsuario=" + nombreUsuario + ", email=" + email
 				+ ", password=" + password + ", roles=" + roles + "]";
 	}
-    
-    
+
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ public class UsuarioService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public Usuario obtenerUsuarioporNombre(String nombreUsuario){
         return usuarioRepository.findByNombreUsuario(nombreUsuario).orElse(null);
@@ -119,5 +123,15 @@ public class UsuarioService {
     	}
     }
     
-    
+    // cambiar contraseña
+    public void cambiarContrasena(String nombreUsuario, String contrasenaActual, String nuevaContrasena) {
+    	
+        Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario).orElse(null);
+        if (usuario != null && passwordEncoder.matches(contrasenaActual, usuario.getPassword())) {
+            usuario.setPassword(passwordEncoder.encode(nuevaContrasena));
+            usuarioRepository.save(usuario);
+        } else {
+            throw new RuntimeException("La contraseña actual es incorrecta.");
+        }
+    }
 }

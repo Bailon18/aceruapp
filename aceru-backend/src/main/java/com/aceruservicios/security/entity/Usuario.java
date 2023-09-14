@@ -30,6 +30,10 @@ public class Usuario {
     @NotNull
     private String password;
     
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+	private byte[] foto;
+    
     private String rango;
     
     @NotNull
@@ -141,6 +145,16 @@ public class Usuario {
 
 	public void setRango(String rango) {
 		this.rango = rango;
+	}
+
+	
+	
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 	@Override

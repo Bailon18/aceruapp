@@ -30,8 +30,6 @@ export class DescriptionSkillComponent implements OnInit {
     private serviceNavigation: NavigationService,
     private fb: FormBuilder,
     private competenciaService: CompetenciaService,
-    private toaster: ToastrService,
-    private router: Router,
     private route: ActivatedRoute,
     public autoservice: TokenService,
     private toster: ToastrService

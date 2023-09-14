@@ -15,4 +15,8 @@ export class PerfilService {
     return this.http.get<Usuario>(`${baseUrl}/usuario/buscar/${nombreUsuario}`);
   }
 
+  cambiarContrasena(nombreUsuario: string, contrasenaActual: string, nuevaContrasena: string): Observable<any> {
+    const url = `${baseUrl}/usuario/cambiar-contrasena?nombreUsuario=${nombreUsuario}&contrasenaActual=${contrasenaActual}&nuevaContrasena=${nuevaContrasena}`;
+    return this.http.put(url, {});
+  }
 }

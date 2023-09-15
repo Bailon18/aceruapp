@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationService } from 'src/app/shared/services/navigation.service';
+import { FormBuilder, Validators, AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 import { CompetenciaService } from '../services/competencia.service';
 import { Competencia } from '../model/competencia';
 import { ToastrService } from 'ngx-toastr';
@@ -12,20 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./new-skill.component.less']
 })
 export class NewSkillComponent implements OnInit {
-  
+
   titulo: string = 'Nueva competencia';
   nombreBoton: string = 'Crear';
   idCompetencia: any;
   dataCompetencia: any;
-
-  public competenciaForm = this.fb.group({
-    id: [],
-    nombre: ['', [Validators.required]],
-    descripcion: ['', [Validators.required]],
-    fechaInicio: ['', [Validators.required]],
-    fechaFinal: ['', [Validators.required]],
-    estado:['VIGENTE']
-  });
+  competenciaForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -33,22 +24,28 @@ export class NewSkillComponent implements OnInit {
     private toaster: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+    this.competenciaForm = this.fb.group({
+      id: [],
+      nombre: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      fechaInicio: ['', [Validators.required]],
+      fechaFinal: ['', [Validators.required]],
+      estado: ['VIGENTE']
+    }, { validators: this.validateFechaHora });
+  }
 
   ngOnInit() {
-
     this.route.paramMap.subscribe(({ params }: any) => {
       this.idCompetencia = parseInt(params.id);
 
-      console.log("ID: ", this.idCompetencia)
-
-      if(!isNaN(this.idCompetencia)){
+      if (!isNaN(this.idCompetencia)) {
         this.titulo = 'Editar competencia';
         this.nombreBoton = 'Actualizar';
 
         this.competenciaService.buscarCompetenciaPorId(this.idCompetencia).subscribe({
-          next:(data) => {
-            this.dataCompetencia = data; // porque no guarda los datos en dataMaterial
+          next: (data) => {
+            this.dataCompetencia = data;
 
             this.competenciaForm.controls['id'].setValue(data.id);
             this.competenciaForm.controls['nombre'].setValue(data.nombre);
@@ -56,19 +53,16 @@ export class NewSkillComponent implements OnInit {
             this.competenciaForm.controls['fechaInicio'].setValue(data.fechaInicio);
             this.competenciaForm.controls['fechaFinal'].setValue(data.fechaFinal);
             this.competenciaForm.controls['estado'].setValue(data.estado);
-         
           },
-          error:(error) => {
+          error: (error) => {
           }
-        })
-
-      }else{
+        });
+      } else {
         this.competenciaForm.get('fechaFinal')?.disable();
       }
     });
   }
 
- 
   isValidField(field: string): boolean | null {
     return (
       this.competenciaForm.controls[field].errors &&
@@ -85,6 +79,8 @@ export class NewSkillComponent implements OnInit {
       switch (key) {
         case 'required':
           return `Este campo ${field} es requerido`;
+        case 'fechaHoraInvalida':
+          return "La hora de finalización debe ser posterior a la hora de inicio."
       }
     }
     return null;
@@ -101,34 +97,43 @@ export class NewSkillComponent implements OnInit {
     }
   }
 
-  guardarCompetencia(){
-
-    if(this.competenciaForm.valid){
-
+  guardarCompetencia() {
+    if (this.competenciaForm.valid) {
       const nuevaCompetencia: Competencia = this.competenciaForm.value;
 
-      let mensaje = "Competencia creada con exito!"
+      let mensaje = "Competencia creada con éxito!"
 
-      if(this.competenciaForm.value.id != ''){
-
-        mensaje = "Competencia actualizado con exito!"
+      if (this.competenciaForm.value.id != '') {
+        mensaje = "Competencia actualizada con éxito!"
       }
-  
+
       this.competenciaService.crearCompetencia(nuevaCompetencia).subscribe({
         next: () => {
           this.toaster.success(mensaje);
           this.retornar()
         },
-        error:(error) => {
-          this.toaster.error('No se pudo realizar la operacion');
+        error: (error) => {
+          this.toaster.error('No se pudo realizar la operación');
         }
       });
     }
   }
 
-  retornar(){
+  retornar() {
     this.router.navigate(['/skills'])
   }
-  
 
+  validateFechaHora(group: FormGroup): ValidationErrors | null {
+    const fechaInicio = new Date(group.get('fechaInicio')?.value);
+    const fechaFinal = new Date(group.get('fechaFinal')?.value);
+  
+    if (fechaFinal <= fechaInicio) {
+      console.log('Error de fecha y hora');
+      group.controls['fechaFinal'].setErrors({ fechaHoraInvalida: '' });
+      return { fechaHoraInvalida: true };
+    }
+  
+    return null;
+  }
+  
 }

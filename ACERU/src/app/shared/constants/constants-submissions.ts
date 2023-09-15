@@ -42,4 +42,4 @@ export const EXERCISES = {
     },
   ],
 };
-// {value:"assets/images/skills/ver.png", callback:null}
+

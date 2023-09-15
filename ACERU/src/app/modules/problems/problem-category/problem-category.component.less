@@ -42,3 +42,38 @@
 }
 
 
+.filter-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+.search {
+  //flex-grow: 1; /* Hace que el campo de entrada ocupe todo el espacio disponible */
+  margin-right: 10px; /* Añade un espacio entre el campo de entrada y el checkbox */
+}
+
+.show-inactivos {
+  flex-shrink: 0; /* Evita que el checkbox se reduzca cuando el espacio es limitado */
+  width: 14%;
+}
+
+/* Estilo personalizado para el input similar a Angular Material */
+.custom-input {
+  height: 30px; /* Ajusta la altura según tus preferencias */
+  border: 2px solid #afadad; /* Cambia el borde si es necesario */
+  border-radius: 4px; /* Añade bordes redondeados si es necesario */
+  padding: 6px 12px; /* Ajusta el espaciado interno si es necesario */
+  outline: none; /* Elimina el borde de enfoque si es necesario */
+  width: 100%; /* Ajusta el ancho según tus preferencias */
+  font-family: 'Roboto', sans-serif; /* Utiliza una fuente similar a Angular Material */
+  font-size: 14px; /* Ajusta el tamaño de fuente según tus preferencias */
+  color: #333; /* Ajusta el color de texto según tus preferencias */
+}
+
+/* Estilo personalizado para el input cuando está enfocado */
+.custom-input:focus {
+  border-color: #043873; /* Cambia el color del borde cuando está enfocado */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Añade una sombra de enfoque */
+}
+
+

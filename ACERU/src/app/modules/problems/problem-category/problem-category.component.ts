@@ -21,6 +21,8 @@ export class ProblemCategoryComponent implements OnInit {
   data: Categoria[] = [];
   estadoFiltro:any;
 
+  filterText: string = ''; 
+
   showInactivos = false;
 
 
@@ -36,6 +38,17 @@ export class ProblemCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerListadoCategori("Activo");
+  }
+
+  filtrarCategorias() {
+    const filtro = this.filterText.toLowerCase().trim();
+    if (filtro === '') {
+      this.obtenerListadoCategori("Activo");
+    } else {
+      this.data = this.data.filter((categoria: any) =>
+        categoria.nombre.toLowerCase().includes(filtro)
+      );
+    }
   }
 
   clearSearch() {}

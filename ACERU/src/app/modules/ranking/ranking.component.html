@@ -22,8 +22,8 @@
                 <div class="mat-elevation-z8">
                   <table mat-table [dataSource]="dataSource">
                     <ng-container matColumnDef="ID">
-                      <th mat-header-cell *matHeaderCellDef> Id</th>
-                      <td mat-cell *matCellDef="let fila"> {{fila.id}} </td>
+                      <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Id</th>
+                      <td mat-cell *matCellDef="let fila" style="width: 10%;"> {{fila.id}} </td>
                     </ng-container>
     
                     <ng-container matColumnDef="PARTICIPANTE">
@@ -33,8 +33,8 @@
     
     
                     <ng-container matColumnDef="NICK">
-                      <th mat-header-cell *matHeaderCellDef> Nick </th>
-                      <td mat-cell *matCellDef="let fila"> {{fila.nombreUsuario}} </td>
+                      <th mat-header-cell *matHeaderCellDef style="width: 20%;"> Nick </th>
+                      <td mat-cell *matCellDef="let fila" style="width: 20%;"> {{fila.nombreUsuario}} </td>
                     </ng-container>
     
                     <ng-container matColumnDef="EMAIL">
@@ -51,8 +51,8 @@
                     </ng-container>
                     
                     <ng-container matColumnDef="ACCIONES" *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')">
-                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                      <td  mat-cell *matCellDef="let fila" >
+                      <th mat-header-cell *matHeaderCellDef style="width: 7%;"> Acciones </th>
+                      <td  mat-cell *matCellDef="let fila" style="width: 7%;">
                         <a  class="pointer iconosAccion" matTooltip="Editar material" (click)="calificar(fila)">
                           <mat-icon class="success-icon">
                             <i class="fa-solid fa-pen-to-square" style="color: #036839;"></i>

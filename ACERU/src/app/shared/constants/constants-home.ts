@@ -4,34 +4,38 @@ export const DATA_MAIN={
   image:"assets/images/home/inicio.jpg"
 }
 export const DATA_LIST_BTN_RESOURCES=[
-  {icon:"assets/images/home/herramienta.png",title:"Consulta",description:"Contenidos disponibles en ACERU."},
-  {icon:"assets/images/home/codigo.png",title:"Crea",description:"Colecciones de algoritmos de tu intéres."},
-  {icon:"assets/images/home/bocina.png",title:"Participa",description:"En las minicompetencias para ver tu nivel de conocimientos."}
+  {icon:"assets/images/home/herramienta.png",title:"Consulta",description:"Contenidos disponibles en ACERU.", routerLink: "/problems" },
+  {icon:"assets/images/home/codigo.png",title:"Crea",description:"Colecciones de algoritmos de tu intéres." , routerLink: "/materials" },
+  {icon:"assets/images/home/bocina.png",title:"Participa",description:"En las minicompetencias para ver tu nivel de conocimientos." , routerLink: "/skills" }
 ]
 
-export const DATA_RESOURCES=[
+export const DATA_RESOURCES = [
   {
-    title:"Resuelve Problemas",
-    description:"Amplia gama de problemas de desarrollo de algoritmos, teniendo encuenta tus conocimientos desde lo más básico y avanzado, con ejercicios de Estructuras de datos, Matrices, Matemáticas, Gráfos, entre otros.",
-    image:"assets/images/home/imag1.jpg",
-    orientation:"left",
-    btnText:"Get Started"
+    title: "Resuelve Problemas",
+    description: "Amplia gama de problemas de desarrollo de algoritmos, teniendo en cuenta tus conocimientos desde lo más básico y avanzado, con ejercicios de Estructuras de datos, Matrices, Matemáticas, Gráfos, entre otros.",
+    image: "assets/images/home/imag1.jpg",
+    orientation: "left",
+    btnText: "Get Started",
+    routerLink: "/problems" 
   },
   {
-    title:"Aprende a Programar",
-    description:"Con materiales de apoyo para tus conocimientos. Temarios de programación, Videos y PDF, con todos los recursos necesarios. Además con ejercicios de pruebas por cada categoría de aprendizaje en programación competitiva.",
-    image:"assets/images/home/programar.jpg",
-    orientation:"right",
-    btnText:"View"
+    title: "Aprende a Programar",
+    description: "Con materiales de apoyo para tus conocimientos. Temarios de programación, Videos y PDF, con todos los recursos necesarios. Además con ejercicios de pruebas por cada categoría de aprendizaje en programación competitiva.",
+    image: "assets/images/home/programar.jpg",
+    orientation: "right",
+    btnText: "View",
+    routerLink: "/materials" 
   },
   {
-    title:"Participa en MiniCompetencias",
-    description:"Tus conocimientos serán evaluados en con más participantes y verás que resultados con mejores aciertos de competencias. ",
-    image:"assets/images/home/recurso3.jpg",
-    orientation:"left",
-    btnText:"Get Started"
+    title: "Participa en MiniCompetencias",
+    description: "Tus conocimientos serán evaluados con más participantes y verás mejores resultados con mayores aciertos en competencias.",
+    image: "assets/images/home/recurso3.jpg",
+    orientation: "left",
+    btnText: "Get Started",
+    routerLink: "/skills" 
   }
-]
+];
+
 export const DATA_NEWS=
   {
 

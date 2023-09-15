@@ -34,6 +34,7 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
   nombreCategoria?: string;
   showInactivos = false; 
 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   columnas: string[] = ['ID', 'EJERCICIO', 'DIFICULTAD', 'ACCIONES'];

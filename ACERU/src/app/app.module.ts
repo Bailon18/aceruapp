@@ -1,6 +1,6 @@
 import { InterceptorService } from './shared/interceptors/interceptor.service';
 
-import { NgModule, AfterViewInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,9 +45,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
       preventDuplicates: true,
     }),
 
-    //VgCoreModule,
-    // VgControlsModule,
-    //VgCoreModule
     NgxDocViewerModule,
     NgxPaginationModule
 

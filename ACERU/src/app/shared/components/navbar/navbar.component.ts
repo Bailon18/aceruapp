@@ -24,29 +24,19 @@ export class NavbarComponent implements OnInit {
   rol?: string;
   usuario?: Usuario;
 
-
   constructor(
     private serviceNavigation: NavigationService,
     public userService: UserService,
     public tokenService: TokenService,
     private perfilService: PerfilService,
-    private dataService: DataService<any>,
+    public dataService: DataService<any>,
   ) { 
     
-    this.textLinks = TEXT_LINKS_P;
-    this.usuario = this.dataService.getUsuario();
-    console.log("USUARIO: ", this.usuario)
-    this.rol =  this.tokenService.getAuthorities()[0] !== 'ROLE_ADMIN'? 'Participante':'Administrador';
-
-
   }
 
   ngOnInit() {
-
-
+    this.textLinks = TEXT_LINKS_P;
   }
-
-
 
   redirect(page: string) {
     this.serviceNavigation.redirect(page);
@@ -59,8 +49,8 @@ export class NavbarComponent implements OnInit {
   logOut() {
     this.tokenService.logOut();
     this.dataService.clearData()
+    this.dataService.clearUsuario()
     this.redirect('home');
-    window.location.reload()
   }
 
   mostra(): boolean {

@@ -18,7 +18,8 @@ export class MaterialsCategoryComponent implements OnInit {
   data: Categoria[] = [];
   estadoFiltro:any;
 
-  showInactivos = false; // Variable para controlar el estado del checkbox
+  filterText: string = ''; 
+  showInactivos = false;
 
   constructor(
     private serviceNavigation: NavigationService,
@@ -31,6 +32,18 @@ export class MaterialsCategoryComponent implements OnInit {
   ngOnInit() {
     this.obtenerListadoCategori("Activo");
   }
+
+  filtrarCategorias() {
+    const filtro = this.filterText.toLowerCase().trim();
+    if (filtro === '') {
+      this.obtenerListadoCategori("Activo");
+    } else {
+      this.data = this.data.filter((categoria: any) =>
+        categoria.nombre.toLowerCase().includes(filtro)
+      );
+    }
+  }
+
 
   redirect(page: string, parameter?: any) {
     this.serviceNavigation.redirect(page, parameter);

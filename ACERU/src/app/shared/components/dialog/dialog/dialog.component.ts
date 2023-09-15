@@ -38,7 +38,6 @@ export class DialogComponent implements OnInit {
   }
 
   openDialog(dialog:any, component:any, data:any){
-    // console.log('dialog instance', dialog);
     (dialog.instance as CustomDialogComponent).open(component,data);
   }
 

@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
             this.perfilService.buscarUsuarioPorNombre(nombre).subscribe({
               next: (respuesta) =>{
                 this.dataService.clearData();
-                this.dataService.setUsuario(respuesta); // enviamos la data hacia navbar
+                this.dataService.setUsuario(respuesta);
               },
               error:(error) => {
           

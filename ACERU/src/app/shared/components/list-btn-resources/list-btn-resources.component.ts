@@ -7,7 +7,7 @@ import { DATA_LIST_BTN_RESOURCES } from '../../constants/constants-home';
   styleUrls: ['./list-btn-resources.component.less']
 })
 export class ListBtnResourcesComponent implements OnInit {
-@Input() data=DATA_LIST_BTN_RESOURCES;
+  @Input() data=DATA_LIST_BTN_RESOURCES;
   constructor() { }
 
   ngOnInit() {

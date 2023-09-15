@@ -7,7 +7,8 @@ import { DATA_RESOURCES } from '../../constants/constants-home';
   styleUrls: ['./resources.component.less']
 })
 export class ResourcesComponent implements OnInit {
-@Input() data = DATA_RESOURCES;
+  
+  @Input() data = DATA_RESOURCES;
   constructor() { }
 
   ngOnInit() {

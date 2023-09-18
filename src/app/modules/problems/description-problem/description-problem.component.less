@@ -16,29 +16,34 @@
     display: flex;
     height: 100%;
     margin-top: 15px;
+    
     .left {
       width: 70%;
-
+      
       .card-description {
         min-height: calc(100% - 15em);
+        
         .section-description {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
           width: 90%;
-          label{
-            color:@color-primary;
+          label {
+            color: @color-primary;
           }
         }
-        .examples{
+        
+        .examples {
           display: flex;
           justify-content: space-between;
           width: 90%;
-          .mini-card{
+          
+          .mini-card {
             display: flex;
             flex-direction: column;
             width: 40%;
-            .head{
+            
+            .head {
               text-align: center;
               background: @color-btn-content;
               height: 40px;
@@ -46,24 +51,26 @@
               display: flex;
               justify-content: center;
             }
-            .description-example{
+            
+            .description-example {
               background: white;
-height: 150px;
+              height: 150px;
             }
           }
         }
       }
 
       .form {
-
         width: 90%;
         justify-content: space-evenly;
       }
     }
-    .right{
+    
+    .right {
       width: 30%;
       display: flex;
       justify-content: flex-end;
+      
       .card-profile {
         width: 90%;
         display: flex;
@@ -74,7 +81,8 @@ height: 150px;
         padding: 20px 0;
         max-width: 360px;
         height: 30%;
-      .data-profile {
+        
+        .data-profile {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -83,18 +91,20 @@ height: 150px;
           height: -webkit-fill-available;
           color: @color-text-secondary;
           font-weight: bold;
-        .txt{
-          display: flex;
-          justify-content: flex-start;
-          width: 90%;
-
-        }
+          
+          .txt {
+            display: flex;
+            justify-content: flex-start;
+            width: 90%;
+          }
+          
           .edit-profile {
             .button {
               background: @color-succes;
               border: 2px solid @color-succes;
             }
           }
+          
           .change-password {
             .button {
               background: @color-background-button-enter;

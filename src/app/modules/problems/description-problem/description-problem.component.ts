@@ -13,7 +13,7 @@ import { ProblemaService } from '../services/problema.service';
 @Component({
   selector: 'app-description-problem',
   templateUrl: './description-problem.component.html',
-  styleUrls: ['./description-problem.component.less'],
+  styleUrls: ['./description-problem.component.less', './description-problem.component2.less'],
 })
 export class DescriptionProblemComponent implements OnInit {
  

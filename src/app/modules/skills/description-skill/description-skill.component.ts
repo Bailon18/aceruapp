@@ -9,7 +9,7 @@ import { TokenService } from '../../auth/services/token.service';
 @Component({
   selector: 'app-description-skill',
   templateUrl: './description-skill.component.html',
-  styleUrls: ['./description-skill.component.less'],
+  styleUrls: ['./description-skill.component.less','./description-skill.component2.less'],
 })
 export class DescriptionSkillComponent implements OnInit {
   idCompetencia: any;

@@ -33,7 +33,7 @@ export class ListProblemsComponent implements AfterViewInit , OnInit {
   idCategoria?: any;
   nombreCategoria?: string;
   showInactivos = false; 
-  // hola
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

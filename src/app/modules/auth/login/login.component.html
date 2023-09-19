@@ -21,19 +21,17 @@
           <input matInput type="password" formControlName="password" placeholder="Contraseña" />
         </mat-form-field>
 
-        <button mat-raised-button class="button" style="height: 55px;" [disabled]="loginForm.invalid"
+        <button mat-raised-button class="button" style="min-height: 45px;" [disabled]="loginForm.invalid"
           (click)="login()">Ingresar&nbsp; <i class="fa-solid fa-right-to-bracket fa-lg"></i></button>
       </div>
 
-      <div class="form-login">
-        <button mat-raised-button class="button" (click)="redirect('auth/register')" style="border: 1px solid rgb(236, 174, 174);
-                      background-color: rgb(236, 174, 174);
-                      color: black">Registrar&nbsp; <i class="fa-solid fa-user-plus fa-lg"></i></button>
+      <div class="form-login" style="align-items: end; margin-top:24px">
+        <div class="message" (click)="redirect('auth/register')">
+          <a>¿No tienes cuenta? Registrate.</a>
+        </div>
       </div>
     </div>
     <div class="register" *ngIf="actualmodule === 'register'"><app-register></app-register></div>
   </div>
 </div>
-<br><br>
-<br><br>
-<br><br>
+

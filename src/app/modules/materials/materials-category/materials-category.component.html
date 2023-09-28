@@ -1,6 +1,7 @@
 <div class="container-categories">
-  <div class="title text-secondary">Categorias de Material</div>
-  
+  <div class="title text-secondary" style="height: 10px;">Categorias de Material</div>
+  <hr class="separator">
+  <br>
   <div class="actions ">
     <button class="button hiddenParticipante" (click)="redireccionarNuevaCategoria()"
       *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')">Nueva categoria

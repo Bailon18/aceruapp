@@ -1,6 +1,6 @@
 <div class="container-list-problems">
     <div class="name-category text-secondary">Ejercicios - {{ nombreCategoria }}</div>
-    <br>
+    <hr class="separator">
     <div *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')" class="actions "><button
             class="button hiddenParticipante" (click)="abrirVentanaNuevoProblema()">Nuevo problema</button>
         <div class="search">

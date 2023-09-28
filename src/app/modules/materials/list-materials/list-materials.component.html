@@ -1,5 +1,6 @@
 <div class="container-categories">
-  <div class="title text-secondary">Material - {{ nombreCategoria }}</div>
+  <div class="title text-secondary" style="height: 10px;">Material - {{ nombreCategoria }}</div>
+  <hr class="separator">
   <br>
   <div class="actions " *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')">
     <button class="button hiddenParticipante" (click)="mostrarformnuevomaterial()">

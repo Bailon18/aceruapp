@@ -27,7 +27,7 @@ export class RankingComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   
   columnas: string[] = [
-    'ID',
+    //'ID',
     'PARTICIPANTE',
     'NICK',
     'EMAIL',

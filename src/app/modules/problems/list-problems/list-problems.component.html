@@ -1,6 +1,6 @@
 <div class="container-list-problems">
     <div class="name-category text-secondary">Ejercicios - {{ nombreCategoria }}</div>
-    <br>
+    <hr class="separator">
     <div *ngIf="tokenService.getAuthorities().includes('ROLE_ADMIN')" class="actions "><button
             class="button hiddenParticipante" (click)="abrirVentanaNuevoProblema()">Nuevo problema</button>
         <div class="search">
@@ -75,8 +75,8 @@
                                         <a class="pointer iconosAccion" matTooltip="Configurar problema"
                                             (click)="resolverProblema(fila)">
                                             <mat-icon class="info-icon">
-                                                <i class="fa-solid fa-gear" style="color: #183153;"></i>
-                                            </mat-icon>
+                                                <i class="fa-solid fa-eye" style="color: #183153;"></i>
+                                            </mat-icon>                                              
                                         </a>
                                     </td>
                                 </ng-container>

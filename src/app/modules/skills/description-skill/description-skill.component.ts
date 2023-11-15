@@ -89,6 +89,7 @@ export class DescriptionSkillComponent implements OnInit {
       );
       return;
     }
+   
 
     if (authorities[0] === 'ROLE_ADMIN') {
       this.toster.error(
@@ -104,8 +105,11 @@ export class DescriptionSkillComponent implements OnInit {
         next: (data) => {
           this.toster.info(
             'Te has inscrito en esta competencia correctamente.'
+            
           );
+           window.location.href = 'https://forms.gle/nzr4QgxbM3iRJaUs7';
         },
+        
         error: (error) => {
           this.toster.error(
             'Ocurrió un error en la operación. Por favor, inténtalo de nuevo más tarde.'

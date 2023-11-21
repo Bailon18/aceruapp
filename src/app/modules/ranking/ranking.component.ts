@@ -89,7 +89,7 @@ export class RankingComponent implements AfterViewInit, OnInit {
           if (value) {
             this.usuarioService.actualizarRangoUsuario(fila.id, value).subscribe({
               next:(response) => {
-                resolve('.');
+                resolve('');
                 this.listarUsuariosParticipantes();
               },
               error:(error) => {

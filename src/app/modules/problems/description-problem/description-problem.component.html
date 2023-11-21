@@ -41,23 +41,26 @@
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
     <div class="right">
       <div class="card-profile">
         <div class="data-profile">
-          <div class="txt"><strong><i class="fas fa-tags" style="color: blue;"></i>Categoría:</strong> {{ dataProblema.categoria.nombre }}</div>
-          <div class="txt"><strong><i class="fas fa-file" style="color: green;"></i>Problema:</strong> {{ dataProblema.nombre }}</div>
-          <div class="txt"><strong><i class="fas fa-star" style="color: red;"></i>Dificultad:</strong> {{ dataProblema.dificultad }}</div>
+          <div class="txt"><strong><i class="fas fa-tags" style="color: blue;"></i>Categoría:</strong>
+            {{ dataProblema.categoria.nombre }}</div>
+          <div class="txt"><strong><i class="fas fa-file" style="color: green;"></i>Problema:</strong>
+            {{ dataProblema.nombre }}</div>
+          <div class="txt"><strong><i class="fas fa-star" style="color: red;"></i>Dificultad:</strong>
+            {{ dataProblema.dificultad }}</div>
           <div class="edit-profile">
             <button class="button button-resolver" (click)="openConsol()">
-              <i class="fas fa-code"></i> Resolver
+              <i class="fas fa-code"></i> Ver código
             </button>
           </div>
           <div class="change-password">
             <button class="button button-cancelar" (click)="retornar()">
-              <i class="fas fa-times"></i> Cancelar
+              <i class="fas fa-times"></i> Regresar
             </button>
           </div>
         </div>

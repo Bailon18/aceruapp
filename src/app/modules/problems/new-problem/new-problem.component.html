@@ -68,16 +68,17 @@
               <mat-option value="Fácil">Fácil</mat-option>
               <mat-option value="Intermedio">Intermedio</mat-option>
               <mat-option value="Difícil">Difícil</mat-option>
-          </mat-select>
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="actions">
           <div class="buttons">
             <button mat-raised-button color="warn" (click)="retornar()">Cancelar</button>
-            <button mat-raised-button color="primary" [disabled]="problemaForm.invalid" (click)="saveProblem()">{{ nombreboton }}</button>
+            <button mat-raised-button color="primary" [disabled]="problemaForm.invalid"
+              (click)="saveProblem()">{{ nombreboton }}</button>
           </div>
         </div>
-         <br/>
+        <br />
       </div>
     </div>
   </div>

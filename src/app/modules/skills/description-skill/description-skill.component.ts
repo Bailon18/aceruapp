@@ -107,7 +107,8 @@ export class DescriptionSkillComponent implements OnInit {
             'Te has inscrito en esta competencia correctamente.'
             
           );
-           window.location.href = 'https://forms.gle/nzr4QgxbM3iRJaUs7';
+              window.location.href = 'https://forms.gle/nzr4QgxbM3iRJaUs7';
+       
         },
         
         error: (error) => {

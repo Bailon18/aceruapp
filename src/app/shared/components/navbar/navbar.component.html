@@ -12,21 +12,16 @@
 
     <!-- Links para la página de inicio -->
     <div class="text-links" *ngIf="getActualPage('home')">
-      <a
-        *ngFor="let item of (tokenService.estaAutenticado() ? textLinks.login : textLinks.notLogin)"
-        href="{{ item.path }}"
-      >
+      <a *ngFor="let item of (tokenService.estaAutenticado() ? textLinks.login : textLinks.notLogin)"
+        href="{{ item.path }}">
         {{ item.name }}
       </a>
     </div>
 
     <!-- Links para páginas diferentes de la página de inicio -->
     <div class="text-links" *ngIf="!getActualPage('home') && tokenService.estaAutenticado()">
-      <a
-        *ngFor="let item of textLinks.login"
-        href="{{ item.path }}"
-        [ngClass]="{ 'text-selected': getActualPage(item.path) }"
-      >
+      <a *ngFor="let item of textLinks.login" href="{{ item.path }}"
+        [ngClass]="{ 'text-selected': getActualPage(item.path) }">
         {{ item.name }}
       </a>
     </div>
@@ -37,8 +32,10 @@
     <div class="actions">
       <!-- Botones de inicio de sesión y registro -->
       <div class="buttons" *ngIf="!tokenService.estaAutenticado()">
-        <button class="button enter" (click)="redirect('auth/login')">Ingresar <i class="fa-solid fa-right-to-bracket"></i></button>
-        <button class="button sign-up" (click)="redirect('auth/register')">Regístrate <i class="fa-solid fa-user-plus"></i></button>
+        <button class="button enter" (click)="redirect('auth/login')">Ingresar <i
+            class="fa-solid fa-right-to-bracket"></i></button>
+        <button class="button sign-up" (click)="redirect('auth/register')">Regístrate <i
+            class="fa-solid fa-user-plus"></i></button>
       </div>
 
       <!-- Información del usuario autenticado -->
@@ -49,9 +46,7 @@
         <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="profile-button">
           <img
             [src]="dataService.getUsuario()?.foto ? 'data:image/jpeg;base64,' + dataService.getUsuario()?.foto : 'assets/images/profile/foto-perfil.jpeg'"
-            alt="imagen no disponible"
-            class="profile-image"
-          />
+            alt="imagen no disponible" class="profile-image" />
         </button>
       </div>
 

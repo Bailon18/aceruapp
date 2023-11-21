@@ -69,7 +69,8 @@ export class DescriptionProblemComponent implements OnInit {
     this.problemaService.existsByUsuarioIdAndProblemaId(userName, this.idProblem).subscribe({
       next: (existe) => {
         if (existe) {
-          this.toster.warning('Ya estás inscrito para resolver el problema.');
+          this.toster.warning('Ya observaste la solución.'); 
+          window.location.href = 'https://github.com/ACERU/SolucionesProblemas';
         } else {
           this.problemaService.insertProblema(userName, this.idProblem).subscribe({
             next: (data) => {

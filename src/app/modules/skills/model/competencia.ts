@@ -8,4 +8,6 @@ export class Competencia {
     fechaInicio?: string;
     fechaFinal?:  string;
     estado?:      string;
+
+    formulario?:  string;
 }

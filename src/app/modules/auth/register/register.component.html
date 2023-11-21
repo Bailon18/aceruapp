@@ -45,7 +45,6 @@
     <mat-form-field appearance="outline">
       <mat-label>Rol</mat-label>
       <select matNativeControl formControlName="rol" name="miselect">
-        <option value="admin">Administrador</option>
         <option value="user">Participante</option>
       </select>
     </mat-form-field>
@@ -57,7 +56,7 @@
     <mat-error *ngIf="isValidField('foto')" style="margin-top: 5px; font-size: 12px;">
       {{ getFieldError('foto') }}
     </mat-error>
-  </div>  
+  </div>
   <br>
   <div class="actions">
     <button mat-raised-button class="button" [disabled]="registerForm.invalid" (click)="register()">Registrar</button>

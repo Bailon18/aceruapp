@@ -31,7 +31,6 @@ export class NewSkillComponent implements OnInit {
       descripcion: ['', [Validators.required]],
       fechaInicio: ['', [Validators.required]],
       fechaFinal: ['', [Validators.required]],
-      formulario: ['', [Validators.required]],
       estado: ['VIGENTE']
     }, { validators: this.validateFechaHora });
   }
@@ -54,7 +53,7 @@ export class NewSkillComponent implements OnInit {
             this.competenciaForm.controls['fechaInicio'].setValue(data.fechaInicio);
             this.competenciaForm.controls['fechaFinal'].setValue(data.fechaFinal);
             this.competenciaForm.controls['estado'].setValue(data.estado);
-            this.competenciaForm.controls['formulario'].setValue(data.formulario);
+
           },
           error: (error) => {
           }

@@ -104,10 +104,10 @@ export class DescriptionSkillComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.toster.info(
-            'Te has inscrito en esta competencia correctamente.'
+            'Iniciemos la competencia'
             
           );
-              window.location.href = 'https://forms.gle/nzr4QgxbM3iRJaUs7';
+              window.location.href = 'https://redprogramacioncompetitiva.com/contests/ACERU/index.php';
        
         },
         

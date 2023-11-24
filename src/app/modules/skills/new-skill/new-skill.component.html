@@ -14,7 +14,7 @@
         {{ getFieldError('nombre') }}
       </mat-error>
     </mat-form-field>
-    
+
     <mat-form-field class="div-input">
       <mat-label class="txt">Descripción</mat-label>
       <textarea matInput formControlName="descripcion" class="input"></textarea>
@@ -49,18 +49,11 @@
         <mat-option value="TERMINADO">Terminado</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="div-input">
-      <mat-label class="txt">Enlace de Inscripción</mat-label>
-      <input matInput formControlName="nombre" class="input" />
-      <mat-error *ngIf="isValidField('nombre')">
-        {{ getFieldError('nombre') }}
-      </mat-error>
-    </mat-form-field>
     <div class="actions">
       <button mat-raised-button color="warn" (click)="retornar()">Cancelar</button>
       <button mat-raised-button color="primary" [disabled]="competenciaForm.invalid"
         (click)="guardarCompetencia()">{{ nombreBoton }}</button>
-        
+
     </div>
   </div>
 </div>
